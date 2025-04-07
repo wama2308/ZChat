@@ -1,4 +1,4 @@
-import './gesture-handler';
+import '../gesture-handler';
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
@@ -18,7 +18,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import AppNavigator from './src/navigation/AppNavigator';
+import AppNavigator from '@navigation/AppNavigator';
 
 type SectionProps = PropsWithChildren<{
   title: string;
