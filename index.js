@@ -7,7 +7,9 @@ import { PaperProvider } from 'react-native-paper';
 import { lightTheme, darkTheme } from './src/config/themes/themes';
 import { useThemeStore } from './src/store/config/useThemeStore';
 import { useLanguageSetup } from './src/hooks/config/useLanguageSetup';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 export default function Main() {
   const { isDarkMode } = useThemeStore();
   const isLanguageLoaded = useLanguageSetup();
@@ -15,9 +17,11 @@ export default function Main() {
   if (!isLanguageLoaded) return null;
 
   return (
-    <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <App />
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <App />
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
 
