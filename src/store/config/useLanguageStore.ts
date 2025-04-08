@@ -1,9 +1,9 @@
 // useLanguageStore.ts
-import {create} from 'zustand';
-import {persist, createJSONStorage} from 'zustand/middleware';
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type TLanguage = 'system' | 'en' | 'es';
+import { TLanguage } from '@interfaces/config';
 
 interface LanguageStore {
   language: TLanguage;
@@ -12,9 +12,9 @@ interface LanguageStore {
 
 export const useLanguageStore = create<LanguageStore>()(
   persist(
-    set => ({
+    (set) => ({
       language: 'system', // Valor predeterminado para el idioma
-      setLanguage: (lng: TLanguage) => set({language: lng}), // Cambiar el idioma en Zustand
+      setLanguage: (lng: TLanguage) => set({ language: lng }), // Cambiar el idioma en Zustand
     }),
     {
       name: 'user-language', // Nombre de la clave para el almacenamiento persistente

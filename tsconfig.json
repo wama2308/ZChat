@@ -11,7 +11,7 @@
       "@screens/*": ["screens/*"],
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
-      "@types/*": ["types/*"],
+      "@interfaces/*": ["interfaces/*"],
       "@utils/*": ["utils/*"]
     },
     /* Bundler mode */

@@ -1,11 +1,11 @@
 // src/hooks/useLanguageSetup.ts
-import {useEffect, useState} from 'react';
-import {useLanguageStore} from '@store/config/useLanguageStore';
+import { useEffect, useState } from 'react';
+import { useLanguageStore } from '@store/config/useLanguageStore';
 import i18n from '@config/languages/i18n';
-import {getDeviceLanguage} from '@config/languages/i18n';
+import { getDeviceLanguage } from '@config/languages/i18n';
 
 export const useLanguageSetup = () => {
-  const {language, setLanguage} = useLanguageStore();
+  const { language } = useLanguageStore();
   const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
 
   useEffect(() => {
