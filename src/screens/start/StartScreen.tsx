@@ -1,59 +1,75 @@
+import TextLogo from '@components/TextLogo';
+import { SPACES } from '@config/themes/themes';
+import { RootStackParamList } from '@navigation/AppNavigator';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
-import { useLanguageStore } from '@store/config/useLanguageStore';
-import { useThemeStore } from '@store/config/useThemeStore';
-import { useTheme } from 'react-native-paper'; // Para acceder al tema actual
-import { Button, Text as TextPaper } from 'react-native-paper'; // Componente Surface
+import { StyleSheet, View } from 'react-native';
+import { Button, Surface, Text, useTheme } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const StartScreen = () => {
   const { t } = useTranslation();
-  const { setLanguage } = useLanguageStore();
-  const { toggleTheme } = useThemeStore();
   const { colors } = useTheme();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.background,
-      }}
-    >
-      <View style={{ marginBottom: 20 }}>
-        <TextPaper variant="displayLarge" style={{ marginBottom: 20 }}>
-          Test Language
-        </TextPaper>
-        <TextPaper variant="titleLarge">{t('welcome')}</TextPaper>
-        <TextPaper style={{ marginBottom: 20 }} variant="titleLarge">
-          {t('login')}
-        </TextPaper>
-        <Button mode="contained" onPress={() => setLanguage('es')}>
-          Spanish
-        </Button>
-        <View style={{ marginVertical: 20 }}>
-          <Button mode="contained" onPress={() => setLanguage('en')}>
-            English
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
+      <View style={styles.contentContainer}>
+        <Surface style={styles.surface} elevation={0}>
+          <Text variant="titleMedium">{t('register-start')}</Text>
+          <Button
+            mode="contained"
+            theme={{ roundness: 1 }}
+            accessibilityLabel="Botón para registrarse"
+            onPress={() => navigation.navigate('Register')}
+            style={{ width: '90%' }}
+          >
+            {t('register')}
           </Button>
-        </View>
-        <Button mode="contained" onPress={() => setLanguage('system')}>
-          System
-        </Button>
+          <View style={styles.viewTexts}>
+            <Text variant="titleMedium">{t('have-an-account')}</Text>
+            <Text variant="titleMedium">{t('log-in-you')}</Text>
+          </View>
+          <Text
+            style={[styles.textLink, { color: colors.primary }]}
+            variant="titleMedium"
+            onPress={() => navigation.navigate('Login')}
+          >
+            {t('login')}
+          </Text>
+        </Surface>
       </View>
-      <View style={{ marginBottom: 20 }}>
-        <TextPaper variant="displayLarge">Test themes</TextPaper>
-        <TextPaper variant="labelLarge">Prueba de cambio de tema</TextPaper>
-        <View style={{ marginVertical: 20 }}>
-          <Button mode="contained" onPress={() => toggleTheme()}>
-            Oscuro
-          </Button>
-        </View>
-        <Button mode="outlined" onPress={() => toggleTheme()}>
-          Claro
-        </Button>
-      </View>
-    </View>
+      <TextLogo />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    justifyContent: 'space-between', // Esto distribuye entre el centro y el fondo
+    alignItems: 'center',
+    padding: SPACES.p2,
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+  },
+  surface: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: SPACES.p3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewTexts: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  textLink: {
+    textDecorationLine: 'underline',
+  },
+});
 
 export default StartScreen;

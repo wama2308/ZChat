@@ -1,5 +1,7 @@
 {
-  "welcome": "Welcome",
-  "login": "Log In",
-  "start": "Start"
+  "register-start": "Sign up and get started with ZChat",
+  "register": "Register",
+  "have-an-account": "If you already have an account",
+  "log-in-you": "Sign in",
+  "login": "Login"
 }

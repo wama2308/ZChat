@@ -1,6 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
 
 // Importa las pantallas
 import StartScreen from '@screens/start/StartScreen';
@@ -11,22 +10,21 @@ import { useThemeStore } from '@store/config/useThemeStore';
 
 // Definir los tipos de la navegación
 export type RootStackParamList = {
-  Inicio: undefined;
-  Registro: { userId: string }; // Parámetro opcional
-  Login: { userId: string }; // Parámetro opcional
+  Start: undefined;
+  Register: undefined; // Parámetro opcional
+  Login: undefined; // Parámetro opcional
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
-  const { t } = useTranslation();
   const { isDarkMode } = useThemeStore();
 
   return (
     <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedLightTheme}>
       <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={StartScreen} options={{ title: t('start') }} />
-        <Stack.Screen name="Registro" component={RegisterScreen} />
+        <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>

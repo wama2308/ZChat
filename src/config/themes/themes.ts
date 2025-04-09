@@ -137,3 +137,16 @@ export const CombinedDarkTheme = {
     notification: darkTheme.colors.error,
   },
 };
+
+export const SPACES = {
+  p1: 8,
+  p2: 16,
+  p3: 24,
+  p4: 32,
+  p5: 40,
+  m1: 8,
+  m2: 16,
+  m3: 24,
+  m4: 32,
+  m5: 40,
+};

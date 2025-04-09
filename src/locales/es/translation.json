@@ -1,5 +1,7 @@
 {
-  "welcome": "Bienvenido",
-  "login": "Iniciar sesión",
-  "start": "Inicio"
+  "register-start": "Registrese y comience con ZChat",
+  "register": "Registrarse",
+  "have-an-account": "Si ya tiene una cuenta",
+  "log-in-you": "Inicie sesión",
+  "login": "Iniciar sesión"
 }
