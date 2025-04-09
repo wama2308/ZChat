@@ -9,6 +9,10 @@ import { useThemeStore } from './src/store/config/useThemeStore';
 import { useLanguageSetup } from './src/hooks/config/useLanguageSetup';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+if (__DEV__) {
+  require("./ReactotronConfig");
+}
+
 const queryClient = new QueryClient();
 export default function Main() {
   const { isDarkMode } = useThemeStore();
