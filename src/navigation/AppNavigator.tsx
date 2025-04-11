@@ -7,6 +7,7 @@ import RegisterScreen from '@screens/register/RegisterScreen';
 import LoginScreen from '@screens/login/Login';
 import { CombinedDarkTheme, CombinedLightTheme } from '@config/themes/themes';
 import { useThemeStore } from '@store/config/useThemeStore';
+import { useTranslation } from 'react-i18next';
 
 // Definir los tipos de la navegación
 export type RootStackParamList = {
@@ -18,13 +19,18 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
+  const { t } = useTranslation();
   const { isDarkMode } = useThemeStore();
 
   return (
     <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedLightTheme}>
       <Stack.Navigator>
         <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerTitle: '', headerBackTitle: t('label-back') }}
+        />
         <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>

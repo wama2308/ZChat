@@ -3,5 +3,11 @@
   "register": "Registrarse",
   "have-an-account": "Si ya tiene una cuenta",
   "log-in-you": "Inicie sesión",
-  "login": "Iniciar sesión"
+  "login": "Iniciar sesión",
+  "your-profile": "Tu perfil",
+  "label-name": "Nombre",
+  "label-lastname": "Apellido",
+  "label-add": "Agregar",
+  "label-edit": "Editar",
+  "label-back": "Atrás"
 }
