@@ -2,13 +2,18 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const TextLogo = () => {
   return (
-    <View>
+    <View style={styles.content}>
       <Text style={styles.zangiText}>ZChat</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   zangiText: {
     fontSize: 48,
     fontWeight: 'bold',

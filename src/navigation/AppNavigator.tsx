@@ -31,7 +31,11 @@ export default function AppNavigator() {
           component={RegisterScreen}
           options={{ headerTitle: '', headerBackTitle: t('label-back') }}
         />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerTitle: '', headerBackTitle: t('label-back') }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

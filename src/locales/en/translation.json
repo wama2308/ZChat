@@ -9,5 +9,12 @@
   "label-lastname": "Last name",
   "label-add": "Add",
   "label-edit": "Edit",
-  "label-back": "Back"
+  "label-back": "Back",
+  "label-user": "User",
+  "label-user-name": "Username",
+  "label-password": "Password",
+  "label-confirm-password": "Confirm Password",
+  "label-number-zchat": "Number ZChat",
+  "label-continue": "Continue",
+  "text-informative-login": "Please enter your ZChat number or username to log in"
 }

@@ -1,7 +1,8 @@
 // import { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 // import { Asset } from 'react-native-image-picker';
+import Icon from '@react-native-vector-icons/ionicons';
 
 import { SPACES } from '@config/themes/themes';
 import { useTranslation } from 'react-i18next';
@@ -17,10 +18,56 @@ const RegisterScreen = () => {
     <AuthLayout contentCenter={false}>
       {/* {selectedImage?.uri && <Image source={{ uri: selectedImage.uri }} style={styles.image} />} */}
       <Text variant="displaySmall">{t('your-profile')}</Text>
-      <Image source={require('../../assets/images/user-select.jpg')} style={styles.image} />
-      <View style={{ width: '100%', gap: SPACES.g1 }}>
-        <TextInput label={t('label-name')} value={''} onChangeText={() => {}} />
-        <TextInput label={t('label-lastname')} value={''} onChangeText={() => {}} />
+      <View style={styles.content}>
+        <TextInput label={t('label-user-name')} value={''} onChangeText={() => {}} />
+        <TextInput
+          label={t('label-password')}
+          value={''}
+          onChangeText={() => {}}
+          secureTextEntry={true}
+          right={
+            <TextInput.Icon
+              icon={() => (
+                <Icon
+                  // name={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
+                  name={'eye-off-outline'}
+                  size={24}
+                  color="#666"
+                />
+              )}
+              onPress={() => {}}
+            />
+          }
+          left={
+            <TextInput.Icon
+              icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
+            />
+          }
+        />
+        <TextInput
+          label={t('label-confirm-password')}
+          value={''}
+          onChangeText={() => {}}
+          secureTextEntry={true}
+          right={
+            <TextInput.Icon
+              icon={() => (
+                <Icon
+                  // name={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
+                  name={'eye-off-outline'}
+                  size={24}
+                  color="#666"
+                />
+              )}
+              onPress={() => {}}
+            />
+          }
+          left={
+            <TextInput.Icon
+              icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
+            />
+          }
+        />
       </View>
       <Button
         theme={{ roundness: 1 }}
@@ -35,11 +82,10 @@ const RegisterScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  image: {
-    width: 150,
-    height: 150,
-    borderRadius: 100,
-    marginBottom: 16,
+  content: {
+    width: '100%',
+    gap: SPACES.g1,
+    marginTop: SPACES.m3,
   },
 });
 
