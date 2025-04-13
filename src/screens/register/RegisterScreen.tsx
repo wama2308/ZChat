@@ -25,7 +25,7 @@ const RegisterScreen = () => {
   return (
     <AuthLayout contentCenter={false}>
       {/* {selectedImage?.uri && <Image source={{ uri: selectedImage.uri }} style={styles.image} />} */}
-      <Text variant="displaySmall">{t('your-profile')}</Text>
+      <Text variant="displaySmall">{t('profile.your-profile')}</Text>
       <View style={styles.content}>
         <Controller
           control={control}
@@ -34,7 +34,7 @@ const RegisterScreen = () => {
             <View>
               <TextInput
                 autoCapitalize="none"
-                label={t('label-user-name')}
+                label={t('form.label-user-name')}
                 value={value}
                 onChangeText={onChange}
                 error={!!errors.username?.message}
@@ -57,7 +57,7 @@ const RegisterScreen = () => {
             <View>
               <TextInput
                 key={showPassword ? 'text' : 'password'}
-                label={t('label-password')}
+                label={t('form.label-password')}
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
@@ -101,7 +101,7 @@ const RegisterScreen = () => {
           render={({ field: { onChange, value } }) => (
             <View>
               <TextInput
-                label={t('label-confirm-password')}
+                label={t('form.label-confirm-password')}
                 value={value}
                 onChangeText={onChange}
                 secureTextEntry={!showConfirmPassword}
@@ -142,7 +142,7 @@ const RegisterScreen = () => {
         onPress={handleSubmit}
         style={{ width: '100%' }}
       >
-        {t('register')}
+        {t('auth.register')}
       </Button>
     </AuthLayout>
   );

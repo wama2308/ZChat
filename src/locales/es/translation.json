@@ -1,26 +1,37 @@
 {
-  "register-start": "Registrese y comience con ZChat",
-  "register": "Registrarse",
-  "have-an-account": "Si ya tiene una cuenta",
-  "log-in-you": "Inicie sesión",
-  "login": "Iniciar sesión",
-  "your-profile": "Tu perfil",
-  "label-name": "Nombre",
-  "label-lastname": "Apellido",
-  "label-add": "Agregar",
-  "label-edit": "Editar",
-  "label-back": "Atrás",
-  "label-user": "Usuario",
-  "label-user-name": "Nombre de usuario",
-  "label-password": "Contraseña",
-  "label-confirm-password": "Confirmar contraseña",
-  "label-number-zchat": "Número ZChat",
-  "label-continue": "Continuar",
-  "text-informative-login": "Por favor ingresa tu número de ZChat o tu usuario para iniciar sesión",
-  "rules-validation-username": "El nombre de usuario es requerido",
-  "rules-validation-password": "La contraseña es requerida",
-  "rules-validation-confirm-password": "La confirmación de la contraseña es requerida",
-  "rules-validation-password-confirm-password-do-not-match": "La contraseña y la confirmación de la contraseña no coinciden",
-  "rules-validation-password-lenght": "La contraseña debe contener al menos 6 caracteres",
-  "rules-validation-username-numberzchat": "El nombre de usuario o el número ZChat es requerido"
+  "validation": {
+    "rules-validation-username": "El nombre de usuario es requerido",
+    "rules-validation-username-length": "El nombre de usuario debe contener al menos 3 caracteres",
+    "rules-validation-password": "La contraseña es requerida",
+    "rules-validation-confirm-password": "La confirmación de la contraseña es requerida",
+    "rules-validation-password-confirm-password-do-not-match": "La contraseña y la confirmación de la contraseña no coinciden",
+    "rules-validation-password-lenght": "La contraseña debe contener al menos 6 caracteres",
+    "rules-validation-username-numberzchat": "El nombre de usuario o el número ZChat es requerido"
+  },
+  "auth": {
+    "register-start": "Registrese y comience con ZChat",
+    "register": "Registrarse",
+    "have-an-account": "Si ya tiene una cuenta",
+    "log-in-you": "Inicie sesión",
+    "login": "Iniciar sesión",
+    "text-informative-login": "Por favor ingresa tu número de ZChat o tu usuario para iniciar sesión"
+  },
+  "profile": {
+    "your-profile": "Tu perfil",
+    "label-name": "Nombre",
+    "label-lastname": "Apellido"
+  },
+  "common": {
+    "label-add": "Agregar",
+    "label-edit": "Editar",
+    "label-back": "Atrás",
+    "label-continue": "Continuar"
+  },
+  "form": {
+    "label-user": "Usuario",
+    "label-user-name": "Nombre de usuario",
+    "label-password": "Contraseña",
+    "label-confirm-password": "Confirmar contraseña",
+    "label-number-zchat": "Número ZChat"
+  }
 }

@@ -1,26 +1,37 @@
 {
-  "register-start": "Sign up and get started with ZChat",
-  "register": "Register",
-  "have-an-account": "If you already have an account",
-  "log-in-you": "Sign in",
-  "login": "Login",
-  "your-profile": "Your profile",
-  "label-name": "Name",
-  "label-lastname": "Last name",
-  "label-add": "Add",
-  "label-edit": "Edit",
-  "label-back": "Back",
-  "label-user": "User",
-  "label-user-name": "Username",
-  "label-password": "Password",
-  "label-confirm-password": "Confirm Password",
-  "label-number-zchat": "Number ZChat",
-  "label-continue": "Continue",
-  "text-informative-login": "Please enter your ZChat number or username to log in",
-  "rules-validation-username": "Username is required",
-  "rules-validation-password": "Password is required",
-  "rules-validation-confirm-password": "Password confirmation is required",
-  "rules-validation-password-confirm-password-do-not-match": "The password and password confirmation do not match",
-  "rules-validation-password-lenght": "The password must contain at least 6 characters",
-  "rules-validation-username-numberzchat": "Username or ZChat number is required"
+  "validation": {
+    "rules-validation-username": "Username is required",
+    "rules-validation-username-length": "Username must contain at least 3 characters",
+    "rules-validation-password": "Password is required",
+    "rules-validation-confirm-password": "Password confirmation is required",
+    "rules-validation-password-confirm-password-do-not-match": "The password and password confirmation do not match",
+    "rules-validation-password-lenght": "The password must contain at least 6 characters",
+    "rules-validation-username-numberzchat": "Username or ZChat number is required"
+  },
+  "auth": {
+    "register-start": "Sign up and get started with ZChat",
+    "register": "Register",
+    "have-an-account": "If you already have an account",
+    "log-in-you": "Sign in",
+    "login": "Login",
+    "text-informative-login": "Please enter your ZChat number or username to log in"
+  },
+  "profile": {
+    "your-profile": "Your profile",
+    "label-name": "Name",
+    "label-lastname": "Last name"
+  },
+  "common": {
+    "label-add": "Add",
+    "label-edit": "Edit",
+    "label-back": "Back",
+    "label-continue": "Continue"
+  },
+  "form": {
+    "label-user": "User",
+    "label-user-name": "Username",
+    "label-password": "Password",
+    "label-confirm-password": "Confirm Password",
+    "label-number-zchat": "Number ZChat"
+  }
 }

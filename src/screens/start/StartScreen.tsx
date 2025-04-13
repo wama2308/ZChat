@@ -12,7 +12,7 @@ const StartScreen = () => {
 
   return (
     <AuthLayout>
-      <Text variant="titleMedium">{t('register-start')}</Text>
+      <Text variant="titleMedium">{t('auth.register-start')}</Text>
       <Button
         mode="contained"
         theme={{ roundness: 1 }}
@@ -20,18 +20,18 @@ const StartScreen = () => {
         onPress={() => navigation.navigate('Register')}
         style={{ width: '100%' }}
       >
-        {t('register')}
+        {t('auth.register')}
       </Button>
       <View style={styles.viewTexts}>
-        <Text variant="titleMedium">{t('have-an-account')}</Text>
-        <Text variant="titleMedium">{t('log-in-you')}</Text>
+        <Text variant="titleMedium">{t('auth.have-an-account')}</Text>
+        <Text variant="titleMedium">{t('auth.log-in-you')}</Text>
       </View>
       <Text
         style={[styles.textLink, { color: colors.primary }]}
         variant="titleMedium"
         onPress={() => navigation.navigate('Login')}
       >
-        {t('login')}
+        {t('auth.login')}
       </Text>
     </AuthLayout>
   );

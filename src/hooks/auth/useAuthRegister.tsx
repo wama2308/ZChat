@@ -36,25 +36,34 @@ const useAuthRegister = () => {
       const errors: Record<string, any> = {};
 
       if (!values.username) {
-        errors.username = { type: 'required', message: t('rules-validation-username') };
+        errors.username = { type: 'required', message: t('validation.rules-validation-username') };
+      }
+      if (values.username && values.username.length < 3) {
+        errors.username = {
+          type: 'required',
+          message: t('validation.rules-validation-username-length'),
+        };
       }
       if (!values.password) {
-        errors.password = { type: 'required', message: t('rules-validation-password') };
+        errors.password = { type: 'required', message: t('validation.rules-validation-password') };
       }
       if (values.password && values.password.length < 6) {
-        errors.password = { type: 'required', message: t('rules-validation-password-lenght') };
+        errors.password = {
+          type: 'required',
+          message: t('validation.rules-validation-password-lenght'),
+        };
       }
       if (!values.confirmPassword) {
         errors.confirmPassword = {
           type: 'required',
-          message: t('rules-validation-confirm-password'),
+          message: t('validation.rules-validation-confirm-password'),
         };
       }
       console.log(values);
       if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
         errors.confirmPassword = {
           type: 'required',
-          message: t('rules-validation-password-confirm-password-do-not-match'),
+          message: t('validation.rules-validation-password-confirm-password-do-not-match'),
         };
       }
 

@@ -29,12 +29,12 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-          options={{ headerTitle: '', headerBackTitle: t('label-back') }}
+          options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
         />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ headerTitle: '', headerBackTitle: t('label-back') }}
+          options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
         />
       </Stack.Navigator>
     </NavigationContainer>

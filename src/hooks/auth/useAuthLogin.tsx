@@ -31,14 +31,17 @@ const useAuthLogin = () => {
       if (!values.userNameNumberZChat) {
         errors.userNameNumberZChat = {
           type: 'required',
-          message: t('rules-validation-username-numberzchat'),
+          message: t('validation.rules-validation-username-numberzchat'),
         };
       }
       if (!values.password) {
-        errors.password = { type: 'required', message: t('rules-validation-password') };
+        errors.password = { type: 'required', message: t('validation.rules-validation-password') };
       }
       if (values.password && values.password.length < 6) {
-        errors.password = { type: 'required', message: t('rules-validation-password-lenght') };
+        errors.password = {
+          type: 'required',
+          message: t('validation.rules-validation-password-lenght'),
+        };
       }
 
       return { values, errors };

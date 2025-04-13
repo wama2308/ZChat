@@ -14,10 +14,10 @@ const LoginScreen = () => {
     <AuthLayout contentCenter={false}>
       <View style={styles.content}>
         <Text style={{ textAlign: 'center' }} variant="displaySmall">
-          {t('login')}
+          {t('auth.login')}
         </Text>
         <Text style={{ marginVertical: SPACES.m4, textAlign: 'center' }} variant="titleMedium">
-          {t('text-informative-login')}
+          {t('auth.text-informative-login')}
         </Text>
         <View style={{ gap: SPACES.g1 }}>
           <Controller
@@ -27,7 +27,7 @@ const LoginScreen = () => {
               <View>
                 <TextInput
                   autoCapitalize="none"
-                  label={`${t('label-user-name')} / ${t('label-number-zchat')}`}
+                  label={`${t('form.label-user-name')} / ${t('form.label-number-zchat')}`}
                   value={value}
                   onChangeText={onChange}
                   error={!!errors.userNameNumberZChat?.message}
@@ -47,7 +47,7 @@ const LoginScreen = () => {
               <View>
                 <TextInput
                   key={showPassword ? 'text' : 'password'}
-                  label={t('label-password')}
+                  label={t('form.label-password')}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -88,7 +88,7 @@ const LoginScreen = () => {
             onPress={handleSubmit}
             style={{ width: '100%', marginTop: SPACES.m2 }}
           >
-            {t('label-continue')}
+            {t('common.label-continue')}
           </Button>
         </View>
       </View>
