@@ -16,5 +16,11 @@
   "label-confirm-password": "Confirmar contraseña",
   "label-number-zchat": "Número ZChat",
   "label-continue": "Continuar",
-  "text-informative-login": "Por favor ingresa tu número de ZChat o tu usuario para iniciar sesión"
+  "text-informative-login": "Por favor ingresa tu número de ZChat o tu usuario para iniciar sesión",
+  "rules-validation-username": "El nombre de usuario es requerido",
+  "rules-validation-password": "La contraseña es requerida",
+  "rules-validation-confirm-password": "La confirmación de la contraseña es requerida",
+  "rules-validation-password-confirm-password-do-not-match": "La contraseña y la confirmación de la contraseña no coinciden",
+  "rules-validation-password-lenght": "La contraseña debe contener al menos 6 caracteres",
+  "rules-validation-username-numberzchat": "El nombre de usuario o el número ZChat es requerido"
 }

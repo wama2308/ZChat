@@ -1,17 +1,25 @@
-// import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-
-// import { Asset } from 'react-native-image-picker';
-import Icon from '@react-native-vector-icons/ionicons';
-
 import { SPACES } from '@config/themes/themes';
+import { Controller } from 'react-hook-form';
+
+import Icon from '@react-native-vector-icons/ionicons';
 import { useTranslation } from 'react-i18next';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Button, HelperText, Text, TextInput } from 'react-native-paper';
 
 import AuthLayout from '@components/AuthLayout';
+import useAuthRegister from '@hooks/auth/useAuthRegister';
 
 const RegisterScreen = () => {
   const { t } = useTranslation();
+  const {
+    control,
+    showPassword,
+    showConfirmPassword,
+    errors,
+    handleSubmit,
+    handleShowPassword,
+    handleShowConfirmPassword,
+  } = useAuthRegister();
 
   // const [selectedImage, setSelectedImage] = useState<Asset | null>(null);
   return (
@@ -19,60 +27,119 @@ const RegisterScreen = () => {
       {/* {selectedImage?.uri && <Image source={{ uri: selectedImage.uri }} style={styles.image} />} */}
       <Text variant="displaySmall">{t('your-profile')}</Text>
       <View style={styles.content}>
-        <TextInput label={t('label-user-name')} value={''} onChangeText={() => {}} />
-        <TextInput
-          label={t('label-password')}
-          value={''}
-          onChangeText={() => {}}
-          secureTextEntry={true}
-          right={
-            <TextInput.Icon
-              icon={() => (
-                <Icon
-                  // name={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
-                  name={'eye-off-outline'}
-                  size={24}
-                  color="#666"
-                />
+        <Controller
+          control={control}
+          name="username"
+          render={({ field: { onChange, value } }) => (
+            <View>
+              <TextInput
+                autoCapitalize="none"
+                label={t('label-user-name')}
+                value={value}
+                onChangeText={onChange}
+                error={!!errors.username?.message}
+              />
+              {!!errors.username?.message && (
+                <HelperText type="error" visible={!!errors.username?.message}>
+                  {errors.username?.message}
+                </HelperText>
               )}
-              onPress={() => {}}
-            />
-          }
-          left={
-            <TextInput.Icon
-              icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
-            />
-          }
+            </View>
+          )}
         />
-        <TextInput
-          label={t('label-confirm-password')}
-          value={''}
-          onChangeText={() => {}}
-          secureTextEntry={true}
-          right={
-            <TextInput.Icon
-              icon={() => (
-                <Icon
-                  // name={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
-                  name={'eye-off-outline'}
-                  size={24}
-                  color="#666"
-                />
+        <Controller
+          control={control}
+          name="password"
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <View>
+              <TextInput
+                key={showPassword ? 'text' : 'password'}
+                label={t('label-password')}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                secureTextEntry={!showPassword}
+                keyboardType="default"
+                autoComplete="off"
+                textContentType="none" // iOS
+                importantForAutofill="no" // Android
+                right={
+                  <TextInput.Icon
+                    icon={() => (
+                      <Icon
+                        name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                        size={24}
+                        color="#666"
+                      />
+                    )}
+                    onPress={handleShowPassword}
+                  />
+                }
+                left={
+                  <TextInput.Icon
+                    icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
+                  />
+                }
+              />
+              {!!errors.password?.message && (
+                <HelperText type="error" visible={!!errors.password?.message}>
+                  {errors.password?.message}
+                </HelperText>
               )}
-              onPress={() => {}}
-            />
-          }
-          left={
-            <TextInput.Icon
-              icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
-            />
-          }
+            </View>
+          )}
+        />
+        <Controller
+          control={control}
+          name="confirmPassword"
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <View>
+              <TextInput
+                label={t('label-confirm-password')}
+                value={value}
+                onChangeText={onChange}
+                secureTextEntry={!showConfirmPassword}
+                keyboardType="default"
+                autoComplete="off"
+                textContentType="none" // iOS
+                importantForAutofill="no" // Android
+                right={
+                  <TextInput.Icon
+                    icon={() => (
+                      <Icon
+                        name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'}
+                        size={24}
+                        color="#666"
+                      />
+                    )}
+                    onPress={handleShowConfirmPassword}
+                  />
+                }
+                left={
+                  <TextInput.Icon
+                    icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
+                  />
+                }
+              />
+              {!!errors.confirmPassword?.message && (
+                <HelperText type="error" visible={!!errors.confirmPassword?.message}>
+                  {errors.confirmPassword?.message}
+                </HelperText>
+              )}
+            </View>
+          )}
         />
       </View>
       <Button
         theme={{ roundness: 1 }}
         mode="contained"
-        onPress={() => console.log('Pressed')}
+        onPress={handleSubmit}
         style={{ width: '100%' }}
       >
         {t('register')}
