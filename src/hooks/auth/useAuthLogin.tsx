@@ -34,6 +34,12 @@ const useAuthLogin = () => {
           message: t('validation.rules-validation-username-numberzchat'),
         };
       }
+      if (values.userNameNumberZChat && values.userNameNumberZChat.length < 3) {
+        errors.userNameNumberZChat = {
+          type: 'required',
+          message: t('validation.rules-validation-username-numberzchat-length'),
+        };
+      }
       if (!values.password) {
         errors.password = { type: 'required', message: t('validation.rules-validation-password') };
       }

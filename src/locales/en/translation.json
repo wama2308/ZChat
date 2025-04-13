@@ -6,7 +6,8 @@
     "rules-validation-confirm-password": "Password confirmation is required",
     "rules-validation-password-confirm-password-do-not-match": "The password and password confirmation do not match",
     "rules-validation-password-lenght": "The password must contain at least 6 characters",
-    "rules-validation-username-numberzchat": "Username or ZChat number is required"
+    "rules-validation-username-numberzchat": "Username or ZChat number is required",
+    "rules-validation-username-numberzchat-length": "Username or ZChat number must contain at least 3 characters"
   },
   "auth": {
     "register-start": "Sign up and get started with ZChat",
