@@ -8,6 +8,7 @@ import { Button, Text, useTheme } from 'react-native-paper';
 const StartScreen = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (

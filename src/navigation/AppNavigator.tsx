@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import BottomTabsNavigator from './BottomTabsNavigator';
 
 // Importa las pantallas
 import StartScreen from '@screens/start/StartScreen';
@@ -8,6 +9,7 @@ import LoginScreen from '@screens/login/Login';
 import { CombinedDarkTheme, CombinedLightTheme } from '@config/themes/themes';
 import { useThemeStore } from '@store/config/useThemeStore';
 import { useTranslation } from 'react-i18next';
+import { useAuthStore } from '@store/auth/useAuthStore';
 
 // Definir los tipos de la navegación
 export type RootStackParamList = {
@@ -21,22 +23,27 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function AppNavigator() {
   const { t } = useTranslation();
   const { isDarkMode } = useThemeStore();
+  const { isLoggedIn } = useAuthStore();
 
   return (
     <NavigationContainer theme={isDarkMode ? CombinedDarkTheme : CombinedLightTheme}>
-      <Stack.Navigator>
-        <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
-        />
-      </Stack.Navigator>
+      {isLoggedIn ? (
+        <BottomTabsNavigator />
+      ) : (
+        <Stack.Navigator>
+          <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
+          />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }

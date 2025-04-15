@@ -1,3 +1,4 @@
+import { useAuthStore } from '@store/auth/useAuthStore';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,7 @@ interface FormValues {
 
 const useAuthLogin = () => {
   const { t } = useTranslation();
+  const { login } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = useCallback(() => {
@@ -56,7 +58,7 @@ const useAuthLogin = () => {
 
   const handleSubmit = handleSubmitForm(async (formData) => {
     console.log('Form data ', formData);
-
+    login();
     // Do login
   });
   return {

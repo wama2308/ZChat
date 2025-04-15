@@ -34,5 +34,11 @@
     "label-password": "Contraseña",
     "label-confirm-password": "Confirmar contraseña",
     "label-number-zchat": "Número ZChat"
+  },
+  "tabs": {
+    "label-chats": "Chats",
+    "label-calls": "Llamadas",
+    "label-contacts": "Contactos",
+    "label-settings": "Ajustes"
   }
 }
