@@ -1,11 +1,11 @@
-import { Controller } from 'react-hook-form';
-import AuthLayout from '@components/AuthLayout';
-import { SPACES } from '@config/themes/themes';
-import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, Text, TextInput } from 'react-native-paper';
-import Icon from '@react-native-vector-icons/ionicons';
-import useAuthLogin from '@hooks/auth/useAuthLogin';
+import AuthLayout from "@components/AuthLayout";
+import { SPACES } from "@config/themes/themes";
+import useAuthLogin from "@hooks/auth/useAuthLogin";
+import Icon from "@react-native-vector-icons/ionicons";
+import { Controller } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, View } from "react-native";
+import { Button, HelperText, Text, TextInput } from "react-native-paper";
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -13,11 +13,11 @@ const LoginScreen = () => {
   return (
     <AuthLayout contentCenter={false}>
       <View style={styles.content}>
-        <Text style={{ textAlign: 'center' }} variant="displaySmall">
-          {t('auth.login')}
+        <Text style={{ textAlign: "center" }} variant="displaySmall">
+          {t("auth.login")}
         </Text>
-        <Text style={{ marginVertical: SPACES.m4, textAlign: 'center' }} variant="titleMedium">
-          {t('auth.text-informative-login')}
+        <Text style={{ marginVertical: SPACES.m4, textAlign: "center" }} variant="titleMedium">
+          {t("auth.text-informative-login")}
         </Text>
         <View style={{ gap: SPACES.g1 }}>
           <Controller
@@ -27,7 +27,7 @@ const LoginScreen = () => {
               <View>
                 <TextInput
                   autoCapitalize="none"
-                  label={`${t('form.label-user-name')} / ${t('form.label-number-zchat')}`}
+                  label={`${t("form.label-user-name")} / ${t("form.label-number-zchat")}`}
                   value={value}
                   onChangeText={onChange}
                   error={!!errors.userNameNumberZChat?.message}
@@ -46,8 +46,8 @@ const LoginScreen = () => {
             render={({ field: { onChange, onBlur, value } }) => (
               <View>
                 <TextInput
-                  key={showPassword ? 'text' : 'password'}
-                  label={t('form.label-password')}
+                  key={showPassword ? "text" : "password"}
+                  label={t("form.label-password")}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -60,7 +60,7 @@ const LoginScreen = () => {
                     <TextInput.Icon
                       icon={() => (
                         <Icon
-                          name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                          name={showPassword ? "eye-off-outline" : "eye-outline"}
                           size={24}
                           color="#666"
                         />
@@ -69,9 +69,7 @@ const LoginScreen = () => {
                     />
                   }
                   left={
-                    <TextInput.Icon
-                      icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />}
-                    />
+                    <TextInput.Icon icon={() => <Icon name="lock-closed-outline" size={24} color="#666" />} />
                   }
                 />
                 {!!errors.password?.message && (
@@ -86,9 +84,9 @@ const LoginScreen = () => {
             theme={{ roundness: 1 }}
             mode="contained"
             onPress={handleSubmit}
-            style={{ width: '100%', marginTop: SPACES.m2 }}
+            style={{ width: "100%", marginTop: SPACES.m2 }}
           >
-            {t('common.label-continue')}
+            {t("common.label-continue")}
           </Button>
         </View>
       </View>
@@ -98,12 +96,12 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   header: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: SPACES.g5,
   },
   content: {
-    width: '100%',
+    width: "100%",
     gap: SPACES.g1,
     marginTop: SPACES.m3,
   },

@@ -1,7 +1,7 @@
-import { useAuthStore } from '@store/auth/useAuthStore';
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { useAuthStore } from "@store/auth/useAuthStore";
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface FormValues {
   userNameNumberZChat: string;
@@ -22,33 +22,33 @@ const useAuthLogin = () => {
     formState: { errors, isSubmitting, isValid },
     control,
   } = useForm<FormValues>({
-    mode: 'onBlur',
+    mode: "onBlur",
     defaultValues: {
-      userNameNumberZChat: '',
-      password: '',
+      userNameNumberZChat: "",
+      password: "",
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};
 
       if (!values.userNameNumberZChat) {
         errors.userNameNumberZChat = {
-          type: 'required',
-          message: t('validation.rules-validation-username-numberzchat'),
+          type: "required",
+          message: t("validation.rules-validation-username-numberzchat"),
         };
       }
       if (values.userNameNumberZChat && values.userNameNumberZChat.length < 3) {
         errors.userNameNumberZChat = {
-          type: 'required',
-          message: t('validation.rules-validation-username-numberzchat-length'),
+          type: "required",
+          message: t("validation.rules-validation-username-numberzchat-length"),
         };
       }
       if (!values.password) {
-        errors.password = { type: 'required', message: t('validation.rules-validation-password') };
+        errors.password = { type: "required", message: t("validation.rules-validation-password") };
       }
       if (values.password && values.password.length < 6) {
         errors.password = {
-          type: 'required',
-          message: t('validation.rules-validation-password-lenght'),
+          type: "required",
+          message: t("validation.rules-validation-password-lenght"),
         };
       }
 
@@ -57,7 +57,7 @@ const useAuthLogin = () => {
   });
 
   const handleSubmit = handleSubmitForm(async (formData) => {
-    console.log('Form data ', formData);
+    console.log("Form data ", formData);
     login();
     // Do login
   });

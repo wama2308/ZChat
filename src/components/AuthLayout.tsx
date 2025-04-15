@@ -1,8 +1,9 @@
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Surface, useTheme } from 'react-native-paper';
-import { SPACES } from '@config/themes/themes';
-import TextLogo from './TextLogo';
+import { SPACES } from "@config/themes/themes";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { Surface, useTheme } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import TextLogo from "./TextLogo";
 
 interface Props {
   children: React.ReactNode;
@@ -15,14 +16,14 @@ const AuthLayout = ({ children, contentCenter = true }: Props) => {
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoidingView}
         keyboardVerticalOffset={100} // ajusta según tu diseño
       >
         <ScrollView
           contentContainerStyle={[
             styles.contentContainer,
-            { justifyContent: contentCenter ? 'center' : 'flex-start' },
+            { justifyContent: contentCenter ? "center" : "flex-start" },
           ]}
           keyboardShouldPersistTaps="handled"
         >
@@ -46,14 +47,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
   },
   surface: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: SPACES.g3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

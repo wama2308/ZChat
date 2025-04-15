@@ -1,13 +1,14 @@
 // Main.tsx
-import React from 'react';
-import { AppRegistry } from 'react-native';
-import App from './src/App';
-import { name as appName } from './app.json';
-import { PaperProvider } from 'react-native-paper';
-import { lightTheme, darkTheme } from './src/config/themes/themes';
-import { useThemeStore } from './src/store/config/useThemeStore';
-import { useLanguageSetup } from './src/hooks/config/useLanguageSetup';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
+import { AppRegistry } from "react-native";
+import { PaperProvider } from "react-native-paper";
+
+import { name as appName } from "./app.json";
+import App from "./src/App";
+import { lightTheme, darkTheme } from "./src/config/themes/themes";
+import { useLanguageSetup } from "./src/hooks/config/useLanguageSetup";
+import { useThemeStore } from "./src/store/config/useThemeStore";
 
 if (__DEV__) {
   require("./ReactotronConfig");

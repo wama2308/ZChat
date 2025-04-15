@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface FormValues {
   username: string;
@@ -26,44 +26,44 @@ const useAuthRegister = () => {
     formState: { errors, isSubmitting, isValid },
     control,
   } = useForm<FormValues>({
-    mode: 'onBlur',
+    mode: "onBlur",
     defaultValues: {
-      username: '',
-      password: '',
-      confirmPassword: '',
+      username: "",
+      password: "",
+      confirmPassword: "",
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};
 
       if (!values.username) {
-        errors.username = { type: 'required', message: t('validation.rules-validation-username') };
+        errors.username = { type: "required", message: t("validation.rules-validation-username") };
       }
       if (values.username && values.username.length < 3) {
         errors.username = {
-          type: 'required',
-          message: t('validation.rules-validation-username-length'),
+          type: "required",
+          message: t("validation.rules-validation-username-length"),
         };
       }
       if (!values.password) {
-        errors.password = { type: 'required', message: t('validation.rules-validation-password') };
+        errors.password = { type: "required", message: t("validation.rules-validation-password") };
       }
       if (values.password && values.password.length < 6) {
         errors.password = {
-          type: 'required',
-          message: t('validation.rules-validation-password-lenght'),
+          type: "required",
+          message: t("validation.rules-validation-password-lenght"),
         };
       }
       if (!values.confirmPassword) {
         errors.confirmPassword = {
-          type: 'required',
-          message: t('validation.rules-validation-confirm-password'),
+          type: "required",
+          message: t("validation.rules-validation-confirm-password"),
         };
       }
       console.log(values);
       if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
         errors.confirmPassword = {
-          type: 'required',
-          message: t('validation.rules-validation-password-confirm-password-do-not-match'),
+          type: "required",
+          message: t("validation.rules-validation-password-confirm-password-do-not-match"),
         };
       }
 
@@ -72,7 +72,7 @@ const useAuthRegister = () => {
   });
 
   const handleSubmit = handleSubmitForm(async (formData) => {
-    console.log('Form data ', formData);
+    console.log("Form data ", formData);
 
     // Do login
   });

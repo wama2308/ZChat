@@ -1,15 +1,14 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomTabsNavigator from './BottomTabsNavigator';
+import { CombinedDarkTheme, CombinedLightTheme } from "@config/themes/themes";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "@screens/login/Login";
+import RegisterScreen from "@screens/register/RegisterScreen";
+import StartScreen from "@screens/start/StartScreen";
+import { useAuthStore } from "@store/auth/useAuthStore";
+import { useThemeStore } from "@store/config/useThemeStore";
+import { useTranslation } from "react-i18next";
 
-// Importa las pantallas
-import StartScreen from '@screens/start/StartScreen';
-import RegisterScreen from '@screens/register/RegisterScreen';
-import LoginScreen from '@screens/login/Login';
-import { CombinedDarkTheme, CombinedLightTheme } from '@config/themes/themes';
-import { useThemeStore } from '@store/config/useThemeStore';
-import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@store/auth/useAuthStore';
+import BottomTabsNavigator from "./BottomTabsNavigator";
 
 // Definir los tipos de la navegación
 export type RootStackParamList = {
@@ -19,7 +18,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-
+console.log(12);
 export default function AppNavigator() {
   const { t } = useTranslation();
   const { isDarkMode } = useThemeStore();
@@ -35,12 +34,12 @@ export default function AppNavigator() {
           <Stack.Screen
             name="Register"
             component={RegisterScreen}
-            options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
+            options={{ headerTitle: "", headerBackTitle: t("common.label-back") }}
           />
           <Stack.Screen
             name="Login"
             component={LoginScreen}
-            options={{ headerTitle: '', headerBackTitle: t('common.label-back') }}
+            options={{ headerTitle: "", headerBackTitle: t("common.label-back") }}
           />
         </Stack.Navigator>
       )}

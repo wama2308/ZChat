@@ -1,5 +1,5 @@
 // src/store/config/useAuthStore.ts
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface AuthState {
   isLoggedIn: boolean;

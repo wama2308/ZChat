@@ -1,12 +1,7 @@
 // src/components/ImagePickerButton.tsx
-import React from 'react';
-import { Alert, View, Button, StyleSheet } from 'react-native';
-import {
-  launchCamera,
-  launchImageLibrary,
-  Asset,
-  ImagePickerResponse,
-} from 'react-native-image-picker';
+import React from "react";
+import { Alert, View, Button, StyleSheet } from "react-native";
+import { launchCamera, launchImageLibrary, Asset, ImagePickerResponse } from "react-native-image-picker";
 
 type Props = {
   onImageSelected: (image: Asset) => void;
@@ -15,9 +10,9 @@ type Props = {
 export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
   const handleResponse = (response: ImagePickerResponse) => {
     if (response.didCancel) {
-      console.log('Usuario canceló la acción');
+      console.log("Usuario canceló la acción");
     } else if (response.errorCode) {
-      Alert.alert('Error', response.errorMessage || 'Ocurrió un error');
+      Alert.alert("Error", response.errorMessage || "Ocurrió un error");
     } else if (response.assets && response.assets.length > 0) {
       onImageSelected(response.assets[0]);
     }
@@ -26,21 +21,21 @@ export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
   const openCamera = () => {
     launchCamera(
       {
-        mediaType: 'photo',
-        cameraType: 'back',
+        mediaType: "photo",
+        cameraType: "back",
         saveToPhotos: true,
       },
-      handleResponse,
+      handleResponse
     );
   };
 
   const openGallery = () => {
     launchImageLibrary(
       {
-        mediaType: 'photo',
+        mediaType: "photo",
         selectionLimit: 1,
       },
-      handleResponse,
+      handleResponse
     );
   };
 
@@ -55,7 +50,7 @@ export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 16,
   },
 });

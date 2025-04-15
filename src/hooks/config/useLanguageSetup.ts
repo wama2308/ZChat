@@ -1,8 +1,8 @@
 // src/hooks/useLanguageSetup.ts
-import { useEffect, useState } from 'react';
-import { useLanguageStore } from '@store/config/useLanguageStore';
-import i18n from '@config/languages/i18n';
-import { getDeviceLanguage } from '@config/languages/i18n';
+import i18n from "@config/languages/i18n";
+import { getDeviceLanguage } from "@config/languages/i18n";
+import { useLanguageStore } from "@store/config/useLanguageStore";
+import { useEffect, useState } from "react";
 
 export const useLanguageSetup = () => {
   const { language } = useLanguageStore();
@@ -13,7 +13,7 @@ export const useLanguageSetup = () => {
       try {
         // Si el idioma es 'system', obtenemos el idioma del dispositivo
         const systemLang = getDeviceLanguage();
-        const langToUse = language === 'system' ? systemLang : language || 'es';
+        const langToUse = language === "system" ? systemLang : language || "es";
 
         // Aplicamos el idioma con i18n
         await i18n.changeLanguage(langToUse);
@@ -21,7 +21,7 @@ export const useLanguageSetup = () => {
         // Marcamos que el idioma está cargado
         setIsLanguageLoaded(true);
       } catch (err) {
-        console.error('❌ Error al cargar idioma:', err);
+        console.error("❌ Error al cargar idioma:", err);
       }
     };
 
