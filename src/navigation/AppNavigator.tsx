@@ -1,7 +1,7 @@
 import { CombinedDarkTheme, CombinedLightTheme } from "@config/themes/themes";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "@screens/login/Login";
+import LoginScreen from "@screens/login/LoginScreen";
 import RegisterScreen from "@screens/register/RegisterScreen";
 import StartScreen from "@screens/start/StartScreen";
 import { useAuthStore } from "@store/auth/useAuthStore";
