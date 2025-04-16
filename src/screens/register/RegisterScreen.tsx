@@ -64,6 +64,7 @@ const RegisterScreen = () => {
                 autoComplete="off"
                 textContentType="none" // iOS
                 importantForAutofill="no" // Android
+                error={!!errors.password?.message}
                 right={
                   <TextInput.Icon
                     icon={() => (
@@ -101,6 +102,7 @@ const RegisterScreen = () => {
                 autoComplete="off"
                 textContentType="none" // iOS
                 importantForAutofill="no" // Android
+                error={!!errors.confirmPassword?.message}
                 right={
                   <TextInput.Icon
                     icon={() => (

@@ -56,6 +56,7 @@ const LoginScreen = () => {
                   autoComplete="off"
                   textContentType="none" // iOS
                   importantForAutofill="no" // Android
+                  error={!!errors.password?.message}
                   right={
                     <TextInput.Icon
                       icon={() => (
