@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CallsScreen from "@screens/calls/CallsScreen";
 import ChatsScreen from "@screens/chats/ChatsScreen";
 import ContactsScreen from "@screens/contacts/ContactsScreen";
-import SettingsScreen from "@screens/settings/SettingsScreen";
 import { useTranslation } from "react-i18next";
+import SettingsNavigator from "./SettingsNavigator";
 
 export type BottomTabParamList = {
   Chats: undefined;
@@ -37,7 +37,11 @@ export default function BottomTabsNavigator() {
       <Tab.Screen name="Chats" component={ChatsScreen} options={{ title: t("tabs.label-chats") }} />
       <Tab.Screen name="Calls" component={CallsScreen} options={{ title: t("tabs.label-calls") }} />
       <Tab.Screen name="Contacts" component={ContactsScreen} options={{ title: t("tabs.label-contacts") }} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: t("tabs.label-settings") }} />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsNavigator}
+        options={{ title: t("tabs.label-settings") }}
+      />
     </Tab.Navigator>
   );
 }

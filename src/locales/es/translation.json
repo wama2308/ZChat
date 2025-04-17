@@ -26,7 +26,9 @@
     "label-add": "Agregar",
     "label-edit": "Editar",
     "label-back": "Atrás",
-    "label-continue": "Continuar"
+    "label-continue": "Continuar",
+    "label-language": "Idiomas",
+    "label-theme": "Tema"
   },
   "form": {
     "label-user": "Usuario",
