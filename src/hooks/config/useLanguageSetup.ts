@@ -1,6 +1,5 @@
 // src/hooks/useLanguageSetup.ts
-import i18n from "@config/languages/i18n";
-import { getDeviceLanguage } from "@config/languages/i18n";
+import i18n, { getDeviceLanguage } from "@config/languages/i18n";
 import { useLanguageStore } from "@store/config/useLanguageStore";
 import { useEffect, useState } from "react";
 

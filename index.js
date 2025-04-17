@@ -6,7 +6,7 @@ import { PaperProvider } from "react-native-paper";
 
 import { name as appName } from "./app.json";
 import App from "./src/App";
-import { lightTheme, darkTheme } from "./src/config/themes/themes";
+import { darkTheme, lightTheme } from "./src/config/themes/themes";
 import { useLanguageSetup } from "./src/hooks/config/useLanguageSetup";
 import { useThemeStore } from "./src/store/config/useThemeStore";
 

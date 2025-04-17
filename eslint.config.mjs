@@ -6,6 +6,8 @@ import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintPluginTS from '@typescript-eslint/eslint-plugin';
 import parserTS from '@typescript-eslint/parser';
+import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'; // ← Añade esto
+
 
 export default [
   {
@@ -27,6 +29,7 @@ export default [
       import: eslintPluginImport,
       '@typescript-eslint': eslintPluginTS,
       prettier: eslintPluginPrettier,
+      'simple-import-sort': eslintPluginSimpleImportSort,
     },
     rules: {
       'prettier/prettier': [
@@ -47,14 +50,11 @@ export default [
       'react-native/no-color-literals': 'off',
       'react-native/split-platform-components': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'import/order': [
-        'error',
-        {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc', caseInsensitive: true },
-        },
-      ],
+      'simple-import-sort/imports': 'error',  // ← Ordena imports al guardar
+      'simple-import-sort/exports': 'error', // ← Ordena exports al guardar
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
       'no-unused-vars': ['error', {
         'vars': 'all',   // Aplica la regla para todas las variables
         'args': 'none',  // No marca como error los argumentos de las funciones no utilizados
