@@ -6,8 +6,6 @@ import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintPluginTS from '@typescript-eslint/eslint-plugin';
 import parserTS from '@typescript-eslint/parser';
-import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'; // ← Añade esto
-
 
 export default [
   {
@@ -29,7 +27,6 @@ export default [
       import: eslintPluginImport,
       '@typescript-eslint': eslintPluginTS,
       prettier: eslintPluginPrettier,
-      'simple-import-sort': eslintPluginSimpleImportSort,
     },
     rules: {
       'prettier/prettier': [
@@ -43,6 +40,16 @@ export default [
           endOfLine: 'lf',
           arrowParens: 'always',
           printWidth: 110,
+          organizeImportsSkipDestructiveCodeActions: true,
+          plugins: ['prettier-plugin-organize-imports'],
+          importOrder: [
+            '^react',       // 1. React (opcional)
+            '^@?\\w',       // 2. Paquetes externos (axios, lodash, etc.)
+            '^@/(.*)$',     // 3. Alias internos (@/components, @/utils)
+            '^[./]',        // 4. Imports relativos (./, ../)
+          ],
+          importOrderSeparation: true, // Añade líneas vacías entre grupos
+          importOrderSortSpecifiers: true,
         },
       ],
       'react/react-in-jsx-scope': 'off',
@@ -50,11 +57,7 @@ export default [
       'react-native/no-color-literals': 'off',
       'react-native/split-platform-components': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'simple-import-sort/imports': 'error',  // ← Ordena imports al guardar
-      'simple-import-sort/exports': 'error', // ← Ordena exports al guardar
-      'import/first': 'error',
-      'import/newline-after-import': 'error',
-      'import/no-duplicates': 'error',
+      'import/order': 'off',
       'no-unused-vars': ['error', {
         'vars': 'all',   // Aplica la regla para todas las variables
         'args': 'none',  // No marca como error los argumentos de las funciones no utilizados

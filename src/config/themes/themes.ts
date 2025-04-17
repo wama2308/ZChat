@@ -2,7 +2,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
-import { MD3DarkTheme as PaperDarkTheme, MD3LightTheme as DefaultTheme } from "react-native-paper";
+import { MD3LightTheme as DefaultTheme, MD3DarkTheme as PaperDarkTheme } from "react-native-paper";
 
 const LIGHTS_COLORS = {
   colors: {
