@@ -20,7 +20,8 @@
   "profile": {
     "your-profile": "Your profile",
     "label-name": "Name",
-    "label-lastname": "Last name"
+    "label-lastname": "Last name",
+    "label-your-private-number": "Your private number"
   },
   "common": {
     "label-add": "Add",

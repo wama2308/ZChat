@@ -46,6 +46,8 @@ const LIGHTS_COLORS = {
     surfaceDisabled: "rgba(26, 28, 30, 0.12)",
     onSurfaceDisabled: "rgba(26, 28, 30, 0.38)",
     backdrop: "rgba(44, 49, 55, 0.4)",
+    brightBlue: "#006bfb",
+    white: "#ffffff",
   },
 };
 
@@ -91,6 +93,8 @@ const DARK_COLORS = {
     surfaceDisabled: "rgba(226, 226, 229, 0.12)",
     onSurfaceDisabled: "rgba(226, 226, 229, 0.38)",
     backdrop: "rgba(44, 49, 55, 0.4)",
+    brightBlue: "#006bfb",
+    white: "#ffffff",
   },
 };
 
@@ -155,3 +159,5 @@ export const SPACES = {
   g4: 32,
   g5: 40,
 };
+
+export type AppTheme = typeof lightTheme;
