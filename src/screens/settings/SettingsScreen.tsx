@@ -1,4 +1,5 @@
 import ListViewSettings from "@components/settings/ListViewSettings";
+import ProfileNumber from "@components/settings/ProfileNumber";
 import { SPACES } from "@config/themes/themes";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import { ScrollView, View } from "react-native"; // Importa ScrollView
@@ -27,6 +28,7 @@ const SettingsScreen = () => {
   return (
     <View style={styles.content}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
+        <ProfileNumber />
         <ListViewSettings />
       </ScrollView>
     </View>

@@ -1,4 +1,4 @@
-import AuthLayout from "@components/AuthLayout";
+import AuthLayout from "@components/auth/AuthLayout";
 import { SPACES } from "@config/themes/themes";
 import useAuthLogin from "@hooks/auth/useAuthLogin";
 import Icon from "@react-native-vector-icons/ionicons";
