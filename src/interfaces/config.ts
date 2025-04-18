@@ -2,6 +2,7 @@ import Icon from "@react-native-vector-icons/ionicons";
 import { ComponentProps } from "react";
 
 export type TLanguage = "system" | "en" | "es";
+export type TMode = "system" | "dark" | "light";
 
 export type TIconName = ComponentProps<typeof Icon>["name"];
 
@@ -13,4 +14,9 @@ export interface IConfigItemProps {
   showRightArrow?: boolean;
   rightIconName?: TIconName;
   rightIconColor?: string;
+}
+
+export interface ISettingsLanguage {
+  id: TLanguage;
+  label: string;
 }

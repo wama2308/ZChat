@@ -26,12 +26,12 @@ export default function SettingsNavigator() {
       <Stack.Screen
         name="LanguageSettings"
         component={LanguageScreen}
-        options={{ headerTitle: t("common.label-language") }}
+        options={{ headerTitle: t("common.label-language"), headerBackTitle: "" }}
       />
       <Stack.Screen
         name="ThemeSettings"
         component={ThemeScreen}
-        options={{ headerTitle: t("common.label-theme") }}
+        options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
       />
     </Stack.Navigator>
   );

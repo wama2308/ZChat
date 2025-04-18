@@ -18,7 +18,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-console.log(12);
+
 export default function AppNavigator() {
   const { t } = useTranslation();
   const { isDarkMode } = useThemeStore();

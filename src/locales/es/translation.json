@@ -42,5 +42,15 @@
     "label-calls": "Llamadas",
     "label-contacts": "Contactos",
     "label-settings": "Ajustes"
+  },
+  "languages": {
+    "spanish": "Español",
+    "english": "Ingles",
+    "device": "Idioma del dispositivo"
+  },
+  "themes": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "device": "Color del sistema"
   }
 }
