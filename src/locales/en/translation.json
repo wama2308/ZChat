@@ -7,7 +7,9 @@
     "rules-validation-password-confirm-password-do-not-match": "The password and password confirmation do not match",
     "rules-validation-password-lenght": "The password must contain at least 6 characters",
     "rules-validation-username-numberzchat": "Username or ZChat number is required",
-    "rules-validation-username-numberzchat-length": "Username or ZChat number must contain at least 3 characters"
+    "rules-validation-username-numberzchat-length": "Username or ZChat number must contain at least 3 characters",
+    "rules-validation-edit-profile-name": "Name is required",
+    "rules-validation-edit-profile-lastname": "Last name is required"
   },
   "auth": {
     "register-start": "Sign up and get started with ZChat",
@@ -21,7 +23,8 @@
     "your-profile": "Your profile",
     "label-name": "Name",
     "label-lastname": "Last name",
-    "label-your-private-number": "Your private number"
+    "label-your-private-number": "Your private number",
+    "label-edit-data-perfil": "Edit profile information"
   },
   "common": {
     "label-add": "Add",
@@ -29,14 +32,17 @@
     "label-back": "Back",
     "label-continue": "Continue",
     "label-language": "Language",
-    "label-theme": "Theme"
+    "label-theme": "Theme",
+    "label-save": "Save"
   },
   "form": {
     "label-user": "User",
     "label-user-name": "Username",
     "label-password": "Password",
     "label-confirm-password": "Confirm Password",
-    "label-number-zchat": "Number ZChat"
+    "label-number-zchat": "Number ZChat",
+    "label-name": "Name",
+    "label-lastname": "Lastname"
   },
   "tabs": {
     "label-chats": "Chats",

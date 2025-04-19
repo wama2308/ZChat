@@ -1,4 +1,5 @@
 import ListViewSettings from "@components/settings/ListViewSettings";
+import Profile from "@components/settings/Profile";
 import ProfileNumber from "@components/settings/ProfileNumber";
 import { SPACES } from "@config/themes/themes";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
@@ -29,6 +30,7 @@ const SettingsScreen = () => {
     <View style={styles.content}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
         <ProfileNumber />
+        <Profile />
         <ListViewSettings />
       </ScrollView>
     </View>

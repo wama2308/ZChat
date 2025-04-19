@@ -1,6 +1,6 @@
 import AuthLayout from "@components/auth/AuthLayout";
-import { RootStackParamList } from "@navigation/AppNavigator";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import type { RootStackParamList } from "@navigation/AppNavigator";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { Button, Text, useTheme } from "react-native-paper";

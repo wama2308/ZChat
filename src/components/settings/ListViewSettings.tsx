@@ -1,6 +1,6 @@
 import type { IConfigItemProps } from "@interfaces/config";
-import { RootStackParamListSettings } from "@navigation/SettingsNavigator";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { type RootStackParamListSettings } from "@navigation/SettingsNavigator";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { type TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";

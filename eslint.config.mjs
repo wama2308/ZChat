@@ -64,6 +64,8 @@ export default [
         'ignoreRestSiblings': false, // No ignora las variables de objetos desestructurados no usadas
       }],
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
+      "@typescript-eslint/consistent-type-imports": "error",
+      "max-params": ["error", 4],
     },
     settings: {
       react: {

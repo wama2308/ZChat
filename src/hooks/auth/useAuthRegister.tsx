@@ -59,7 +59,6 @@ const useAuthRegister = () => {
           message: t("validation.rules-validation-confirm-password"),
         };
       }
-      console.log(values);
       if (values.password && values.confirmPassword && values.password !== values.confirmPassword) {
         errors.confirmPassword = {
           type: "required",

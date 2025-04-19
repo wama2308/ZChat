@@ -65,7 +65,7 @@ const ProfileNumber = () => {
           <View style={styles.left}>
             <Icon name="call-outline" size={32} color={colors.white} style={styles.iconCall} />
             <View>
-              <Text variant="titleSmall" style={{ color: colors.onSurface }}>
+              <Text variant="titleSmall" style={{ color: colors.outline }}>
                 {t("profile.label-your-private-number")}
               </Text>
               <Text variant="titleLarge">10-3576-4592</Text>

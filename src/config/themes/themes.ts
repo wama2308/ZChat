@@ -48,6 +48,7 @@ const LIGHTS_COLORS = {
     backdrop: "rgba(44, 49, 55, 0.4)",
     brightBlue: "#006bfb",
     white: "#ffffff",
+    blueBootstrap: "#0d6efd",
   },
 };
 
@@ -95,6 +96,7 @@ const DARK_COLORS = {
     backdrop: "rgba(44, 49, 55, 0.4)",
     brightBlue: "#006bfb",
     white: "#ffffff",
+    blueBootstrap: "#0d6efd",
   },
 };
 

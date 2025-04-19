@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import LanguageScreen from "@screens/settings/LanguageScreen";
+import ProfileScreen from "@screens/settings/ProfileScreen";
 import SettingsScreen from "@screens/settings/SettingsScreen";
 import ThemeScreen from "@screens/settings/ThemeScreen";
 import { useTranslation } from "react-i18next";
@@ -9,6 +10,7 @@ export type RootStackParamListSettings = {
   HomeSettings: undefined;
   LanguageSettings: undefined;
   ThemeSettings: undefined;
+  ProfileSettings: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamListSettings>();
@@ -31,6 +33,11 @@ export default function SettingsNavigator() {
       <Stack.Screen
         name="ThemeSettings"
         component={ThemeScreen}
+        options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
+      />
+      <Stack.Screen
+        name="ProfileSettings"
+        component={ProfileScreen}
         options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
       />
     </Stack.Navigator>

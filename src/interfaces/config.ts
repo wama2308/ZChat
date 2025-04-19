@@ -1,5 +1,5 @@
-import Icon from "@react-native-vector-icons/ionicons";
-import { ComponentProps } from "react";
+import type Icon from "@react-native-vector-icons/ionicons";
+import type { ComponentProps } from "react";
 
 export type TLanguage = "system" | "en" | "es";
 export type TMode = "system" | "dark" | "light";

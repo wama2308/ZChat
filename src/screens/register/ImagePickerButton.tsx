@@ -1,7 +1,12 @@
 // src/components/ImagePickerButton.tsx
 import React from "react";
 import { Alert, Button, StyleSheet, View } from "react-native";
-import { Asset, ImagePickerResponse, launchCamera, launchImageLibrary } from "react-native-image-picker";
+import {
+  type Asset,
+  type ImagePickerResponse,
+  launchCamera,
+  launchImageLibrary,
+} from "react-native-image-picker";
 
 type Props = {
   onImageSelected: (image: Asset) => void;
