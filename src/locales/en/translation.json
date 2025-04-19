@@ -24,7 +24,8 @@
     "label-name": "Name",
     "label-lastname": "Last name",
     "label-your-private-number": "Your private number",
-    "label-edit-data-perfil": "Edit profile information"
+    "label-edit-data-perfil": "Edit profile information",
+    "label-edit-profile-picture": "Edit profile picture"
   },
   "common": {
     "label-add": "Add",
@@ -33,7 +34,9 @@
     "label-continue": "Continue",
     "label-language": "Language",
     "label-theme": "Theme",
-    "label-save": "Save"
+    "label-save": "Save",
+    "label-take-photo": "Take photo",
+    "label-select-photo": "Select photo"
   },
   "form": {
     "label-user": "User",

@@ -1,18 +1,23 @@
-// src/components/ImagePickerButton.tsx
-import React from "react";
-import { Alert, Button, StyleSheet, View } from "react-native";
+import { type AppTheme, SPACES } from "@config/themes/themes";
+import { useTranslation } from "react-i18next";
+import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import {
   type Asset,
   type ImagePickerResponse,
   launchCamera,
   launchImageLibrary,
 } from "react-native-image-picker";
+import { Divider, Text, useTheme } from "react-native-paper";
 
-type Props = {
+interface Props {
   onImageSelected: (image: Asset) => void;
-};
+  callBack: () => void;
+}
 
-export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
+export const ImagePickerButton = ({ onImageSelected, callBack }: Props) => {
+  const { t } = useTranslation();
+  const { colors } = useTheme<AppTheme>();
+
   const handleResponse = (response: ImagePickerResponse) => {
     if (response.didCancel) {
       console.log("Usuario canceló la acción");
@@ -20,6 +25,7 @@ export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
       Alert.alert("Error", response.errorMessage || "Ocurrió un error");
     } else if (response.assets && response.assets.length > 0) {
       onImageSelected(response.assets[0]);
+      callBack();
     }
   };
 
@@ -46,16 +52,24 @@ export const ImagePickerButton: React.FC<Props> = ({ onImageSelected }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Abrir Cámara" onPress={openCamera} />
-      <View style={{ marginVertical: 8 }} />
-      <Button title="Seleccionar de Galería" onPress={openGallery} />
+      <TouchableOpacity onPress={openCamera}>
+        <Text style={{ color: colors.blueBootstrap }} variant="titleLarge">
+          {t("common.label-take-photo")}
+        </Text>
+      </TouchableOpacity>
+      <Divider />
+      <TouchableOpacity onPress={openGallery}>
+        <Text style={{ color: colors.blueBootstrap }} variant="titleLarge">
+          {t("common.label-select-photo")}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    padding: 16,
+    flexDirection: "column",
+    gap: SPACES.g2,
   },
 });
