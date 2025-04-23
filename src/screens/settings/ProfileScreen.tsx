@@ -35,7 +35,12 @@ const ProfileScreen = () => {
         </ViewSettings>
         <Divider bold />
         <ViewSettings>
-          <Text variant="titleLarge" style={{ color: colors.blueBootstrap }}>
+          <Text
+            variant="titleLarge"
+            style={{
+              color: colors.blueBootstrap,
+            }}
+          >
             {t("profile.label-edit-data-perfil")}
           </Text>
         </ViewSettings>
