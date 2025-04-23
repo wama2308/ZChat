@@ -35,11 +35,7 @@ export default function SettingsNavigator() {
         component={ThemeScreen}
         options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
       />
-      <Stack.Screen
-        name="ProfileSettings"
-        component={ProfileScreen}
-        options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
-      />
+      <Stack.Screen name="ProfileSettings" component={ProfileScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

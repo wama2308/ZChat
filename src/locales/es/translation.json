@@ -25,7 +25,9 @@
     "label-lastname": "Apellido",
     "label-your-private-number": "Tú número privado",
     "label-edit-data-perfil": "Editar la información del perfil",
-    "label-edit-profile-picture": "Editar foto de perfil"
+    "label-edit-profile-picture": "Editar foto de perfil",
+    "label-profile": "Perfil",
+    "label-edit-profile": "Editar perfil"
   },
   "common": {
     "label-add": "Agregar",
@@ -36,7 +38,9 @@
     "label-theme": "Tema",
     "label-save": "Guardar",
     "label-take-photo": "Tomar foto",
-    "label-select-photo": "Seleccionar foto"
+    "label-select-photo": "Seleccionar foto",
+    "label-ok": "Ok",
+    "label-cancel": "Cancelar"
   },
   "form": {
     "label-user": "Usuario",

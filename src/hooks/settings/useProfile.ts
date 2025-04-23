@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import type { Asset } from "react-native-image-picker";
 
-interface FormValues {
+export interface FormValuesEditProfile {
   name: string;
   lastname: string;
 }
@@ -10,17 +11,23 @@ interface FormValues {
 const useProfile = () => {
   const { t } = useTranslation();
 
-  const [edit, setEdit] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Asset | null>(null);
+  const [modalShow, setModalShow] = useState(false);
 
-  const handleEdit = useCallback((value: boolean) => {
-    setEdit(value);
+  const handleModalShow = useCallback((value: boolean) => {
+    setModalShow(value);
+  }, []);
+
+  const handleSelectedImage = useCallback((value: Asset | null) => {
+    setSelectedImage(value);
   }, []);
 
   const {
     handleSubmit: handleSubmitForm,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
+    reset,
     control,
-  } = useForm<FormValues>({
+  } = useForm<FormValuesEditProfile>({
     mode: "onBlur",
     defaultValues: {
       name: "",
@@ -43,7 +50,21 @@ const useProfile = () => {
     },
   });
 
-  return { edit, control, errors, isSubmitting, isValid, handleEdit, handleSubmitForm };
+  const hasChanges = isDirty && Object.keys(dirtyFields).some((field) => field);
+
+  return {
+    control,
+    errors,
+    isSubmitting,
+    isValid,
+    selectedImage,
+    modalShow,
+    hasChanges,
+    handleModalShow,
+    handleSubmitForm,
+    handleSelectedImage,
+    reset,
+  };
 };
 
 export default useProfile;

@@ -21,8 +21,10 @@ export const ImagePickerButton = ({ onImageSelected, callBack }: Props) => {
   const handleResponse = (response: ImagePickerResponse) => {
     if (response.didCancel) {
       console.log("Usuario canceló la acción");
+      callBack();
     } else if (response.errorCode) {
       Alert.alert("Error", response.errorMessage || "Ocurrió un error");
+      callBack();
     } else if (response.assets && response.assets.length > 0) {
       onImageSelected(response.assets[0]);
       callBack();

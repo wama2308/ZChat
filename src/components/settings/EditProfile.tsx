@@ -1,36 +1,38 @@
 import { ImagePickerButton } from "@components/ui/ImagePickerButton";
 import { SPACES } from "@config/themes/themes";
-import useProfile from "@hooks/settings/useProfile";
-import { Suspense, lazy, useState } from "react";
-import { Controller } from "react-hook-form";
+import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
+import { Suspense, lazy } from "react";
+import { type Control, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { type Asset } from "react-native-image-picker";
+import type { Asset } from "react-native-image-picker";
 import { TextInput } from "react-native-paper";
 const ModalComponent = lazy(async () => await import("@components/ui/ModalComponent"));
 
-const EditProfile = () => {
-  const { t } = useTranslation();
-  const { control } = useProfile();
-  const [selectedImage, setSelectedImage] = useState<Asset | null>(null);
-  const [visible, setVisible] = useState(false);
+interface Props {
+  control: Control<FormValuesEditProfile, any, FormValuesEditProfile>;
+  modalShow: boolean;
+  selectedImage: Asset | null;
+  handleModalShow: (value: boolean) => void;
+  handleSelectedImage: (value: Asset | null) => void;
+}
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handleSelectedImage }: Props) => {
+  const { t } = useTranslation();
 
   return (
     <>
       <Suspense>
         <ModalComponent
-          visible={visible}
-          hideModal={hideModal}
+          visible={modalShow}
+          hideModal={() => handleModalShow(false)}
           title={t("profile.label-edit-profile-picture")}
         >
-          <ImagePickerButton onImageSelected={setSelectedImage} callBack={hideModal} />
+          <ImagePickerButton onImageSelected={handleSelectedImage} callBack={() => handleModalShow(false)} />
         </ModalComponent>
       </Suspense>
       <View style={styles.content}>
-        <TouchableOpacity onPress={showModal}>
+        <TouchableOpacity onPress={() => handleModalShow(true)}>
           <ImageBackground
             source={
               selectedImage?.uri ? { uri: selectedImage.uri } : require("../../assets/images/user-select.jpg")
