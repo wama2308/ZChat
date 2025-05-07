@@ -1,5 +1,5 @@
 import AuthLayout from "@components/auth/AuthLayout";
-import type { RootStackParamList } from "@navigation/AppNavigator";
+import type { NoAuthtStackParamList } from "@navigation/NoAuthNavigator";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
@@ -9,7 +9,7 @@ const StartScreen = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
 
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<NoAuthtStackParamList>>();
 
   return (
     <AuthLayout>

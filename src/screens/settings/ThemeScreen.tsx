@@ -36,7 +36,7 @@ const ThemeScreen = () => {
     {
       container: {
         paddingHorizontal: SPACES.p2,
-        backgroundColor: colors.background,
+        backgroundColor: colors.onSecondary,
       },
       content: {
         flexDirection: "row",

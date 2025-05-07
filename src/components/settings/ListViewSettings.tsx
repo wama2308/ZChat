@@ -1,10 +1,12 @@
+import { type AppTheme } from "@config/themes/themes";
+import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import type { IConfigItemProps } from "@interfaces/config";
 import { type RootStackParamListSettings } from "@navigation/SettingsNavigator";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { type TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
-import { Divider } from "react-native-paper";
+import { FlatList, View } from "react-native";
+import { Divider, useTheme } from "react-native-paper";
 import ConfigItem from "./ConfigItem";
 import ViewSettings from "./ViewSettings";
 
@@ -17,12 +19,14 @@ const getSettingsItems = (
     label: t("common.label-language"),
     onPress: () => navigation.navigate("LanguageSettings"),
     id: "language-settings",
+    backColorIcon: "#2faeeb",
   },
   {
     leftIconName: "color-palette-outline",
     label: t("common.label-theme"),
     onPress: () => navigation.navigate("ThemeSettings"),
     id: "theme-settings",
+    backColorIcon: "#0068a0",
   },
 ];
 
@@ -30,22 +34,29 @@ const ListViewSettings = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<RootStackParamListSettings>>();
   const settingsItems = getSettingsItems(t, navigation);
+  const { colors } = useTheme<AppTheme>();
+  const styles = useDynamicStyles(
+    {
+      container: {
+        backgroundColor: colors.onSecondary,
+      },
+    },
+    [colors]
+  );
 
   return (
-    <View>
-      {settingsItems.map((item, index) => (
-        <View key={item.id || index.toString()}>
+    <View style={styles.container}>
+      <FlatList
+        scrollEnabled={false}
+        data={settingsItems}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <ViewSettings>
-            <ConfigItem
-              id={item.id}
-              leftIconName={item.leftIconName}
-              label={item.label}
-              onPress={item.onPress}
-            />
+            <ConfigItem {...item} />
           </ViewSettings>
-          {index < settingsItems.length - 1 && <Divider bold />}
-        </View>
-      ))}
+        )}
+        ItemSeparatorComponent={() => <Divider bold style={{ marginLeft: 70 }} />}
+      />
     </View>
   );
 };

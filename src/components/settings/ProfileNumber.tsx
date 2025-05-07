@@ -48,7 +48,7 @@ const ProfileNumber = () => {
       iconCall: {
         backgroundColor: colors.brightBlue,
         padding: SPACES.p1,
-        borderRadius: 10,
+        borderRadius: SPACES.p1,
       },
       iconShare: {
         backgroundColor: colors.background,
@@ -63,7 +63,7 @@ const ProfileNumber = () => {
       <ViewSettings>
         <View style={styles.container}>
           <View style={styles.left}>
-            <Icon name="call-outline" size={32} color={colors.white} style={styles.iconCall} />
+            <Icon name="call-outline" size={24} color={colors.white} style={styles.iconCall} />
             <View>
               <Text variant="titleSmall" style={{ color: colors.outline }}>
                 {t("profile.label-your-private-number")}

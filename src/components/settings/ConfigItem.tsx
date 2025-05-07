@@ -1,4 +1,4 @@
-import { SPACES } from "@config/themes/themes";
+import { type AppTheme, SPACES } from "@config/themes/themes";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import type { IConfigItemProps } from "@interfaces/config";
 import Icon from "@react-native-vector-icons/ionicons";
@@ -12,8 +12,9 @@ const ConfigItem = ({
   showRightArrow = true,
   rightIconName,
   rightIconColor,
+  backColorIcon,
 }: IConfigItemProps) => {
-  const { colors } = useTheme();
+  const { colors } = useTheme<AppTheme>();
   const styles = useDynamicStyles(
     {
       container: {
@@ -37,7 +38,12 @@ const ConfigItem = ({
     <TouchableOpacity style={styles.pressable} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.container}>
         <View style={styles.left}>
-          <Icon name={leftIconName} size={24} color={colors.onBackground} />
+          <Icon
+            name={leftIconName}
+            size={24}
+            color={colors.white}
+            style={{ backgroundColor: backColorIcon, padding: SPACES.p1, borderRadius: SPACES.p1 }}
+          />
           <Text>{label}</Text>
         </View>
 

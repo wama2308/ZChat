@@ -14,6 +14,7 @@ export interface IConfigItemProps {
   showRightArrow?: boolean;
   rightIconName?: TIconName;
   rightIconColor?: string;
+  backColorIcon?: string;
 }
 
 export interface ISettingsLanguage {

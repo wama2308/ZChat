@@ -28,7 +28,11 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.content}>
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <ProfileNumber />
         <Profile />
         <ListViewSettings />
