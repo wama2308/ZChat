@@ -1,13 +1,12 @@
 import { ImagePickerButton } from "@components/ui/ImagePickerButton";
+import ModalComponent from "@components/ui/ModalComponent";
 import { SPACES } from "@config/themes/themes";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
-import { Suspense, lazy } from "react";
 import { type Control, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import type { Asset } from "react-native-image-picker";
 import { TextInput } from "react-native-paper";
-const ModalComponent = lazy(async () => await import("@components/ui/ModalComponent"));
 
 interface Props {
   control: Control<FormValuesEditProfile, any, FormValuesEditProfile>;
@@ -22,7 +21,7 @@ const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handl
 
   return (
     <>
-      <Suspense>
+      {modalShow && (
         <ModalComponent
           visible={modalShow}
           hideModal={() => handleModalShow(false)}
@@ -30,7 +29,7 @@ const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handl
         >
           <ImagePickerButton onImageSelected={handleSelectedImage} callBack={() => handleModalShow(false)} />
         </ModalComponent>
-      </Suspense>
+      )}
       <View style={styles.content}>
         <TouchableOpacity onPress={() => handleModalShow(true)}>
           <ImageBackground
