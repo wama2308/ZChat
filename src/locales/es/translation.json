@@ -66,5 +66,8 @@
     "light": "Claro",
     "dark": "Oscuro",
     "device": "Color del sistema"
+  },
+  "contacts": {
+    "new": "Nuevo Contacto"
   }
 }

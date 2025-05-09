@@ -57,5 +57,7 @@
     <string>Necesitamos acceso a tu galería para que puedas seleccionar imágenes.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>Necesitamos permiso para guardar fotos.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Esta app necesita acceso a tus contactos para...</string>
   </dict>
 </plist>

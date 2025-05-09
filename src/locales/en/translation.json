@@ -66,5 +66,8 @@
     "light": "Light",
     "dark": "Dark",
     "device": "System color"
+  },
+  "contacts": {
+    "new": "New Contact"
   }
 }
