@@ -52,7 +52,7 @@ const HeaderContacts = () => {
   };
 
   return (
-    <View style={[styles.viewContainer, { backgroundColor: colors.background }]}>
+    <View style={[styles.viewContainer]}>
       <Animated.View style={[styles.viewHeader, { height: headerHeight }]}>
         <TouchableOpacity style={styles.touchableText} onPress={() => {}}>
           <Text style={styles.text}>{t("contacts.classify")}</Text>
