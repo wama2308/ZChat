@@ -21,6 +21,7 @@ module.exports = {
           "@store": "./src/store",
           "@interfaces": "./src/interfaces",
           "@utils": "./src/utils",
+          "@styles": "./src/styles",
         },
       },
     ],

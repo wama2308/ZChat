@@ -49,6 +49,7 @@ const LIGHTS_COLORS = {
     brightBlue: "#006bfb",
     white: "#ffffff",
     blueBootstrap: "#0d6efd",
+    borderBottonHeader: "rgba(0, 0, 0)",
   },
 };
 
@@ -97,6 +98,7 @@ const DARK_COLORS = {
     brightBlue: "#006bfb",
     white: "#ffffff",
     blueBootstrap: "#0d6efd",
+    borderBottonHeader: "rgba(255, 255, 255, 0.45)",
   },
 };
 

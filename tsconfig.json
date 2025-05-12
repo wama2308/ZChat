@@ -12,6 +12,7 @@
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "@interfaces/*": ["interfaces/*"],
+      "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     },
     /* Bundler mode */

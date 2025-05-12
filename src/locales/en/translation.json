@@ -40,7 +40,8 @@
     "label-take-photo": "Take photo",
     "label-select-photo": "Select photo",
     "label-ok": "Ok",
-    "label-cancel": "Cancel"
+    "label-cancel": "Cancel",
+    "label-search": "Search"
   },
   "form": {
     "label-user": "User",
@@ -68,6 +69,7 @@
     "device": "System color"
   },
   "contacts": {
-    "new": "New Contact"
+    "new": "New Contact",
+    "classify": "Classify"
   }
 }

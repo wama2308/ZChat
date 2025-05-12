@@ -1,38 +1,60 @@
+// src/hooks/useContacts.ts
 import { useEffect, useState } from "react";
-import { PermissionsAndroid, Platform } from "react-native";
+import { Platform } from "react-native";
 import Contacts, { type Contact } from "react-native-contacts";
+import {
+  check,
+  openSettings,
+  type Permission,
+  PERMISSIONS,
+  request,
+  RESULTS,
+} from "react-native-permissions";
+
+type PermissionStatus = "granted" | "denied" | "blocked" | "unavailable";
+
+const getPermission = (): Permission => {
+  return Platform.select({
+    ios: PERMISSIONS.IOS.CONTACTS,
+    android: PERMISSIONS.ANDROID.READ_CONTACTS,
+    default: PERMISSIONS.ANDROID.READ_CONTACTS,
+  })!;
+};
 
 export const useContacts = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
+  const [permissionStatus, setPermissionStatus] = useState<PermissionStatus>("unavailable");
   const [error, setError] = useState<null | string>(null);
 
   const requestPermission = async () => {
-    if (Platform.OS === "android") {
-      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: "Permiso de Contactos",
-        message: "La app necesita acceso a tus contactos para funcionar correctamente.",
-        buttonPositive: "Aceptar",
-      });
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    }
-    return true; // iOS pide permiso automático con getAll()
+    const status = await request(getPermission());
+    setPermissionStatus(status as PermissionStatus);
+    return status === RESULTS.GRANTED;
   };
 
   const loadContacts = async () => {
     try {
       setLoading(true);
-      const hasPermission = await requestPermission();
-      if (!hasPermission) {
-        setError("Permiso denegado");
-        setContacts([]);
-        return;
-      }
+      const status = await check(getPermission());
+      setPermissionStatus(status as PermissionStatus);
 
-      const all = await Contacts.getAll();
-      // Opcional: ordenar por nombre
-      all.sort((a, b) => (a.displayName || "").localeCompare(b.displayName || ""));
-      setContacts(all);
+      if (status === RESULTS.GRANTED) {
+        const all = await Contacts.getAll();
+        all.sort((a, b) => (a.displayName || "").localeCompare(b.displayName || ""));
+        setContacts(all);
+      } else if (status === RESULTS.DENIED) {
+        const granted = await requestPermission();
+        if (granted) {
+          const all = await Contacts.getAll();
+          all.sort((a, b) => (a.displayName || "").localeCompare(b.displayName || ""));
+          setContacts(all);
+        } else {
+          setError("Permiso denegado");
+        }
+      } else if (status === RESULTS.BLOCKED) {
+        setError("Permiso bloqueado. Ve a configuración.");
+      }
     } catch (err: any) {
       console.error("Error al cargar contactos", err);
       setError("Error al cargar contactos");
@@ -45,5 +67,12 @@ export const useContacts = () => {
     loadContacts();
   }, []);
 
-  return { contacts, loading, error, reload: loadContacts };
+  return {
+    contacts,
+    loading,
+    error,
+    permissionStatus,
+    reload: loadContacts,
+    openAppSettings: openSettings,
+  };
 };

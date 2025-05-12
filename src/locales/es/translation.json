@@ -40,7 +40,8 @@
     "label-take-photo": "Tomar foto",
     "label-select-photo": "Seleccionar foto",
     "label-ok": "Ok",
-    "label-cancel": "Cancelar"
+    "label-cancel": "Cancelar",
+    "label-search": "Buscar"
   },
   "form": {
     "label-user": "Usuario",
@@ -68,6 +69,7 @@
     "device": "Color del sistema"
   },
   "contacts": {
-    "new": "Nuevo Contacto"
+    "new": "Nuevo Contacto",
+    "classify": "Clasificar"
   }
 }

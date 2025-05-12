@@ -16,11 +16,7 @@ export default function ContactsNavigator() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="HomeContacts"
-        component={ContactsScreen}
-        options={{ headerTitle: t("tabs.label-contacts") }}
-      />
+      <Stack.Screen name="HomeContacts" component={ContactsScreen} options={{ headerShown: false }} />
       <Stack.Screen
         name="NewContact"
         component={NewContact}
