@@ -24,7 +24,7 @@ const ContactScreen = () => {
   } else if (permissionStatus === "blocked") {
     actionButton = () => openAppSettings();
   }
-  console.log("contacts a ", contacts);
+  console.log("contacts ", contacts);
   return (
     <>
       <HeaderContacts />

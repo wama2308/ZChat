@@ -36,7 +36,7 @@ const HeaderProfile = ({ hasChanges, reset }: Props) => {
             <Text style={styles.text}>{t("common.label-cancel")}</Text>
           </TouchableOpacity>
         ) : (
-          <HeaderBackButton onPress={() => navigation.goBack()} />
+          <HeaderBackButton onPress={() => navigation.goBack()} tintColor={colors.backButtonHeader} />
         )
       }
       headerRight={() =>

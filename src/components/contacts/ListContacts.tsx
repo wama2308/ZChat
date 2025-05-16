@@ -1,4 +1,4 @@
-import { type AppTheme } from "@config/themes/themes";
+import { SPACES, type AppTheme } from "@config/themes/themes";
 import { DATA_CONTACTS_ZCHAT } from "@constants/dataContacts";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import { type IItemContact } from "@interfaces/contacts";
@@ -12,12 +12,12 @@ const ListContacts = () => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const { contactsPhone } = useContactsStore();
-  console.log("contactsPhone", contactsPhone);
+  console.log("contactsPhone ", contactsPhone);
   const styles = useDynamicStyles(
     {
       header: {
-        paddingVertical: 8,
-        paddingHorizontal: 16,
+        paddingVertical: SPACES.p1,
+        paddingHorizontal: SPACES.p2,
         fontSize: 16,
         color: colors.onSurface,
         backgroundColor: colors.surfaceVariant,

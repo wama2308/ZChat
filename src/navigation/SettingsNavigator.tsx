@@ -1,9 +1,11 @@
+import { type AppTheme } from "@config/themes/themes";
 import { createStackNavigator } from "@react-navigation/stack";
 import LanguageScreen from "@screens/settings/LanguageScreen";
 import ProfileScreen from "@screens/settings/ProfileScreen";
 import SettingsScreen from "@screens/settings/SettingsScreen";
 import ThemeScreen from "@screens/settings/ThemeScreen";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "react-native-paper";
 
 // Definir los tipos de la navegación
 export type RootStackParamListSettings = {
@@ -17,9 +19,10 @@ const Stack = createStackNavigator<RootStackParamListSettings>();
 
 export default function SettingsNavigator() {
   const { t } = useTranslation();
+  const { colors } = useTheme<AppTheme>();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerTintColor: colors.backButtonHeader }}>
       <Stack.Screen
         name="HomeSettings"
         component={SettingsScreen}

@@ -1,4 +1,5 @@
 // src/hooks/useContacts.ts
+import { useFocusEffect } from "@react-navigation/native";
 import { useContactsStore } from "@store/contacts/useContactsStore";
 import { normalizeContacts } from "@utils/normalizeContacts";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -113,9 +114,11 @@ export const useContacts = () => {
     return () => subscription.remove();
   }, [permissionStatus, checkPermission]);
 
-  useEffect(() => {
-    loadContacts();
-  }, [loadContacts]);
+  useFocusEffect(
+    useCallback(() => {
+      loadContacts();
+    }, [loadContacts])
+  );
 
   return {
     contacts,

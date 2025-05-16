@@ -4,8 +4,8 @@ import { type Contact } from "react-native-contacts"; // El tipo original
 export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
   return contacts.map((contact) => ({
     id: contact.recordID,
-    firstName: contact.displayName || "",
-    lastName: contact.givenName || "",
+    firstName: cleanName(contact.givenName ?? "") || "",
+    lastName: cleanName(contact.familyName ?? "") || "",
     phoneNumbers: contact.phoneNumbers.map((p) => ({
       label: p.label || "other",
       number: p.number,
@@ -18,3 +18,9 @@ export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
     status: "",
   }));
 };
+
+const cleanName = (str: string): string =>
+  str
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "") // caracteres invisibles
+    .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])+/g, "") // emojis
+    .trim();
