@@ -41,7 +41,9 @@
     "label-select-photo": "Seleccionar foto",
     "label-ok": "Ok",
     "label-cancel": "Cancelar",
-    "label-search": "Buscar"
+    "label-search": "Buscar",
+    "label-try-again": "Intentar nuevamente",
+    "label-accept": "Aceptar"
   },
   "form": {
     "label-user": "Usuario",
@@ -70,6 +72,13 @@
   },
   "contacts": {
     "new": "Nuevo Contacto",
-    "classify": "Clasificar"
+    "classify": "Clasificar",
+    "allow-access": "Permitir acceso",
+    "error-load": "Error al cargar los contactos",
+    "text-no-access": "Permitir acceso que ZChat copie los contactos de tu dispositivo aquí. Alternativamente, puedes agregar contactos internos de ZChat manualmente.",
+    "text-no-access-title-avise": "ZChat no tiene acceso a tus contactos",
+    "text-no-access-avise": "ZChat necesita acceso a los contactos de tu teléfono para que puedas enviar invitaciones.",
+    "zchat": "Contactos ZChat",
+    "phone": "Todos los contactos"
   }
 }

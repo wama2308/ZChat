@@ -1,61 +1,43 @@
 // src/screens/ContactScreen.tsx
 import HeaderContacts from "@components/contacts/HeaderContacts";
+import ListContacts from "@components/contacts/ListContacts";
+import NoAccessToContacts from "@components/contacts/NoAccessToContacts";
 import { useContacts } from "@hooks/contacts/useContacts";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
-  const { loading } = useContacts();
-
+  const { contacts, loading, error, permissionStatus, reload, openAppSettings } = useContacts();
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator animating={true} size="large" />
       </View>
     );
   }
 
-  // if (permissionStatus === "blocked") {
-  //   return (
-  //     <View style={styles.centered}>
-  //       <Text>Acceso a contactos bloqueado.</Text>
-  //       <Button title="Abrir configuración" onPress={() => openAppSettings()} />
-  //     </View>
-  //   );
-  // }
+  const shouldShowError = permissionStatus === "blocked" || permissionStatus === "denied" || !!error;
 
-  // if (permissionStatus === "denied") {
-  //   return (
-  //     <View style={styles.centered}>
-  //       <Text>Necesitamos tu permiso para mostrar los contactos.</Text>
-  //       <Button title="Volver a intentar" onPress={reload} />
-  //     </View>
-  //   );
-  // }
-
-  // if (error) {
-  //   return (
-  //     <View style={styles.centered}>
-  //       <Text>{error}</Text>
-  //       <Button title="Reintentar" onPress={reload} />
-  //     </View>
-  //   );
-  // }
-
+  let actionButton = () => {};
+  if (permissionStatus === "denied" || !!error) {
+    actionButton = () => reload();
+  } else if (permissionStatus === "blocked") {
+    actionButton = () => openAppSettings();
+  }
+  console.log("contacts a ", contacts);
   return (
-    <HeaderContacts />
-    // <FlatList
-    //   data={contacts}
-    //   keyExtractor={(item) => item.recordID}
-    //   renderItem={({ item }) => (
-    //     <View style={styles.item}>
-    //       <Text style={{ color: "white" }}>{item.givenName}</Text>
-    //     </View>
-    //   )}
-    // />
+    <>
+      <HeaderContacts />
+      {shouldShowError && <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />}
+      <ListContacts />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
   centered: {
     flex: 1,
     alignItems: "center",

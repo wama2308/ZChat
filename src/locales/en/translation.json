@@ -41,7 +41,9 @@
     "label-select-photo": "Select photo",
     "label-ok": "Ok",
     "label-cancel": "Cancel",
-    "label-search": "Search"
+    "label-search": "Search",
+    "label-try-again": "Try again",
+    "label-accept": "Accept"
   },
   "form": {
     "label-user": "User",
@@ -70,6 +72,13 @@
   },
   "contacts": {
     "new": "New Contact",
-    "classify": "Classify"
+    "classify": "Classify",
+    "allow-access": "Allow access",
+    "error-load": "Error loading contacts",
+    "text-no-access": "Allow ZChat to copy contacts from your device here. Alternatively, you can add internal ZChat contacts manually.",
+    "text-no-access-title-avise": "ZChat does not have access to your contacts",
+    "text-no-access-avise": "ZChat needs access to your phone's contacts so you can send invitations.",
+    "zchat": "ZChat Contacts",
+    "phone": "All contacts"
   }
 }

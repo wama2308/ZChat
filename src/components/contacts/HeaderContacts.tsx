@@ -85,6 +85,12 @@ const HeaderContacts = () => {
           onFocus={() => toggleHeader(true)}
           onBlur={() => !searchQuery && toggleHeader(false)}
           style={styles.searchBar}
+          icon={() => <Icon name="search-outline" size={22} color={colors.onBackground} />}
+          clearIcon={
+            searchQuery
+              ? () => <Icon name="close-outline" size={22} color={colors.onBackground} />
+              : undefined
+          }
         />
         {isSearchFocused && (
           <Button onPress={handleCancelSearch} textColor={colors.brightBlue} style={styles.cancelButton}>

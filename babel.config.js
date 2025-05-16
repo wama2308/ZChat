@@ -22,6 +22,7 @@ module.exports = {
           "@interfaces": "./src/interfaces",
           "@utils": "./src/utils",
           "@styles": "./src/styles",
+          "@constants": "./src/constants",
         },
       },
     ],

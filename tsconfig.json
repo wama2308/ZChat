@@ -13,7 +13,8 @@
       "@store/*": ["store/*"],
       "@interfaces/*": ["interfaces/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@constants/*": ["constants/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
