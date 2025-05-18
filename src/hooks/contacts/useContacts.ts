@@ -59,7 +59,12 @@ export const useContacts = () => {
   const fetchAndSortContacts = async () => {
     try {
       const allContacts = await Contacts.getAll();
-      const sortedContacts = [...allContacts].sort((a, b) =>
+      // Filtra contactos que tengan al menos un número válido
+      const contactsWithPhone = allContacts.filter(
+        (contact) => contact.phoneNumbers && contact.phoneNumbers.length > 0
+      );
+      // Ordena alfabéticamente por displayName o givenName
+      const sortedContacts = [...contactsWithPhone].sort((a, b) =>
         (a.displayName || a.givenName || "").localeCompare(b.displayName || b.givenName || "")
       );
       setContacts(sortedContacts);

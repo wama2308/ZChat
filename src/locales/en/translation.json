@@ -43,7 +43,8 @@
     "label-cancel": "Cancel",
     "label-search": "Search",
     "label-try-again": "Try again",
-    "label-accept": "Accept"
+    "label-accept": "Accept",
+    "label-share": "Share"
   },
   "form": {
     "label-user": "User",
@@ -79,6 +80,9 @@
     "text-no-access-title-avise": "ZChat does not have access to your contacts",
     "text-no-access-avise": "ZChat needs access to your phone's contacts so you can send invitations.",
     "zchat": "ZChat Contacts",
-    "phone": "All contacts"
+    "phone": "All contacts",
+    "invitation": "Invitation",
+    "invitation-sms": "Invite by SMS",
+    "send-invitation": "Send invitation"
   }
 }

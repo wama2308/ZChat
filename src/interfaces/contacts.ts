@@ -73,4 +73,5 @@ export interface IItemContact {
   image: string;
   email?: IEmailAddressesContacts[];
   status: string;
+  zchat: boolean;
 }

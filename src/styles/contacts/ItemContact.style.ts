@@ -8,12 +8,13 @@ export const getItemContactStyles = (colors: AppTheme["colors"]) => {
       alignItems: "center",
       backgroundColor: colors.onSecondary,
       padding: SPACES.p1,
+      gap: SPACES.g2,
     },
     avatar: {
       width: 48,
       height: 48,
       borderRadius: 24,
-      marginRight: SPACES.m2,
+      // marginRight: SPACES.m1,
     },
     initials: {
       justifyContent: "center",

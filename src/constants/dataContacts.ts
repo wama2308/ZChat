@@ -16,6 +16,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "2",
@@ -33,6 +34,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "3",
@@ -50,6 +52,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "4",
@@ -67,6 +70,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "5",
@@ -84,6 +88,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "6",
@@ -101,6 +106,7 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
   {
     id: "7",
@@ -118,5 +124,6 @@ export const DATA_CONTACTS_ZCHAT = [
         number: "+584243572155",
       },
     ],
+    zchat: true,
   },
 ];

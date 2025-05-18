@@ -16,6 +16,7 @@ export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
       email: e.email,
     })),
     status: "",
+    zchat: false,
   }));
 };
 
