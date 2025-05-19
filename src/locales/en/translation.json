@@ -44,7 +44,8 @@
     "label-search": "Search",
     "label-try-again": "Try again",
     "label-accept": "Accept",
-    "label-share": "Share"
+    "label-share": "Share",
+    "label-choose": "Choose"
   },
   "form": {
     "label-user": "User",

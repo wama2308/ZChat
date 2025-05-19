@@ -1,12 +1,12 @@
 import { ImagePickerButton } from "@components/ui/ImagePickerButton";
 import ModalComponent from "@components/ui/ModalComponent";
-import { SPACES } from "@config/themes/themes";
+import { type AppTheme, SPACES } from "@config/themes/themes";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
 import { type Control, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import type { Asset } from "react-native-image-picker";
-import { TextInput } from "react-native-paper";
+import { Text, TextInput, useTheme } from "react-native-paper";
 
 interface Props {
   control: Control<FormValuesEditProfile, any, FormValuesEditProfile>;
@@ -18,6 +18,7 @@ interface Props {
 
 const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handleSelectedImage }: Props) => {
   const { t } = useTranslation();
+  const { colors } = useTheme<AppTheme>();
 
   return (
     <>
@@ -31,20 +32,18 @@ const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handl
         </ModalComponent>
       )}
       <View style={styles.content}>
-        <TouchableOpacity onPress={() => handleModalShow(true)}>
-          <ImageBackground
+        <TouchableOpacity style={{ gap: SPACES.g1 }}>
+          <Image
             source={
               selectedImage?.uri ? { uri: selectedImage.uri } : require("../../assets/images/user-select.jpg")
             }
             style={styles.image}
-            imageStyle={styles.imageStyle}
-          >
-            <View style={styles.overlay}>
-              <Text style={styles.overlayText}>
-                {selectedImage?.uri ? t("common.label-edit") : t("common.label-add")}
-              </Text>
-            </View>
-          </ImageBackground>
+          />
+          <TouchableOpacity onPress={() => handleModalShow(true)}>
+            <Text variant="titleMedium" style={[{ color: colors.blueBootstrap, textAlign: "center" }]}>
+              {selectedImage?.uri ? t("common.label-edit") : t("common.label-add")}
+            </Text>
+          </TouchableOpacity>
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
           <Controller
@@ -86,8 +85,8 @@ const styles = StyleSheet.create({
     gap: SPACES.g3,
   },
   image: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
     borderRadius: 100,
     overflow: "hidden",
     justifyContent: "center",
@@ -101,11 +100,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 12,
-  },
-  overlayText: {
-    color: "white",
-    fontSize: 10,
-    textAlign: "center",
   },
 });
 
