@@ -1,32 +1,45 @@
 import { type AppTheme, SPACES } from "@config/themes/themes";
+import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
+import { type AssetImageCrop } from "@interfaces/config";
 import { useTranslation } from "react-i18next";
-import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Alert, TouchableOpacity, View } from "react-native";
 import ImagePicker, { type Image } from "react-native-image-crop-picker";
 import { Divider, Text, useTheme } from "react-native-paper";
 
 // Define el tipo para las props
 interface Props {
-  onImageSelected: (image: Asset) => void;
+  titleId: string;
+  onImageSelected: (image: AssetImageCrop) => void;
   callBack: () => void;
 }
 
 // Tipo para la imagen (puedes usar el Image de la librería o tu propio tipo)
-type Asset = {
-  uri: string;
-  width?: number;
-  height?: number;
-  type?: string;
-  fileSize?: number;
-  fileName?: string;
-};
 
-export const ImagePickerButton = ({ onImageSelected, callBack }: Props) => {
+export const ImagePickerButton = ({ titleId, onImageSelected, callBack }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const LABEL_CHOOSE = t("common.label-choose");
   const LABEL_CANCEL = t("common.label-cancel");
 
-  const mapImageToAsset = (image: Image): Asset => ({
+  const styles = useDynamicStyles(
+    {
+      container: {},
+      textTitle: {
+        textAlign: "center",
+        padding: SPACES.p2,
+        color: colors.outline,
+        fontWeight: "bold",
+      },
+      textOptions: {
+        fontSize: 18,
+        textAlign: "center",
+        padding: SPACES.p2,
+      },
+    },
+    [colors]
+  );
+
+  const mapImageToAsset = (image: Image): AssetImageCrop => ({
     uri: image.path,
     width: image.width,
     height: image.height,
@@ -85,24 +98,19 @@ export const ImagePickerButton = ({ onImageSelected, callBack }: Props) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.textTitle}>{titleId}</Text>
+      <Divider bold />
       <TouchableOpacity onPress={openCamera}>
-        <Text style={{ color: colors.blueBootstrap }} variant="titleLarge">
+        <Text style={styles.textOptions} variant="titleLarge">
           {t("common.label-take-photo")}
         </Text>
       </TouchableOpacity>
-      <Divider />
+      <Divider bold />
       <TouchableOpacity onPress={openGallery}>
-        <Text style={{ color: colors.blueBootstrap }} variant="titleLarge">
+        <Text style={styles.textOptions} variant="titleLarge">
           {t("common.label-select-photo")}
         </Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    gap: SPACES.g2,
-  },
-});

@@ -19,10 +19,8 @@ const RegisterScreen = () => {
     handleShowConfirmPassword,
   } = useAuthRegister();
 
-  // const [selectedImage, setSelectedImage] = useState<Asset | null>(null);
   return (
     <AuthLayout contentCenter={false}>
-      {/* {selectedImage?.uri && <Image source={{ uri: selectedImage.uri }} style={styles.image} />} */}
       <Text variant="displaySmall">{t("profile.your-profile")}</Text>
       <View style={styles.content}>
         <Controller

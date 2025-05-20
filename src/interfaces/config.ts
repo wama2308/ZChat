@@ -21,3 +21,12 @@ export interface ISettingsLanguage {
   id: TLanguage;
   label: string;
 }
+
+export interface AssetImageCrop {
+  uri: string;
+  width?: number;
+  height?: number;
+  type?: string;
+  fileSize?: number;
+  fileName?: string;
+}

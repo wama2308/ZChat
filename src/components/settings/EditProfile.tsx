@@ -1,36 +1,38 @@
 import { ImagePickerButton } from "@components/ui/ImagePickerButton";
-import ModalComponent from "@components/ui/ModalComponent";
+import ModalBottom from "@components/ui/ModalBottom";
 import { type AppTheme, SPACES } from "@config/themes/themes";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
+import { type AssetImageCrop } from "@interfaces/config";
 import { type Control, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import type { Asset } from "react-native-image-picker";
 import { Text, TextInput, useTheme } from "react-native-paper";
 
 interface Props {
   control: Control<FormValuesEditProfile, any, FormValuesEditProfile>;
   modalShow: boolean;
-  selectedImage: Asset | null;
+  selectedImage: AssetImageCrop | null;
   handleModalShow: (value: boolean) => void;
-  handleSelectedImage: (value: Asset | null) => void;
+  handleSelectedImage: (value: AssetImageCrop | null) => void;
+  hasChanges?: boolean;
 }
 
-const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handleSelectedImage }: Props) => {
+const EditProfile = ({
+  control,
+  modalShow,
+  selectedImage,
+  handleModalShow,
+  handleSelectedImage,
+  hasChanges,
+}: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
+  const TITLE_MODAL_BOTTOM = hasChanges
+    ? t("profile.label-edit-profile-picture")
+    : t("profile.label-add-profile-picture");
 
   return (
     <>
-      {modalShow && (
-        <ModalComponent
-          visible={modalShow}
-          hideModal={() => handleModalShow(false)}
-          title={t("profile.label-edit-profile-picture")}
-        >
-          <ImagePickerButton onImageSelected={handleSelectedImage} callBack={() => handleModalShow(false)} />
-        </ModalComponent>
-      )}
       <View style={styles.content}>
         <TouchableOpacity style={{ gap: SPACES.g1 }}>
           <Image
@@ -74,6 +76,13 @@ const EditProfile = ({ control, modalShow, selectedImage, handleModalShow, handl
           />
         </View>
       </View>
+      <ModalBottom visible={modalShow} onDismiss={() => handleModalShow(false)}>
+        <ImagePickerButton
+          titleId={TITLE_MODAL_BOTTOM}
+          onImageSelected={handleSelectedImage}
+          callBack={() => handleModalShow(false)}
+        />
+      </ModalBottom>
     </>
   );
 };

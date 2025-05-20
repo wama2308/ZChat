@@ -2,7 +2,15 @@ import { type AppTheme } from "@config/themes/themes";
 import { getMarginBottomStyles } from "@styles/ui/ModalBottom.styles";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated, Dimensions, Easing, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  Easing,
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Portal, Text, TouchableRipple, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -28,6 +36,7 @@ const ModalBottom = ({ visible, onDismiss, children }: ModalBottomProps) => {
   useEffect(() => {
     if (visible) {
       setIsVisible(true);
+      Keyboard.dismiss();
       slideAnim.setValue(1);
       backdropAnim.setValue(0);
       Animated.parallel([

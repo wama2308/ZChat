@@ -3,12 +3,13 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-export interface FormValuesEditProfile {
+export interface FormValuesAddContact {
   name: string;
   lastname: string;
+  images: string[];
 }
 
-const useProfile = () => {
+const useAddContacts = () => {
   const { t } = useTranslation();
 
   const [selectedImage, setSelectedImage] = useState<AssetImageCrop | null>(null);
@@ -27,22 +28,23 @@ const useProfile = () => {
     formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
     reset,
     control,
-  } = useForm<FormValuesEditProfile>({
+  } = useForm<FormValuesAddContact>({
     mode: "onBlur",
     defaultValues: {
       name: "",
       lastname: "",
+      images: [],
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};
 
       if (!values.name) {
-        errors.name = { type: "required", message: t("validation.rules-validation-edit-profile-name") };
+        errors.name = { type: "required", message: t("rules-validation-edit-profile-name") };
       }
       if (!values.lastname) {
         errors.lastname = {
           type: "required",
-          message: t("validation.rules-validation-edit-profile-lastname"),
+          message: t("rules-validation-edit-profile-name"),
         };
       }
 
@@ -67,4 +69,4 @@ const useProfile = () => {
   };
 };
 
-export default useProfile;
+export default useAddContacts;

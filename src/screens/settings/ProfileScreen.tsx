@@ -28,6 +28,7 @@ const ProfileScreen = () => {
             selectedImage={selectedImage}
             handleModalShow={handleModalShow}
             handleSelectedImage={handleSelectedImage}
+            hasChanges={hasChanges}
           />
         </ViewSettings>
         <Divider bold />
