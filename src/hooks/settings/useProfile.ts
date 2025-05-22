@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 export interface FormValuesEditProfile {
   name: string;
   lastname: string;
+  image?: string;
 }
 
 const useProfile = () => {
@@ -52,6 +53,11 @@ const useProfile = () => {
 
   const hasChanges = isDirty && Object.keys(dirtyFields).some((field) => field);
 
+  const resetForm = () => {
+    reset(); // ← resetea RHF
+    setSelectedImage(null); // ← resetea tu estado local
+  };
+
   return {
     control,
     errors,
@@ -63,7 +69,7 @@ const useProfile = () => {
     handleModalShow,
     handleSubmitForm,
     handleSelectedImage,
-    reset,
+    resetForm,
   };
 };
 

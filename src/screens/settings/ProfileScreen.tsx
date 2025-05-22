@@ -8,7 +8,7 @@ import { View } from "react-native";
 import { Divider } from "react-native-paper";
 
 const ProfileScreen = () => {
-  const { control, modalShow, selectedImage, hasChanges, handleModalShow, handleSelectedImage, reset } =
+  const { control, modalShow, selectedImage, hasChanges, handleModalShow, handleSelectedImage, resetForm } =
     useProfile();
 
   const styles = useDynamicStyles({
@@ -19,7 +19,7 @@ const ProfileScreen = () => {
 
   return (
     <>
-      <HeaderProfile hasChanges={hasChanges} reset={reset} />
+      <HeaderProfile hasChanges={hasChanges} reset={resetForm} />
       <View style={styles.container}>
         <ViewSettings>
           <EditProfile

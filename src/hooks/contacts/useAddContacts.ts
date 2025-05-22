@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next";
 export interface FormValuesAddContact {
   name: string;
   lastname: string;
-  images: string[];
+  image?: string;
+  phones: string[];
 }
 
 const useAddContacts = () => {
@@ -20,6 +21,7 @@ const useAddContacts = () => {
   }, []);
 
   const handleSelectedImage = useCallback((value: AssetImageCrop | null) => {
+    setValue("image", value?.uri);
     setSelectedImage(value);
   }, []);
 
@@ -27,13 +29,15 @@ const useAddContacts = () => {
     handleSubmit: handleSubmitForm,
     formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
     reset,
+    setValue,
     control,
   } = useForm<FormValuesAddContact>({
     mode: "onBlur",
     defaultValues: {
       name: "",
       lastname: "",
-      images: [],
+      image: "",
+      phones: [],
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};
@@ -54,6 +58,11 @@ const useAddContacts = () => {
 
   const hasChanges = isDirty && Object.keys(dirtyFields).some((field) => field);
 
+  const resetForm = () => {
+    reset(); // ← resetea RHF
+    setSelectedImage(null); // ← resetea tu estado local
+  };
+
   return {
     control,
     errors,
@@ -65,7 +74,7 @@ const useAddContacts = () => {
     handleModalShow,
     handleSubmitForm,
     handleSelectedImage,
-    reset,
+    resetForm,
   };
 };
 

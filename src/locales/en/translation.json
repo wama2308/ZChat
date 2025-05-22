@@ -46,7 +46,9 @@
     "label-try-again": "Try again",
     "label-accept": "Accept",
     "label-share": "Share",
-    "label-choose": "Choose"
+    "label-choose": "Choose",
+    "label-number": "Number",
+    "label-delete": "Delete"
   },
   "form": {
     "label-user": "User",
@@ -85,6 +87,7 @@
     "phone": "All contacts",
     "invitation": "Invitation",
     "invitation-sms": "Invite by SMS",
-    "send-invitation": "Send invitation"
+    "send-invitation": "Send invitation",
+    "add-number-zchat": "Add ZChat number"
   }
 }
