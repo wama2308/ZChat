@@ -1,7 +1,7 @@
 //LIBRARIES
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { AppRegistry } from "react-native";
+import { AppRegistry, View } from "react-native";
 import { name as appName } from "./app.json";
 // COMPONENTS
 import { ActivityIndicator, PaperProvider, configureFonts } from "react-native-paper";
@@ -39,11 +39,9 @@ export default function Main() {
         {isLanguageLoaded ? (
           <App />
         ) : (
-          <ActivityIndicator
-            animating={true}
-            size={100}
-            style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
-          />
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <ActivityIndicator animating={true} size={100} />
+          </View>
         )}
       </PaperProvider>
     </QueryClientProvider>
