@@ -75,6 +75,13 @@
     "dark": "Oscuro",
     "device": "Color del sistema"
   },
+  "changeText": {
+    "change": "Tamaño del texto",
+    "small": "Pequeño",
+    "medium": "Mediano",
+    "large": "Grande",
+    "extraLarge": "Extra grande"
+  },
   "contacts": {
     "new": "Nuevo Contacto",
     "classify": "Clasificar",

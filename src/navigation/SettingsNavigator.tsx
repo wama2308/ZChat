@@ -1,5 +1,6 @@
 import { type AppTheme } from "@config/themes/themes";
 import { createStackNavigator } from "@react-navigation/stack";
+import ChangeSizeTextScreen from "@screens/settings/ChangeSizeTextScreen";
 import LanguageScreen from "@screens/settings/LanguageScreen";
 import ProfileScreen from "@screens/settings/ProfileScreen";
 import SettingsScreen from "@screens/settings/SettingsScreen";
@@ -12,6 +13,7 @@ export type RootStackParamListSettings = {
   HomeSettings: undefined;
   LanguageSettings: undefined;
   ThemeSettings: undefined;
+  ChangeSizeText: undefined;
   ProfileSettings: undefined;
 };
 
@@ -37,6 +39,11 @@ export default function SettingsNavigator() {
         name="ThemeSettings"
         component={ThemeScreen}
         options={{ headerTitle: t("common.label-theme"), headerBackTitle: "" }}
+      />
+      <Stack.Screen
+        name="ChangeSizeText"
+        component={ChangeSizeTextScreen}
+        options={{ headerTitle: t("changeText.change"), headerBackTitle: "" }}
       />
       <Stack.Screen name="ProfileSettings" component={ProfileScreen} options={{ headerShown: false }} />
     </Stack.Navigator>

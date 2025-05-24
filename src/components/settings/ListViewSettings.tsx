@@ -28,6 +28,13 @@ const getSettingsItems = (
     id: "theme-settings",
     backColorIcon: "#0068a0",
   },
+  {
+    leftIconName: "text-outline",
+    label: t("changeText.change"),
+    onPress: () => navigation.navigate("ChangeSizeText"),
+    id: "change-text-settings",
+    backColorIcon: "#663399",
+  },
 ];
 
 const ListViewSettings = () => {

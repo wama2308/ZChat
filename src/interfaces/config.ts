@@ -3,6 +3,7 @@ import type { ComponentProps } from "react";
 
 export type TLanguage = "system" | "en" | "es";
 export type TMode = "system" | "dark" | "light";
+export type TTextSize = "small" | "medium" | "large" | "xLarge";
 
 export type TIconName = ComponentProps<typeof Icon>["name"];
 

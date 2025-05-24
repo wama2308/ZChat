@@ -31,7 +31,6 @@ export const ImagePickerButton = ({ titleId, onImageSelected, callBack }: Props)
         fontWeight: "bold",
       },
       textOptions: {
-        fontSize: 18,
         textAlign: "center",
         padding: SPACES.p2,
       },
@@ -98,7 +97,9 @@ export const ImagePickerButton = ({ titleId, onImageSelected, callBack }: Props)
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textTitle}>{titleId}</Text>
+      <Text variant="titleSmall" style={styles.textTitle}>
+        {titleId}
+      </Text>
       <Divider bold />
       <TouchableOpacity onPress={openCamera}>
         <Text style={styles.textOptions} variant="titleLarge">

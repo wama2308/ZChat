@@ -7,7 +7,7 @@ import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
-  const { contacts, loading, error, permissionStatus, reload, openAppSettings } = useContacts();
+  const { loading, error, permissionStatus, reload, openAppSettings } = useContacts();
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -24,7 +24,7 @@ const ContactScreen = () => {
   } else if (permissionStatus === "blocked") {
     actionButton = () => openAppSettings();
   }
-  console.log("contacts ", contacts);
+
   return (
     <>
       <HeaderContacts />

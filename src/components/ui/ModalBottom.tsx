@@ -103,7 +103,9 @@ const ModalBottom = ({ visible, onDismiss, children }: ModalBottomProps) => {
         >
           <View style={styles.viewChildrens}>{children}</View>
           <TouchableRipple style={styles.viewCancel} onPressIn={() => onDismiss()}>
-            <Text style={{ color: colors.blueBootstrap, fontSize: 20 }}>{t("common.label-cancel")}</Text>
+            <Text variant="titleLarge" style={{ color: colors.blueBootstrap }}>
+              {t("common.label-cancel")}
+            </Text>
           </TouchableRipple>
         </Animated.View>
       </View>

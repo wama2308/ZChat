@@ -19,7 +19,6 @@ const OptionsInvitations = () => {
         fontWeight: "bold",
       },
       textOptions: {
-        fontSize: 18,
         textAlign: "center",
         padding: SPACES.p2,
       },
@@ -29,15 +28,21 @@ const OptionsInvitations = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textTitle}>{t("contacts.send-invitation")}</Text>
+      <Text variant="titleSmall" style={styles.textTitle}>
+        {t("contacts.send-invitation")}
+      </Text>
       <Divider bold />
       <TouchableRipple onPress={() => {}}>
-        <Text style={styles.textOptions}>{t("contacts.invitation-sms")}</Text>
+        <Text variant="titleLarge" style={styles.textOptions}>
+          {t("contacts.invitation-sms")}
+        </Text>
       </TouchableRipple>
       <Divider bold />
 
       <TouchableRipple onPress={() => {}}>
-        <Text style={styles.textOptions}>{t("common.label-share")}</Text>
+        <Text variant="titleLarge" style={styles.textOptions}>
+          {t("common.label-share")}
+        </Text>
       </TouchableRipple>
     </View>
   );

@@ -43,14 +43,18 @@ const ItemContact = ({ data }: Props) => {
           <Image source={require("../../assets/images/user-select.jpg")} style={styles.avatar} />
         )}
         <View style={styles.info}>
-          <Text style={styles.name}>
+          <Text variant="titleMedium">
             {firstName || lastName
               ? `${firstName} ${lastName}`
               : phoneNumbers.length > 0
                 ? phoneNumbers[0].number
                 : ""}
           </Text>
-          {status && <Text style={styles.status}>{status}</Text>}
+          {status && (
+            <Text variant="titleSmall" style={styles.status}>
+              {status}
+            </Text>
+          )}
         </View>
         {!zchat && (
           <Button mode="contained" onPress={() => setOpenInvitation(true)}>

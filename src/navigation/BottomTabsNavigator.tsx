@@ -31,7 +31,8 @@ export default function BottomTabsNavigator() {
     if (
       routeName === "ThemeSettings" ||
       routeName === "LanguageSettings" ||
-      routeName === "ProfileSettings"
+      routeName === "ProfileSettings" ||
+      routeName === "ChangeSizeText"
     ) {
       return false;
     }

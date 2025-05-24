@@ -1,0 +1,18 @@
+export const getFontConfig = (scale: number) => ({
+  displayLarge: { fontSize: 57 * scale, lineHeight: 64 * scale, fontWeight: "400" },
+  displayMedium: { fontSize: 45 * scale, lineHeight: 52 * scale, fontWeight: "400" },
+  displaySmall: { fontSize: 36 * scale, lineHeight: 44 * scale, fontWeight: "400" },
+  headlineLarge: { fontSize: 32 * scale, lineHeight: 40 * scale, fontWeight: "400" },
+  headlineMedium: { fontSize: 28 * scale, lineHeight: 36 * scale, fontWeight: "400" },
+  headlineSmall: { fontSize: 24 * scale, lineHeight: 32 * scale, fontWeight: "400" },
+  titleLarge: { fontSize: 22 * scale, lineHeight: 28 * scale, fontWeight: "400" },
+  titleMedium: { fontSize: 16 * scale, lineHeight: 24 * scale, fontWeight: "500" },
+  titleSmall: { fontSize: 14 * scale, lineHeight: 20 * scale, fontWeight: "500" },
+  labelLarge: { fontSize: 14 * scale, lineHeight: 20 * scale, fontWeight: "500" },
+  labelMedium: { fontSize: 12 * scale, lineHeight: 16 * scale, fontWeight: "500" },
+  labelSmall: { fontSize: 11 * scale, lineHeight: 16 * scale, fontWeight: "500" },
+  bodyLarge: { fontSize: 16 * scale, lineHeight: 24 * scale, fontWeight: "400" },
+  bodyMedium: { fontSize: 14 * scale, lineHeight: 20 * scale, fontWeight: "400" },
+  bodySmall: { fontSize: 12 * scale, lineHeight: 16 * scale, fontWeight: "400" },
+  default: { fontSize: 14 * scale, lineHeight: 20 * scale, fontWeight: "400" },
+});

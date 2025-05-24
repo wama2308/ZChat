@@ -75,6 +75,13 @@
     "dark": "Dark",
     "device": "System color"
   },
+  "changeText": {
+    "change": "Text size",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "extraLarge": "Extra large"
+  },
   "contacts": {
     "new": "New Contact",
     "classify": "Classify",

@@ -24,11 +24,7 @@ export const getItemContactStyles = (colors: AppTheme["colors"]) => {
     info: {
       flex: 1,
     },
-    name: {
-      fontSize: 16,
-    },
     status: {
-      fontSize: 14,
       color: colors.outline,
     },
   });
