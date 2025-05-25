@@ -1,7 +1,7 @@
 import { SPACES } from "@config/themes/themes";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Surface, useTheme } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import TextLogo from "./TextLogo";
 
@@ -12,9 +12,15 @@ interface Props {
 
 const AuthLayout = ({ children, contentCenter = true }: Props) => {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
+    <View
+      style={[
+        styles.safeArea,
+        { backgroundColor: colors.background, marginTop: insets.top, marginBottom: insets.bottom },
+      ]}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoidingView}
@@ -33,7 +39,7 @@ const AuthLayout = ({ children, contentCenter = true }: Props) => {
         </ScrollView>
       </KeyboardAvoidingView>
       <TextLogo />
-    </SafeAreaView>
+    </View>
   );
 };
 
