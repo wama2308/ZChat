@@ -7,6 +7,7 @@ export const getHeaderStyles = (colors: AppTheme["colors"], marginTop: number) =
     viewContainer: {
       flexDirection: "column",
       backgroundColor: colors.background,
+      marginHorizontal: SPACES.m2,
       marginTop,
       paddingBottom: SPACES.p3,
       shadowOpacity: 0.3,
@@ -42,7 +43,6 @@ export const getHeaderStyles = (colors: AppTheme["colors"], marginTop: number) =
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
-      marginHorizontal: SPACES.m2,
       gap: SPACES.m1,
     },
     searchBar: {

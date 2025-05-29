@@ -1,13 +1,12 @@
 import HeaderSearchBar from "@components/ui/HeaderSearchBar";
 import { type AppTheme } from "@config/themes/themes";
 import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
-import Icon from "@react-native-vector-icons/ionicons";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-const HeaderContacts = () => {
+const HeaderFavoriteContacts = () => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
@@ -19,23 +18,19 @@ const HeaderContacts = () => {
   return (
     <HeaderSearchBar
       left={
-        <TouchableOpacity style={{}} onPress={() => {}}>
-          <Text style={{ color: colors.blueBootstrap }}>{t("contacts.classify")}</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={{ color: colors.blueBootstrap }}>{t("common.label-cancel")}</Text>
         </TouchableOpacity>
       }
       textCenter={t("tabs.label-contacts")}
       right={
-        <Icon
-          name="add-outline"
-          size={24}
-          color={colors.brightBlue}
-          style={{}}
-          onPress={() => navigation.navigate("NewContact")}
-        />
+        <TouchableOpacity onPress={() => {}}>
+          <Text style={{ color: colors.blueBootstrap }}>{t("common.label-ok")}</Text>
+        </TouchableOpacity>
       }
       actionSearchBar={handleActionSearchBar}
     />
   );
 };
 
-export default HeaderContacts;
+export default HeaderFavoriteContacts;

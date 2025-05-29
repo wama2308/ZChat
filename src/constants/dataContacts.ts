@@ -127,3 +127,16 @@ export const DATA_CONTACTS_ZCHAT = [
     zchat: true,
   },
 ];
+
+export const DATA_CONTACTS_FAVORITES = [
+  {
+    id: "-1",
+    firstName: "",
+    lastName: "",
+    image: "",
+    status: "",
+    phoneNumbers: [],
+    zchat: false,
+    addFavorite: true,
+  },
+];

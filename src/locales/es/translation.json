@@ -48,7 +48,8 @@
     "label-share": "Compartir",
     "label-choose": "Elegir",
     "label-number": "Número",
-    "label-delete": "Borrar"
+    "label-delete": "Borrar",
+    "label-favorites": "Favoritos"
   },
   "form": {
     "label-user": "Usuario",
@@ -95,6 +96,8 @@
     "invitation": "Invitar",
     "invitation-sms": "Invitar por SMS",
     "send-invitation": "Enviar invitación",
-    "add-number-zchat": "Agregar número ZChat"
+    "add-number-zchat": "Agregar número ZChat",
+    "add-favorites": "Agregar a los favoritos",
+    "select": "Seleccione contactos"
   }
 }

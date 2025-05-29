@@ -8,6 +8,7 @@ import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
   const { loading, error, permissionStatus, reload, openAppSettings } = useContacts();
+
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -26,16 +27,21 @@ const ContactScreen = () => {
   }
 
   return (
-    <>
+    <View style={styles.container}>
       <HeaderContacts />
       {shouldShowError && <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />}
-      <ListContacts />
-    </>
+      <View style={styles.listContainer}>
+        <ListContacts />
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  container: {
+    flex: 1,
+  },
+  listContainer: {
     flex: 1,
   },
   centered: {
@@ -43,11 +49,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 16,
-  },
-  item: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
   },
 });
 
