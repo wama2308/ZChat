@@ -7,7 +7,7 @@ export interface FormValuesAddContact {
   name: string;
   lastname: string;
   image?: string;
-  phones: string[];
+  phone: string;
 }
 
 const useAddContacts = () => {
@@ -37,7 +37,7 @@ const useAddContacts = () => {
       name: "",
       lastname: "",
       image: "",
-      phones: [],
+      phone: "",
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};

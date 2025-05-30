@@ -1,65 +1,69 @@
-import AddDeleteNumber, { type AddDeleteNumberRef } from "@components/contacts/AddDeleteNumber";
 import HeaderAddContact from "@components/contacts/HeaderAddContact";
 import EditProfile from "@components/settings/EditProfile";
-import { SPACES } from "@config/themes/themes";
+import { SPACES, type AppTheme } from "@config/themes/themes";
 import useAddContacts from "@hooks/contacts/useAddContacts";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
-import { useRef } from "react";
+import Icon from "@react-native-vector-icons/ionicons";
+import { memo } from "react";
 import { Controller, type Control } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from "react-native";
+import { Keyboard, Pressable, StyleSheet, View } from "react-native";
+import { TextInput, useTheme } from "react-native-paper";
 
 const NewContact = () => {
   const { t } = useTranslation();
+  const { colors } = useTheme<AppTheme>();
 
   const { control, modalShow, selectedImage, hasChanges, handleModalShow, handleSelectedImage, resetForm } =
     useAddContacts();
-  // console.log("control ", control._formValues);
-  const addDeleteNumberRef = useRef<AddDeleteNumberRef>(null);
-
-  const handleDismiss = () => {
-    addDeleteNumberRef.current?.closeActive();
-    //Keyboard.dismiss();
-  };
 
   return (
-    <>
+    <Pressable style={styles.container} onPress={() => Keyboard.dismiss()}>
       <HeaderAddContact title={t("contacts.new")} hasChanges={hasChanges} reset={resetForm} />
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.contentContainer}
-          contentInsetAdjustmentBehavior="automatic"
-          keyboardShouldPersistTaps="handled"
-          onTouchEnd={handleDismiss}
-        >
-          <EditProfile
-            control={control as unknown as Control<FormValuesEditProfile>}
-            modalShow={modalShow}
-            selectedImage={selectedImage}
-            handleModalShow={handleModalShow}
-            handleSelectedImage={handleSelectedImage}
-            hasChanges={hasChanges}
-          />
-          <Controller
-            control={control}
-            name="phones"
-            render={({ field: { value, onChange } }) => (
-              <AddDeleteNumber
-                ref={addDeleteNumberRef as React.RefObject<AddDeleteNumberRef>}
-                value={value}
-                onChange={onChange}
-              />
-            )}
-          />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </>
+      <View style={styles.contentContainer}>
+        <EditProfile
+          control={control as unknown as Control<FormValuesEditProfile>}
+          modalShow={modalShow}
+          selectedImage={selectedImage}
+          handleModalShow={handleModalShow}
+          handleSelectedImage={handleSelectedImage}
+          hasChanges={hasChanges}
+        />
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field: { value, onChange } }) => (
+            <TextInput
+              label={t("common.label-number")}
+              value={value}
+              onChangeText={(text) => onChange(text)}
+              keyboardType="numeric"
+              maxLength={10}
+              style={styles.input}
+              right={
+                <TextInput.Icon
+                  icon={() => (
+                    <Icon
+                      name={"close-outline"}
+                      size={20}
+                      color="#000000"
+                      style={{ backgroundColor: colors.outline, borderRadius: 30 }}
+                    />
+                  )}
+                  onPress={() => onChange("")}
+                  style={value ? { opacity: 1 } : { opacity: 0 }}
+                />
+              }
+            />
+          )}
+        />
+      </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  container: {
     flex: 1,
   },
   contentContainer: {
@@ -67,6 +71,10 @@ const styles = StyleSheet.create({
     gap: SPACES.g3,
     paddingBottom: 60,
   },
+  input: {
+    height: 60,
+    width: "100%",
+  },
 });
 
-export default NewContact;
+export default memo(NewContact);

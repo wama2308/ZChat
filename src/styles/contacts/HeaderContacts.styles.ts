@@ -32,6 +32,7 @@ export const getHeaderStyles = (colors: AppTheme["colors"], marginTop: number) =
       fontSize: 20,
       fontWeight: "600",
       color: colors.onBackground,
+      lineHeight: 26,
     },
     touchableText: {
       marginHorizontal: SPACES.m2,
