@@ -74,5 +74,5 @@ export interface IItemContact {
   email?: IEmailAddressesContacts[];
   status: string;
   zchat: boolean;
-  addFavorite?: boolean;
+  addFavorite: boolean;
 }

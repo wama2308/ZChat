@@ -6,6 +6,7 @@ module.exports = {
     },
   },
   plugins: [
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
     [
       "module-resolver",
       {
@@ -23,10 +24,10 @@ module.exports = {
           "@utils": "./src/utils",
           "@styles": "./src/styles",
           "@constants": "./src/constants",
+          "@database": "./src/database",
         },
       },
     ],
     "react-native-reanimated/plugin",
-    ["@babel/plugin-proposal-decorators", { legacy: true }],
   ],
 };
