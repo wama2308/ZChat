@@ -9,7 +9,7 @@ export const contactSchema = tableSchema({
     { name: "status", type: "string" },
     { name: "zchat", type: "boolean" },
     { name: "add_favorite", type: "boolean" },
-    { name: "created_at", type: "number" }, // Usamos number para timestamps UNIX
-    { name: "updated_at", type: "number", isOptional: true }, // Opcional porque al crear no ex
+    { name: "created_at", type: "number" },
+    { name: "updated_at", type: "number" },
   ],
 });

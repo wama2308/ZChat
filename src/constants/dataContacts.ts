@@ -17,6 +17,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "2",
@@ -35,6 +36,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "3",
@@ -53,6 +55,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "4",
@@ -71,6 +74,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "5",
@@ -89,6 +93,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "6",
@@ -107,6 +112,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
   {
     id: "7",
@@ -125,6 +131,7 @@ export const DATA_CONTACTS_ZCHAT = [
       },
     ],
     zchat: true,
+    addFavorite: false,
   },
 ];
 

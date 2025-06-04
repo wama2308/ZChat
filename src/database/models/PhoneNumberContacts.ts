@@ -14,5 +14,5 @@ export default class PhoneNumberContacts extends Model {
   @immutableRelation("contacts", "contact_id") contact!: Relation<Contact>;
 
   @date("created_at") createdAt!: Date;
-  @date("updated_at") updatedAt?: Date; // Opcional
+  @date("updated_at") updatedAt!: Date; // Opcional
 }

@@ -19,7 +19,7 @@ export default schemaMigrations({
             { name: "zchat", type: "boolean" },
             { name: "add_favorite", type: "boolean" },
             { name: "created_at", type: "number" },
-            { name: "updated_at", type: "number", isOptional: true },
+            { name: "updated_at", type: "number" },
           ],
         }),
         createTable({
@@ -29,7 +29,7 @@ export default schemaMigrations({
             { name: "number", type: "string" },
             { name: "contact_id", type: "string", isIndexed: true },
             { name: "created_at", type: "number" },
-            { name: "updated_at", type: "number", isOptional: true },
+            { name: "updated_at", type: "number" },
           ],
         }),
         createTable({
@@ -39,7 +39,7 @@ export default schemaMigrations({
             { name: "email", type: "string" },
             { name: "contact_id", type: "string", isIndexed: true },
             { name: "created_at", type: "number" },
-            { name: "updated_at", type: "number", isOptional: true },
+            { name: "updated_at", type: "number" },
           ],
         }),
       ],

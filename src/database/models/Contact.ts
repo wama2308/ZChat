@@ -20,5 +20,5 @@ export default class Contact extends Model {
   @children("phone_numbers") phoneNumbers!: PhoneNumberContacts[];
   @children("email_addresses") emails!: EmailContacts[];
   @date("created_at") createdAt!: Date;
-  @date("updated_at") updatedAt?: Date; // Opcional
+  @date("updated_at") updatedAt!: Date; // Opcional
 }

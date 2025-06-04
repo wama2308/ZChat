@@ -2,6 +2,7 @@
 import HeaderContacts from "@components/contacts/HeaderContacts";
 import ListContacts from "@components/contacts/ListContacts";
 import NoAccessToContacts from "@components/contacts/NoAccessToContacts";
+import database from "@database/index";
 import { useContacts } from "@hooks/contacts/useContacts";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
@@ -25,7 +26,7 @@ const ContactScreen = () => {
   } else if (permissionStatus === "blocked") {
     actionButton = () => openAppSettings();
   }
-
+  console.log(database);
   return (
     <View style={styles.container}>
       <HeaderContacts />

@@ -67,6 +67,7 @@ export const useContacts = () => {
       const sortedContacts = [...contactsWithPhone].sort((a, b) =>
         (a.displayName || a.givenName || "").localeCompare(b.displayName || b.givenName || "")
       );
+      console.log(sortedContacts);
       setContacts(sortedContacts);
       const normalized = normalizeContacts(sortedContacts);
       setContactsPhone(normalized);
