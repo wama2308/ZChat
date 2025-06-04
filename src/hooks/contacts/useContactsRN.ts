@@ -25,7 +25,7 @@ const getPermission = (): Permission => {
   })!;
 };
 
-export const useContacts = () => {
+export const useContactsRN = () => {
   const { t } = useTranslation();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);

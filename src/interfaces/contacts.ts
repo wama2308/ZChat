@@ -75,4 +75,5 @@ export interface IItemContact {
   status: string;
   zchat: boolean;
   addFavorite: boolean;
+  synchronized: boolean;
 }

@@ -15,7 +15,8 @@ export default class Contact extends Model {
   @text("image") image!: string;
   @text("status") status!: string;
   @field("zchat") zchat!: boolean;
-  @field("add_favorite") addFavorite?: boolean;
+  @field("add_favorite") addFavorite!: boolean;
+  @field("synchronized") synchronized!: boolean;
 
   @children("phone_numbers") phoneNumbers!: PhoneNumberContacts[];
   @children("email_addresses") emails!: EmailContacts[];

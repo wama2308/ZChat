@@ -19,7 +19,8 @@ if (__DEV__) {
   require("./ReactotronConfig");
 }
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
+
 export default function Main() {
   const { isDarkMode } = useThemeStore();
   const { scale } = useFontScale();

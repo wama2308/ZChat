@@ -9,6 +9,7 @@ export const contactSchema = tableSchema({
     { name: "status", type: "string" },
     { name: "zchat", type: "boolean" },
     { name: "add_favorite", type: "boolean" },
+    { name: "synchronized", type: "boolean" },
     { name: "created_at", type: "number" },
     { name: "updated_at", type: "number" },
   ],

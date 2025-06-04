@@ -3,12 +3,12 @@ import HeaderContacts from "@components/contacts/HeaderContacts";
 import ListContacts from "@components/contacts/ListContacts";
 import NoAccessToContacts from "@components/contacts/NoAccessToContacts";
 import database from "@database/index";
-import { useContacts } from "@hooks/contacts/useContacts";
+import { useContactsRN } from "@hooks/contacts/useContactsRN";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
-  const { loading, error, permissionStatus, reload, openAppSettings } = useContacts();
+  const { loading, error, permissionStatus, reload, openAppSettings } = useContactsRN();
 
   if (loading) {
     return (
