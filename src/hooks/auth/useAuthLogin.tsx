@@ -56,8 +56,7 @@ const useAuthLogin = () => {
     },
   });
 
-  const handleSubmit = handleSubmitForm(async (formData) => {
-    console.log("Form data ", formData);
+  const handleSubmit = handleSubmitForm(async () => {
     login();
     // Do login
   });

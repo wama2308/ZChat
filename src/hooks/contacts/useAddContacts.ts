@@ -1,4 +1,10 @@
+import { MutationKey } from "@constants/queriesAndMutations";
+import { createContact } from "@database/actions/contacts";
+import { exists, unlink } from "@dr.pogodin/react-native-fs";
 import { type AssetImageCrop } from "@interfaces/config";
+import { EContactStatus, type IItemContact } from "@interfaces/contacts";
+import { useMutation } from "@tanstack/react-query";
+import { moveImageContact } from "@utils/imageRFNS";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -63,6 +69,50 @@ const useAddContacts = () => {
     setSelectedImage(null); // ← resetea tu estado local
   };
 
+  const { mutateAsync: saveContact } = useMutation({
+    mutationKey: [MutationKey.contacts.create],
+    mutationFn: async (data: IItemContact) => {
+      return await createContact(data);
+    },
+
+    onError: async (error: unknown, variables: IItemContact) => {
+      console.error("Error guardando el contacto ", error);
+      if (variables.image && (await exists(variables.image))) {
+        try {
+          await unlink(variables.image);
+        } catch (unlinkErr) {
+          console.error("No se pudo eliminar la imagen:", unlinkErr);
+        }
+      }
+    },
+  });
+
+  const handleSaveContact = handleSubmitForm(async (formData) => {
+    let imagePath = "";
+
+    if (formData.image) {
+      const movedImagePath = await moveImageContact(formData.image, "contacts");
+      if (!movedImagePath) {
+        return; // corta la ejecución si falla el movimiento
+      }
+      imagePath = movedImagePath;
+    }
+
+    const payload: IItemContact = {
+      firstName: formData.name,
+      lastName: formData.lastname,
+      phoneNumbers: [{ label: "mobile", number: formData.phone }],
+      image: imagePath ?? "",
+      email: [],
+      status: EContactStatus.OFFLINE,
+      zchat: true,
+      addFavorite: false,
+      synchronized: false,
+    };
+
+    await saveContact(payload);
+  });
+
   return {
     control,
     errors,
@@ -75,6 +125,7 @@ const useAddContacts = () => {
     handleSubmitForm,
     handleSelectedImage,
     resetForm,
+    handleSaveContact,
   };
 };
 

@@ -4,6 +4,7 @@ import type { FormValuesAddContact } from "@hooks/contacts/useAddContacts";
 import { type RootStackParamListSettings } from "@navigation/SettingsNavigator";
 import { Header, HeaderBackButton } from "@react-navigation/elements";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
+import { type BaseSyntheticEvent } from "react";
 import type { UseFormReset } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native";
@@ -13,9 +14,10 @@ interface Props {
   title: string;
   hasChanges: boolean;
   reset: UseFormReset<FormValuesAddContact>;
+  action: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
 }
 
-const HeaderAddContact = ({ title, hasChanges, reset }: Props) => {
+const HeaderAddContact = ({ title, hasChanges, reset, action }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListSettings>>();
@@ -42,7 +44,7 @@ const HeaderAddContact = ({ title, hasChanges, reset }: Props) => {
       }
       headerRight={() =>
         hasChanges ? (
-          <TouchableOpacity style={styles.touchableText}>
+          <TouchableOpacity style={styles.touchableText} onPress={action}>
             <Text style={styles.text}>{t("common.label-ok")}</Text>
           </TouchableOpacity>
         ) : undefined

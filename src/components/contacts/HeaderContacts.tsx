@@ -13,7 +13,7 @@ const HeaderContacts = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
 
   const handleActionSearchBar = (value: string) => {
-    console.log("searchbaraaaqa ", value);
+    console.info("searchbaraaaqa ", value);
   };
 
   return (

@@ -1,3 +1,4 @@
+import type { EContactStatus } from "@interfaces/contacts";
 import { Model } from "@nozbe/watermelondb";
 import { children, date, field, text } from "@nozbe/watermelondb/decorators";
 import type EmailContacts from "./EmailContacts";
@@ -13,7 +14,7 @@ export default class Contact extends Model {
   @text("first_name") firstName!: string;
   @text("last_name") lastName!: string;
   @text("image") image!: string;
-  @text("status") status!: string;
+  @text("status") status!: EContactStatus;
   @field("zchat") zchat!: boolean;
   @field("add_favorite") addFavorite!: boolean;
   @field("synchronized") synchronized!: boolean;

@@ -66,14 +66,19 @@ export interface IContactsAndroid {
 }
 
 export interface IItemContact {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   phoneNumbers: IPhoneNumberContacts[];
   image: string;
   email?: IEmailAddressesContacts[];
-  status: string;
+  status: EContactStatus;
   zchat: boolean;
   addFavorite: boolean;
   synchronized: boolean;
+}
+
+export enum EContactStatus {
+  ONLINE = "online",
+  OFFLINE = "offline",
 }

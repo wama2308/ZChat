@@ -58,11 +58,11 @@ export default [
       'react-native/split-platform-components': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'import/order': 'off',
-      'no-unused-vars': ['error', {
-        'vars': 'all',   // Aplica la regla para todas las variables
-        'args': 'none',  // No marca como error los argumentos de las funciones no utilizados
-        'ignoreRestSiblings': false, // No ignora las variables de objetos desestructurados no usadas
-      }],
+      // 'no-unused-vars': ['error', {
+      //   'vars': 'all',   // Aplica la regla para todas las variables
+      //   'args': 'none',  // No marca como error los argumentos de las funciones no utilizados
+      //   'ignoreRestSiblings': false, // No ignora las variables de objetos desestructurados no usadas
+      // }],
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
       "@typescript-eslint/consistent-type-imports": "error",
       "max-params": ["error", 4],

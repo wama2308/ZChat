@@ -3,8 +3,8 @@ import { tableSchema } from "@nozbe/watermelondb";
 export const contactSchema = tableSchema({
   name: "contacts",
   columns: [
-    { name: "first_name", type: "string" },
-    { name: "last_name", type: "string" },
+    { name: "first_name", type: "string", isIndexed: true },
+    { name: "last_name", type: "string", isIndexed: true },
     { name: "image", type: "string" },
     { name: "status", type: "string" },
     { name: "zchat", type: "boolean" },

@@ -14,12 +14,25 @@ const NewContact = () => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
 
-  const { control, modalShow, selectedImage, hasChanges, handleModalShow, handleSelectedImage, resetForm } =
-    useAddContacts();
+  const {
+    control,
+    modalShow,
+    selectedImage,
+    hasChanges,
+    handleModalShow,
+    handleSelectedImage,
+    resetForm,
+    handleSaveContact,
+  } = useAddContacts();
 
   return (
     <Pressable style={styles.container} onPress={() => Keyboard.dismiss()}>
-      <HeaderAddContact title={t("contacts.new")} hasChanges={hasChanges} reset={resetForm} />
+      <HeaderAddContact
+        title={t("contacts.new")}
+        hasChanges={hasChanges}
+        reset={resetForm}
+        action={handleSaveContact}
+      />
       <View style={styles.contentContainer}>
         <EditProfile
           control={control as unknown as Control<FormValuesEditProfile>}

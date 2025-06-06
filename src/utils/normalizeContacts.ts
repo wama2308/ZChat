@@ -1,4 +1,4 @@
-import { type IItemContact } from "@interfaces/contacts";
+import { EContactStatus, type IItemContact } from "@interfaces/contacts";
 import { type Contact } from "react-native-contacts"; // El tipo original
 
 export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
@@ -15,7 +15,7 @@ export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
       label: e.label || "other",
       email: e.email,
     })),
-    status: "",
+    status: EContactStatus.OFFLINE,
     zchat: false,
     addFavorite: false,
     synchronized: false,

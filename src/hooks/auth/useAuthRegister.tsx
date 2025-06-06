@@ -71,7 +71,7 @@ const useAuthRegister = () => {
   });
 
   const handleSubmit = handleSubmitForm(async (formData) => {
-    console.log("Form data ", formData);
+    console.info("Form data ", formData);
 
     // Do login
   });
