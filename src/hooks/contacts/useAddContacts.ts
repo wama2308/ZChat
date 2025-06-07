@@ -3,11 +3,15 @@ import { createContact } from "@database/actions/contacts";
 import { exists, unlink } from "@dr.pogodin/react-native-fs";
 import { type AssetImageCrop } from "@interfaces/config";
 import { EContactStatus, type IItemContact } from "@interfaces/contacts";
+import { type RawWithDetails } from "@interfaces/generic";
+import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
+import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useMutation } from "@tanstack/react-query";
 import { moveImageContact } from "@utils/imageRFNS";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import Toast from "react-native-toast-message";
 
 export interface FormValuesAddContact {
   name: string;
@@ -18,9 +22,10 @@ export interface FormValuesAddContact {
 
 const useAddContacts = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
 
   const [selectedImage, setSelectedImage] = useState<AssetImageCrop | null>(null);
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState<boolean>(false);
 
   const handleModalShow = useCallback((value: boolean) => {
     setModalShow(value);
@@ -49,13 +54,16 @@ const useAddContacts = () => {
       const errors: Record<string, any> = {};
 
       if (!values.name) {
-        errors.name = { type: "required", message: t("rules-validation-edit-profile-name") };
+        errors.name = { type: "required", message: t("validation.rules-validation-edit-profile-name") };
       }
       if (!values.lastname) {
         errors.lastname = {
           type: "required",
-          message: t("rules-validation-edit-profile-name"),
+          message: t("validation.rules-validation-edit-profile-lastname"),
         };
+      }
+      if (!values.phone) {
+        errors.phone = { type: "required", message: t("validation.rules-validation-number-zchat-required") };
       }
 
       return { values, errors };
@@ -69,14 +77,26 @@ const useAddContacts = () => {
     setSelectedImage(null); // ← resetea tu estado local
   };
 
-  const { mutateAsync: saveContact } = useMutation({
+  const { mutateAsync: saveContact, isPending: isLoadingAddContact } = useMutation({
     mutationKey: [MutationKey.contacts.create],
     mutationFn: async (data: IItemContact) => {
       return await createContact(data);
     },
-
+    onSuccess(response: RawWithDetails<IItemContact>) {
+      console.log("response ", response);
+      Toast.show({
+        type: "success",
+        text1: t("contacts.save-successfully"),
+      });
+      resetForm();
+      navigation.goBack();
+    },
     onError: async (error: unknown, variables: IItemContact) => {
       console.error("Error guardando el contacto ", error);
+      Toast.show({
+        type: "error",
+        text1: t("contacts.save-error"),
+      });
       if (variables.image && (await exists(variables.image))) {
         try {
           await unlink(variables.image);
@@ -121,6 +141,7 @@ const useAddContacts = () => {
     selectedImage,
     modalShow,
     hasChanges,
+    isLoadingAddContact,
     handleModalShow,
     handleSubmitForm,
     handleSelectedImage,

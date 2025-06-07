@@ -2,6 +2,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { AppRegistry, View } from "react-native";
+import Toast from "react-native-toast-message";
 import { name as appName } from "./app.json";
 // COMPONENTS
 import { ActivityIndicator, PaperProvider, configureFonts } from "react-native-paper";
@@ -44,6 +45,7 @@ export default function Main() {
             <ActivityIndicator animating={true} size={100} />
           </View>
         )}
+        <Toast />
       </PaperProvider>
     </QueryClientProvider>
   );

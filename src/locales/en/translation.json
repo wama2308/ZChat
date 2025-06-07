@@ -9,7 +9,8 @@
     "rules-validation-username-numberzchat": "Username or ZChat number is required",
     "rules-validation-username-numberzchat-length": "Username or ZChat number must contain at least 3 characters",
     "rules-validation-edit-profile-name": "Name is required",
-    "rules-validation-edit-profile-lastname": "Last name is required"
+    "rules-validation-edit-profile-lastname": "Last name is required",
+    "rules-validation-number-zchat-required": "ZChat number is required"
   },
   "auth": {
     "register-start": "Sign up and get started with ZChat",
@@ -98,6 +99,8 @@
     "send-invitation": "Send invitation",
     "add-number-zchat": "Add ZChat number",
     "add-favorites": "Add to favorites",
-    "select": "Select contacts"
+    "select": "Select contacts",
+    "save-successfully": "Contact saved successfully",
+    "save-error": "Error saving contact"
   }
 }

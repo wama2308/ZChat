@@ -1,30 +1,31 @@
 import { SPACES, type AppTheme } from "@config/themes/themes";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import type { FormValuesAddContact } from "@hooks/contacts/useAddContacts";
-import { type RootStackParamListSettings } from "@navigation/SettingsNavigator";
+import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import { Header, HeaderBackButton } from "@react-navigation/elements";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { type BaseSyntheticEvent } from "react";
 import type { UseFormReset } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { TouchableOpacity } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { Platform, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 
 interface Props {
   title: string;
   hasChanges: boolean;
   reset: UseFormReset<FormValuesAddContact>;
   action: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
+  loading: boolean;
 }
 
-const HeaderAddContact = ({ title, hasChanges, reset, action }: Props) => {
+const HeaderAddContact = ({ title, hasChanges, reset, action, loading }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
-  const navigation = useNavigation<NavigationProp<RootStackParamListSettings>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
 
   const styles = useDynamicStyles({
     touchableText: {
-      marginHorizontal: SPACES.m1,
+      marginHorizontal: Platform.OS === "ios" ? SPACES.m1 : SPACES.m2,
     },
     text: {
       color: colors.brightBlue,
@@ -33,10 +34,13 @@ const HeaderAddContact = ({ title, hasChanges, reset, action }: Props) => {
   return (
     <Header
       title={title}
+      headerTitleAlign="center"
       headerLeft={() =>
         hasChanges ? (
           <TouchableOpacity style={styles.touchableText} onPress={() => reset()}>
-            <Text style={styles.text}>{t("common.label-cancel")}</Text>
+            <Text variant="titleMedium" style={styles.text}>
+              {t("common.label-cancel")}
+            </Text>
           </TouchableOpacity>
         ) : (
           <HeaderBackButton onPress={() => navigation.goBack()} tintColor={colors.backButtonHeader} />
@@ -44,8 +48,14 @@ const HeaderAddContact = ({ title, hasChanges, reset, action }: Props) => {
       }
       headerRight={() =>
         hasChanges ? (
-          <TouchableOpacity style={styles.touchableText} onPress={action}>
-            <Text style={styles.text}>{t("common.label-ok")}</Text>
+          <TouchableOpacity style={styles.touchableText} onPress={() => action()}>
+            {loading ? (
+              <ActivityIndicator animating={true} />
+            ) : (
+              <Text variant="titleMedium" style={styles.text}>
+                {t("common.label-ok")}
+              </Text>
+            )}
           </TouchableOpacity>
         ) : undefined
       }

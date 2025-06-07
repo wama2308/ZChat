@@ -1,12 +1,13 @@
 import { ImagePickerButton } from "@components/ui/ImagePickerButton";
 import ModalBottom from "@components/ui/ModalBottom";
 import { type AppTheme, SPACES } from "@config/themes/themes";
+import { type FormValuesAddContact } from "@hooks/contacts/useAddContacts";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
 import { type AssetImageCrop } from "@interfaces/config";
-import { type Control, Controller } from "react-hook-form";
+import { type Control, Controller, type FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Text, TextInput, useTheme } from "react-native-paper";
+import { HelperText, Text, TextInput, useTheme } from "react-native-paper";
 
 interface Props {
   control: Control<FormValuesEditProfile, any, FormValuesEditProfile>;
@@ -15,6 +16,8 @@ interface Props {
   handleModalShow: (value: boolean) => void;
   handleSelectedImage: (value: AssetImageCrop | null) => void;
   hasChanges?: boolean;
+  loading?: boolean;
+  errors?: FieldErrors<FormValuesEditProfile> | FieldErrors<FormValuesAddContact>;
 }
 
 const EditProfile = ({
@@ -24,13 +27,15 @@ const EditProfile = ({
   handleModalShow,
   handleSelectedImage,
   hasChanges,
+  loading = false,
+  errors,
 }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const TITLE_MODAL_BOTTOM = hasChanges
     ? t("profile.label-edit-profile-picture")
     : t("profile.label-add-profile-picture");
-
+  console.log(errors);
   return (
     <>
       <View style={styles.content}>
@@ -41,7 +46,7 @@ const EditProfile = ({
             }
             style={styles.image}
           />
-          <TouchableOpacity onPress={() => handleModalShow(true)}>
+          <TouchableOpacity onPress={() => handleModalShow(true)} disabled={loading}>
             <Text variant="titleMedium" style={[{ color: colors.blueBootstrap, textAlign: "center" }]}>
               {selectedImage?.uri ? t("common.label-edit") : t("common.label-add")}
             </Text>
@@ -52,26 +57,44 @@ const EditProfile = ({
             control={control}
             name="name"
             render={({ field: { onChange, value } }) => (
-              <TextInput
-                autoCapitalize="none"
-                label={t("form.label-name")}
-                value={value}
-                onChangeText={onChange}
-                style={{ backgroundColor: "transparent" }}
-              />
+              <>
+                <TextInput
+                  autoCapitalize="sentences"
+                  label={t("form.label-name")}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ backgroundColor: "transparent" }}
+                  disabled={loading}
+                  error={!!errors?.name?.message}
+                />
+                {!!errors?.name?.message && (
+                  <HelperText type="error" visible={!!errors?.name?.message}>
+                    {errors?.name?.message}
+                  </HelperText>
+                )}
+              </>
             )}
           />
           <Controller
             control={control}
             name="lastname"
             render={({ field: { onChange, value } }) => (
-              <TextInput
-                autoCapitalize="none"
-                label={t("form.label-lastname")}
-                value={value}
-                onChangeText={onChange}
-                style={{ backgroundColor: "transparent" }}
-              />
+              <>
+                <TextInput
+                  autoCapitalize="sentences"
+                  label={t("form.label-lastname")}
+                  value={value}
+                  onChangeText={onChange}
+                  style={{ backgroundColor: "transparent" }}
+                  disabled={loading}
+                  error={!!errors?.lastname?.message}
+                />
+                {!!errors?.lastname?.message && (
+                  <HelperText type="error" visible={!!errors?.lastname?.message}>
+                    {errors?.lastname?.message}
+                  </HelperText>
+                )}
+              </>
             )}
           />
         </View>
