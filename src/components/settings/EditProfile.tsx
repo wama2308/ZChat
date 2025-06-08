@@ -35,7 +35,7 @@ const EditProfile = ({
   const TITLE_MODAL_BOTTOM = hasChanges
     ? t("profile.label-edit-profile-picture")
     : t("profile.label-add-profile-picture");
-  console.log(errors);
+
   return (
     <>
       <View style={styles.content}>

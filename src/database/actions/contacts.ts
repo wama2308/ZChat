@@ -81,3 +81,54 @@ export const getAllContacts = async () => {
 export const getContactById = async (id: string) => {
   return await database.get<Contact>("contacts").find(id);
 };
+
+export const updateContactById = async (
+  contactId: string,
+  data: Partial<Pick<Contact, "firstName" | "lastName" | "zchat" | "addFavorite" | "status">>,
+  phoneData?: Partial<Pick<PhoneNumberContacts, "label" | "number">>
+) => {
+  try {
+    await database.write(async () => {
+      const contactsCollection = database.get<Contact>("contacts");
+      const phonesCollection = database.get<PhoneNumberContacts>("phone_numbers");
+
+      const contact = await contactsCollection.find(contactId);
+
+      if (!contact) {
+        console.warn("Contacto no encontrado");
+        return;
+      }
+
+      // Actualizar datos del contacto
+      await contact.update((record) => {
+        if (data.firstName !== undefined) record.firstName = data.firstName;
+        if (data.lastName !== undefined) record.lastName = data.lastName;
+        if (data.zchat !== undefined) record.zchat = data.zchat;
+        if (data.addFavorite !== undefined) record.addFavorite = data.addFavorite;
+        if (data.status !== undefined) record.status = data.status;
+      });
+
+      // Actualizar o crear teléfono
+      if (phoneData) {
+        const existingPhones = await contact.phoneNumbers;
+        const firstPhone = existingPhones[0];
+
+        if (firstPhone) {
+          await firstPhone.update((phone) => {
+            if (phoneData.label !== undefined) phone.label = phoneData.label;
+            if (phoneData.number !== undefined) phone.number = phoneData.number;
+          });
+        } else {
+          await phonesCollection.create((newPhone) => {
+            newPhone.contact.set(contact); // asignar la relación (contact es el modelo)            newPhone.label = phoneData.label ?? "mobile";
+            newPhone.number = phoneData.number ?? "";
+          });
+        }
+      }
+
+      console.log("Contacto y teléfono actualizados correctamente");
+    });
+  } catch (error) {
+    console.error("Error actualizando contacto y teléfono:", error);
+  }
+};

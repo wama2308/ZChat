@@ -1,6 +1,7 @@
 import { Database } from "@nozbe/watermelondb";
 import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
 
+import { Platform } from "react-native";
 import migrations from "./migrations";
 import Contact from "./models/Contact";
 import EmailContacts from "./models/EmailContacts";
@@ -11,7 +12,7 @@ const adapter = new SQLiteAdapter({
   schema,
   migrations,
   dbName: "zchat",
-  jsi: true, // puede causar problemas en Android, desactiva si da errores
+  jsi: Platform.OS === "ios" ? true : false, // puede causar problemas en Android, desactiva si da errores
   onSetUpError: (error) => {
     console.error("Error al configurar la DB:", error);
   },

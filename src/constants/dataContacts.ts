@@ -5,7 +5,7 @@ export const DATA_CONTACTS_ZCHAT = [
     lastName: "Johnson",
     // image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&auto=format",
     image: "",
-    status: "online",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -25,7 +25,7 @@ export const DATA_CONTACTS_ZCHAT = [
     firstName: "Liam",
     lastName: "Smith",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format",
-    status: "last seen 2h ago",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -45,7 +45,7 @@ export const DATA_CONTACTS_ZCHAT = [
     firstName: "",
     lastName: "",
     image: "",
-    status: "online",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -65,7 +65,7 @@ export const DATA_CONTACTS_ZCHAT = [
     firstName: "Noah",
     lastName: "Brown",
     image: "https://images.unsplash.com/photo-1546820389-44d77e1f3b31?w=200&auto=format",
-    status: "last seen yesterday",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -105,7 +105,7 @@ export const DATA_CONTACTS_ZCHAT = [
     firstName: "William",
     lastName: "Garcia",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format",
-    status: "online",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -125,7 +125,7 @@ export const DATA_CONTACTS_ZCHAT = [
     firstName: "Sophia",
     lastName: "Martinez",
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format",
-    status: "last seen 30m ago",
+    status: "offline",
     phoneNumbers: [
       {
         label: "Personalizar",
@@ -148,7 +148,7 @@ export const DATA_CONTACTS_FAVORITES = [
     firstName: "",
     lastName: "",
     image: "",
-    status: "",
+    status: "offline",
     phoneNumbers: [],
     zchat: false,
     addFavorite: true,
