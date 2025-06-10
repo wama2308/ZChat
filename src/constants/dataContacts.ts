@@ -144,7 +144,7 @@ export const DATA_CONTACTS_ZCHAT = [
 
 export const DATA_CONTACTS_FAVORITES = [
   {
-    id: "-1",
+    id: "headerFavorite",
     firstName: "",
     lastName: "",
     image: "",

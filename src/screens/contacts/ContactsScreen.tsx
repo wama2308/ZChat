@@ -1,15 +1,19 @@
 // src/screens/ContactScreen.tsx
 import HeaderContacts from "@components/contacts/HeaderContacts";
 import ListContacts from "@components/contacts/ListContacts";
-import NoAccessToContacts from "@components/contacts/NoAccessToContacts";
-import { useContactsRN } from "@hooks/contacts/useContactsRN";
+import Alert from "@components/ui/Alert";
+import useListContacts from "@hooks/contacts/useListContacts";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
-  const { loading, error, permissionStatus, reload, openAppSettings } = useContactsRN();
+  const { t } = useTranslation();
 
-  if (loading) {
+  const { dataContactsZChatAll, isFetchingDataContactsZChatAll, isErrorDataContactsZChatAll } =
+    useListContacts();
+
+  if (isFetchingDataContactsZChatAll) {
     return (
       <View style={styles.centered}>
         <ActivityIndicator animating={true} size="large" />
@@ -17,21 +21,15 @@ const ContactScreen = () => {
     );
   }
 
-  const shouldShowError = permissionStatus === "blocked" || permissionStatus === "denied" || !!error;
-
-  let actionButton = () => {};
-  if (permissionStatus === "denied" || !!error) {
-    actionButton = () => reload();
-  } else if (permissionStatus === "blocked") {
-    actionButton = () => openAppSettings();
-  }
-
   return (
     <View style={styles.container}>
       <HeaderContacts />
-      {shouldShowError && <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />}
       <View style={styles.listContainer}>
-        <ListContacts />
+        {isErrorDataContactsZChatAll ? (
+          <Alert type="error" message={t("contacts.error-load-list")} />
+        ) : (
+          dataContactsZChatAll && <ListContacts contacts={dataContactsZChatAll} />
+        )}
       </View>
     </View>
   );

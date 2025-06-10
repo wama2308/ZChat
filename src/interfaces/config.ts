@@ -31,3 +31,5 @@ export interface AssetImageCrop {
   fileSize?: number;
   fileName?: string;
 }
+
+export type TAlert = "error" | "warning" | "info" | "success";

@@ -1,10 +1,13 @@
 // src/components/contacts/ListContacts.tsx
+import Alert from "@components/ui/Alert";
 import { SPACES, type AppTheme } from "@config/themes/themes";
-import { DATA_CONTACTS_FAVORITES, DATA_CONTACTS_ZCHAT } from "@constants/dataContacts";
+import { DATA_CONTACTS_FAVORITES } from "@constants/dataContacts";
+import type Contact from "@database/models/Contact";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
-import { type IItemContact } from "@interfaces/contacts";
+import { type EContactStatus, type IItemContact } from "@interfaces/contacts";
+import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
+import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
-import { useContactsStore } from "@store/contacts/useContactsStore";
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -13,11 +16,43 @@ import ItemContact from "./ItemContact";
 
 type ListItem = { type: "header"; title: string; id: string } | { type: "item"; data: IItemContact };
 
-const ListContacts = () => {
+interface Props {
+  contacts: Contact[];
+}
+
+const buildDataList = (contacts: Contact[], t: (key: string) => string): ListItem[] => {
+  const result: ListItem[] = [];
+
+  const favorites = [
+    ...DATA_CONTACTS_FAVORITES.map((item) => ({
+      type: "item" as const,
+      data: { ...item, status: item.status as EContactStatus },
+    })),
+    ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
+  ];
+
+  const others = contacts
+    .filter((item) => !item.addFavorite)
+    .map((item) => ({ type: "item" as const, data: item }));
+
+  if (favorites.length > 0) {
+    result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });
+    result.push(...favorites);
+  }
+
+  if (others.length > 0) {
+    result.push({ type: "header", title: t("contacts.zchat"), id: "zchat-header" });
+    result.push(...others);
+  }
+
+  return result;
+};
+
+const ListContacts = ({ contacts }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
-  const contactsPhone = useContactsStore((state) => state.contactsPhone);
-
+  const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
+  console.log(contacts);
   const styles = useDynamicStyles(
     {
       header: {
@@ -30,73 +65,27 @@ const ListContacts = () => {
     [colors]
   );
 
-  // Convertir las secciones en una lista plana con headers y items
-  const data = useMemo(() => {
-    const result: ListItem[] = [];
+  const data = useMemo(() => buildDataList(contacts, t), [contacts, t]);
 
-    // Sección de favoritos
-    result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });
-    result.push(
-      ...DATA_CONTACTS_FAVORITES.map((item) => ({
-        type: "item" as const, // <-- Añade 'as const' aquí
-        data: item,
-      }))
-    );
-
-    // Sección de zchat
-    result.push({ type: "header", title: t("contacts.zchat"), id: "zchat-header" });
-    result.push(
-      ...DATA_CONTACTS_ZCHAT.map((item) => ({
-        type: "item" as const, // <-- Añade 'as const' aquí
-        data: item,
-      }))
-    );
-
-    // Sección de contactos del teléfono
-    if (contactsPhone) {
-      result.push({ type: "header", title: t("contacts.phone"), id: "phone-header" });
-      result.push(
-        ...contactsPhone
-          .filter((c): c is IItemContact => c !== undefined)
-          .map((item) => ({
-            type: "item" as const, // <-- Añade 'as const' aquí
-            data: item,
-          }))
+  const renderItem = ({ item }: { item: ListItem }) => {
+    if (item.type === "header") {
+      return (
+        <Text variant="titleSmall" style={styles.header}>
+          {item.title}
+        </Text>
       );
     }
+    return <ItemContact data={item.data} />;
+  };
 
-    return result;
-  }, [contactsPhone, t]);
-
-  const renderItem = useMemo(
-    () =>
-      ({ item }: { item: ListItem }) => {
-        if (item.type === "header") {
-          return (
-            <Text variant="titleSmall" style={styles.header}>
-              {item.title}
-            </Text>
-          );
-        }
-        return <ItemContact data={item.data} />;
-      },
-    [styles.header]
-  );
-
-  const ItemSeparatorComponent = useMemo(
-    () =>
-      ({ leadingItem }: { leadingItem?: ListItem }) => {
-        // No mostrar separador después de los headers
-        if (!leadingItem || leadingItem.type === "header") return null;
-
-        return (
-          <View style={{ backgroundColor: colors.onSecondary }}>
-            <Divider bold style={{ marginLeft: 70 }} />
-          </View>
-        );
-      },
-    [colors.onSecondary]
-  );
+  const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: ListItem }) => {
+    if (!leadingItem || leadingItem.type === "header") return null;
+    return (
+      <View style={{ backgroundColor: colors.onSecondary }}>
+        <Divider bold style={{ marginLeft: 70 }} />
+      </View>
+    );
+  };
 
   const getItemType = useMemo(
     () => (item: ListItem) => {
@@ -105,10 +94,10 @@ const ListContacts = () => {
     []
   );
 
-  return (
+  return contacts.length > 0 ? (
     <FlashList
       data={data}
-      keyExtractor={(item) => (item.type === "header" ? item.id : item.data.id)}
+      keyExtractor={(item) => (item.type === "header" ? item.id : item.data.id!)}
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparatorComponent}
       getItemType={getItemType}
@@ -125,6 +114,8 @@ const ListContacts = () => {
         }
       }}
     />
+  ) : (
+    <Alert type="info" message={t("contacts.add-new")} action={() => navigation.navigate("NewContact")} />
   );
 };
 

@@ -8,20 +8,20 @@ export const moveImageContact = async (image: string, folder: "contacts"): Promi
 
   try {
     const filename = image.split("/").pop() || `photo-${Date.now()}.jpg`;
-    const destDir = `${DocumentDirectoryPath}/images/${folder}`;
-    const destPath = `${destDir}/${filename}`;
+    const relativePath = `images/${folder}/${filename}`;
+    const destPath = `${DocumentDirectoryPath}/${relativePath}`;
 
-    // Crear carpeta si no existe
-    const dirExists = await exists(destDir);
+    const dirExists = await exists(`${DocumentDirectoryPath}/images/${folder}`);
     if (!dirExists) {
-      await mkdir(destDir);
+      await mkdir(`${DocumentDirectoryPath}/images/${folder}`);
     }
 
-    // Mover imagen a ruta persistente
     await moveFile(image, destPath);
-    return destPath;
+
+    // ⛳️ DEVUELVE SOLO LA RUTA RELATIVA
+    return relativePath;
   } catch (err) {
     console.error("Error moviendo imagen:", err);
-    return null; // detenemos si falla la imagen
+    return null;
   }
 };

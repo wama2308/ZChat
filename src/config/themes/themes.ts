@@ -51,6 +51,14 @@ const LIGHTS_COLORS = {
     blueBootstrap: "#0d6efd",
     borderBottonHeader: "rgba(0, 0, 0)",
     backButtonHeader: "#000000",
+    successFont: "#28C700",
+    success: "#D4F4CC",
+    errorFont: "#F00",
+    error20: "#FFCCCC",
+    warningFont: "#FE9B0E",
+    warning: "#FFEBCF",
+    infoFont: "#35C0EC",
+    info: "#D7F2FB",
   },
 };
 
@@ -101,6 +109,14 @@ const DARK_COLORS = {
     blueBootstrap: "#0d6efd",
     borderBottonHeader: "rgba(255, 255, 255, 0.45)",
     backButtonHeader: "#ffffff",
+    successFont: "#28C700",
+    success: "#D4F4CC",
+    errorFont: "#F00",
+    error20: "#FFCCCC",
+    warningFont: "#FE9B0E",
+    warning: "#FFEBCF",
+    infoFont: "#35C0EC",
+    info: "#D7F2FB",
   },
 };
 

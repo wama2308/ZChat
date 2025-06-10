@@ -1,6 +1,6 @@
 import { MutationKey } from "@constants/queriesAndMutations";
 import { createContact } from "@database/actions/contacts";
-import { exists, unlink } from "@dr.pogodin/react-native-fs";
+import { DocumentDirectoryPath, exists, unlink } from "@dr.pogodin/react-native-fs";
 import { type AssetImageCrop } from "@interfaces/config";
 import { EContactStatus, type IItemContact } from "@interfaces/contacts";
 import { type RawWithDetails } from "@interfaces/generic";
@@ -97,11 +97,14 @@ const useAddContacts = () => {
         type: "error",
         text1: t("contacts.save-error"),
       });
-      if (variables.image && (await exists(variables.image))) {
-        try {
-          await unlink(variables.image);
-        } catch (unlinkErr) {
-          console.error("No se pudo eliminar la imagen:", unlinkErr);
+      if (variables.image) {
+        const imageAbsolutePath = `${DocumentDirectoryPath}/${variables.image}`;
+        if (await exists(imageAbsolutePath)) {
+          try {
+            await unlink(imageAbsolutePath);
+          } catch (unlinkErr) {
+            console.error("No se pudo eliminar la imagen:", unlinkErr);
+          }
         }
       }
     },
