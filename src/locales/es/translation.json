@@ -102,7 +102,10 @@
     "select": "Seleccione contactos",
     "save-successfully": "Contacto guardado con éxito",
     "save-error": "Error guardando el contacto",
+    "edit-successfully": "Contacto editado con éxito",
+    "edit-error": "Error editando el contacto",
     "add-new": "Aún no tienes contactos. ¡Haz clic aquí para agregar uno!",
-    "error-load-list": "Ha ocurrido un error al cargar la lista de contactos"
+    "error-load-list": "Ha ocurrido un error al cargar la lista de contactos",
+    "edit": "Editar contacto"
   }
 }

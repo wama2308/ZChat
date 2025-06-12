@@ -3,7 +3,9 @@ import EditProfile from "@components/settings/EditProfile";
 import { SPACES, type AppTheme } from "@config/themes/themes";
 import useAddContacts from "@hooks/contacts/useAddContacts";
 import { type FormValuesEditProfile } from "@hooks/settings/useProfile";
+import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import Icon from "@react-native-vector-icons/ionicons";
+import { useRoute, type RouteProp } from "@react-navigation/native";
 import { memo } from "react";
 import { Controller, type Control } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -13,29 +15,31 @@ import { HelperText, TextInput, useTheme } from "react-native-paper";
 const NewContact = () => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
+  const route = useRoute<RouteProp<RootStackParamListContacts>>();
+  const { contact } = route.params || {};
 
   const {
     control,
     modalShow,
     selectedImage,
     hasChanges,
-    isLoadingAddContact,
+    LOADING,
     errors,
     handleModalShow,
     handleSelectedImage,
     resetForm,
     handleSaveContact,
-  } = useAddContacts();
-
+  } = useAddContacts({ data: contact });
+  console.log("selectedImage ", selectedImage);
   return (
     <>
       <Pressable style={styles.container} onPress={() => Keyboard.dismiss()}>
         <HeaderAddContact
-          title={t("contacts.new")}
+          title={contact ? t("contacts.edit") : t("contacts.new")}
           hasChanges={hasChanges}
           reset={resetForm}
           action={handleSaveContact}
-          loading={isLoadingAddContact}
+          loading={LOADING}
         />
         <View style={styles.contentContainer}>
           <EditProfile

@@ -102,7 +102,10 @@
     "select": "Select contacts",
     "save-successfully": "Contact saved successfully",
     "save-error": "Error saving contact",
+    "edit-successfully": "Contact successfully edited",
+    "edit-error": "Error editing contact",
     "add-new": "You don't have any contacts yet. Click here to add one!",
-    "error-load-list": "An error occurred while loading the contact list"
+    "error-load-list": "An error occurred while loading the contact list",
+    "edit": "Edit contact"
   }
 }

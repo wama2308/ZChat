@@ -2,7 +2,6 @@
 import Alert from "@components/ui/Alert";
 import { SPACES, type AppTheme } from "@config/themes/themes";
 import { DATA_CONTACTS_FAVORITES } from "@constants/dataContacts";
-import type Contact from "@database/models/Contact";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
 import { type EContactStatus, type IItemContact } from "@interfaces/contacts";
 import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
@@ -17,10 +16,10 @@ import ItemContact from "./ItemContact";
 type ListItem = { type: "header"; title: string; id: string } | { type: "item"; data: IItemContact };
 
 interface Props {
-  contacts: Contact[];
+  contacts: IItemContact[];
 }
 
-const buildDataList = (contacts: Contact[], t: (key: string) => string): ListItem[] => {
+const buildDataList = (contacts: IItemContact[], t: (key: string) => string): ListItem[] => {
   const result: ListItem[] = [];
 
   const favorites = [
@@ -52,7 +51,7 @@ const ListContacts = ({ contacts }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
-  console.log(contacts);
+
   const styles = useDynamicStyles(
     {
       header: {

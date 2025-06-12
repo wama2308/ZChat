@@ -57,25 +57,33 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
   return newContact;
 };
 
-export const updateContact = async (id: string, updates: Partial<IItemContact>) => {
-  const contact = await database.get<Contact>("contacts").find(id);
+export const getAllContacts = async (): Promise<IItemContact[]> => {
+  const contacts = await database.get<Contact>("contacts").query().fetch();
 
-  if (!contact) throw new Error("Contacto no encontrado");
+  const contactsWithPhones = await Promise.all(
+    contacts.map(async (contact) => {
+      const phoneNumbers = await contact.phoneNumbers;
 
-  await database.write(async () => {
-    await contact.update((c) => {
-      if (updates.firstName !== undefined) c.firstName = updates.firstName;
-      if (updates.lastName !== undefined) c.lastName = updates.lastName;
-      if (updates.image !== undefined) c.image = updates.image;
-      if (updates.status !== undefined) c.status = updates.status;
-      if (updates.zchat !== undefined) c.zchat = updates.zchat;
-      if (updates.addFavorite !== undefined) c.addFavorite = updates.addFavorite;
-    });
-  });
-};
+      return {
+        id: contact.id,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        phoneNumbers: phoneNumbers.map((item) => ({
+          id: item.id,
+          label: item.label,
+          number: item.number,
+        })),
+        image: contact.image,
+        email: [],
+        status: contact.status,
+        zchat: contact.zchat,
+        addFavorite: contact.addFavorite,
+        synchronized: contact.synchronized,
+      };
+    })
+  );
 
-export const getAllContacts = async () => {
-  return await database.get<Contact>("contacts").query().fetch();
+  return contactsWithPhones;
 };
 
 export const getContactById = async (id: string) => {
@@ -125,10 +133,54 @@ export const updateContactById = async (
           });
         }
       }
-
-      console.log("Contacto y teléfono actualizados correctamente");
     });
   } catch (error) {
     console.error("Error actualizando contacto y teléfono:", error);
   }
+};
+
+export const updateContact = async (contactData: IItemContact): Promise<RawWithDetails<IItemContact>> => {
+  const { id, firstName, lastName, image, phoneNumbers } = contactData;
+
+  if (!id) {
+    throw new Error("El ID del contacto es requerido para actualizar.");
+  }
+  const phoneEdit: RawWithDetails<IPhoneNumberContacts>[] = [];
+  const contactEdit = await database.write(async () => {
+    const contact = await database.get<Contact>("contacts").find(id);
+
+    // Actualizar contacto
+    await contact.update((record) => {
+      record.firstName = firstName;
+      record.lastName = lastName;
+      record.image = image;
+    });
+
+    // Actualizar teléfonos
+    for (const phone of phoneNumbers) {
+      if (phone.id) {
+        const phoneRecord = await database.get<PhoneNumberContacts>("phone_numbers").find(phone.id);
+        await phoneRecord.update((record) => {
+          record.label = phone.label;
+          record.number = phone.number;
+        });
+        phoneEdit.push({ label: phoneRecord.label, number: phoneRecord.number, ...phoneRecord._raw });
+      }
+    }
+
+    return {
+      id: contact.id,
+      _status: contact._raw._status,
+      _changed: contact._raw._changed,
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      image: contact.image,
+      status: contact.status,
+      zchat: contact.zchat,
+      addFavorite: contact.addFavorite,
+      synchronized: false, // o el valor que corresponda
+      phoneNumbers: phoneEdit,
+    };
+  });
+  return contactEdit;
 };

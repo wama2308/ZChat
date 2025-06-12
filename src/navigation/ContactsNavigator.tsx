@@ -1,4 +1,5 @@
 import { type AppTheme } from "@config/themes/themes";
+import type { IItemContact } from "@interfaces/contacts";
 import { createStackNavigator } from "@react-navigation/stack";
 import ContactsScreen from "@screens/contacts/ContactsScreen";
 import FavoriteContacts from "@screens/contacts/FavoriteContacts";
@@ -8,7 +9,7 @@ import { useTheme } from "react-native-paper";
 // Definir los tipos de la navegación
 export type RootStackParamListContacts = {
   HomeContacts: undefined;
-  NewContact: undefined;
+  NewContact: { contact: IItemContact } | undefined;
   FavoriteContacts: undefined;
 };
 

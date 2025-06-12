@@ -1,12 +1,12 @@
 import ModalBottom from "@components/ui/ModalBottom";
 import { type AppTheme } from "@config/themes/themes";
-import { DocumentDirectoryPath } from "@dr.pogodin/react-native-fs";
 import { type IItemContact } from "@interfaces/contacts";
 import type { RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import Icon from "@react-native-vector-icons/ionicons";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { getItemContactStyles } from "@styles/contacts/ItemContact.style";
 import { generateRandomColor } from "@utils/colors";
+import { getImageUri } from "@utils/imageRFNS";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
@@ -38,14 +38,15 @@ const ItemContact = ({ data }: Props) => {
 
   const styles = useMemo(() => getItemContactStyles(colors), [colors]);
 
-  const getImageUri = (path?: string) =>
-    path?.startsWith("file://") || path?.startsWith("http")
-      ? path
-      : `file://${DocumentDirectoryPath}/${path}`;
-
   return (
     <>
-      <TouchableRipple onPress={addFavorite ? () => navigation.navigate("FavoriteContacts") : undefined}>
+      <TouchableRipple
+        onPress={
+          HEADER_FAVORITE
+            ? () => navigation.navigate("FavoriteContacts")
+            : () => navigation.navigate("NewContact", { contact: data })
+        }
+      >
         <View style={styles.container}>
           {image ? (
             <Image
