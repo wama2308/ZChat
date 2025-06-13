@@ -52,6 +52,7 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
       synchronized: false, // o el valor que corresponda
       phoneNumbers,
       email: input.email ?? [],
+      lastSeen: contact.lastSeen, // Aseguramos que lastSeen tenga un valor por defecto
     };
   });
 
@@ -59,6 +60,7 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
 };
 
 export const getAllContacts = async (): Promise<IItemContact[]> => {
+  console.log("entro en la función getAllContacts");
   const contacts = await database.get<Contact>("contacts").query(Q.sortBy("last_seen", "desc")).fetch();
 
   const contactsWithPhones = await Promise.all(
@@ -80,6 +82,7 @@ export const getAllContacts = async (): Promise<IItemContact[]> => {
         zchat: contact.zchat,
         addFavorite: contact.addFavorite,
         synchronized: contact.synchronized,
+        lastSeen: contact.lastSeen,
       };
     })
   );
@@ -181,6 +184,7 @@ export const updateContact = async (contactData: IItemContact): Promise<RawWithD
       addFavorite: contact.addFavorite,
       synchronized: false, // o el valor que corresponda
       phoneNumbers: phoneEdit,
+      lastSeen: contact.lastSeen,
     };
   });
   return contactEdit;

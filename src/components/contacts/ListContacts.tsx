@@ -25,7 +25,7 @@ const buildDataList = (contacts: IItemContact[], t: (key: string) => string): Li
   const favorites = [
     ...DATA_CONTACTS_FAVORITES.map((item) => ({
       type: "item" as const,
-      data: { ...item, status: item.status as EContactStatus },
+      data: { ...item, status: item.status as EContactStatus, lastSeen: null },
     })),
     ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
   ];
