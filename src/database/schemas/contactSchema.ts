@@ -10,6 +10,7 @@ export const contactSchema = tableSchema({
     { name: "zchat", type: "boolean" },
     { name: "add_favorite", type: "boolean" },
     { name: "synchronized", type: "boolean" },
+    { name: "last_seen", type: "number", isOptional: true },
     { name: "created_at", type: "number" },
     { name: "updated_at", type: "number" },
   ],

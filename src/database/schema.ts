@@ -5,6 +5,6 @@ import { emailAddressesContactSchema } from "./schemas/emailAddressesContactSche
 import { phoneNumberContactSchema } from "./schemas/phoneNumberContactSchema";
 
 export default appSchema({
-  version: 3,
+  version: 4,
   tables: [contactSchema, phoneNumberContactSchema, emailAddressesContactSchema],
 });

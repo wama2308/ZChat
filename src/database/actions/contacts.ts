@@ -3,6 +3,7 @@ import type EmailContacts from "@database/models/EmailContacts";
 import type PhoneNumberContacts from "@database/models/PhoneNumberContacts";
 import { EContactStatus, type IItemContact, type IPhoneNumberContacts } from "@interfaces/contacts";
 import type { RawWithDetails } from "@interfaces/generic";
+import { Q } from "@nozbe/watermelondb";
 import database from "../index";
 
 export const createContact = async (input: IItemContact): Promise<RawWithDetails<IItemContact>> => {
@@ -58,7 +59,7 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
 };
 
 export const getAllContacts = async (): Promise<IItemContact[]> => {
-  const contacts = await database.get<Contact>("contacts").query().fetch();
+  const contacts = await database.get<Contact>("contacts").query(Q.sortBy("last_seen", "desc")).fetch();
 
   const contactsWithPhones = await Promise.all(
     contacts.map(async (contact) => {
@@ -183,4 +184,27 @@ export const updateContact = async (contactData: IItemContact): Promise<RawWithD
     };
   });
   return contactEdit;
+};
+
+export const updateContactLastSeen = async (id: string): Promise<void> => {
+  if (!id) throw new Error("El ID del contacto es requerido para actualizar.");
+
+  await database.write(async () => {
+    const contact = await database
+      .get<Contact>("contacts")
+      .find(id)
+      .catch(() => null);
+    if (!contact) throw new Error("No se encontró el contacto con el ID proporcionado.");
+
+    const now = new Date();
+    const lastSeen = contact.lastSeen || new Date(0); // si no existe, fecha muy vieja
+    const diffMs = now.getTime() - lastSeen.getTime();
+    const diffMinutes = diffMs / 1000 / 60;
+
+    if (diffMinutes >= 1) {
+      await contact.update((record) => {
+        record.lastSeen = now;
+      });
+    }
+  });
 };

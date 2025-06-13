@@ -30,9 +30,7 @@ const buildDataList = (contacts: IItemContact[], t: (key: string) => string): Li
     ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
   ];
 
-  const others = contacts
-    .filter((item) => !item.addFavorite)
-    .map((item) => ({ type: "item" as const, data: item }));
+  const others = contacts.map((item) => ({ type: "item" as const, data: item }));
 
   if (favorites.length > 0) {
     result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });

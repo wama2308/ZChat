@@ -1,4 +1,4 @@
-import { createTable, schemaMigrations } from "@nozbe/watermelondb/Schema/migrations";
+import { addColumns, createTable, schemaMigrations } from "@nozbe/watermelondb/Schema/migrations";
 
 export default schemaMigrations({
   migrations: [
@@ -42,6 +42,15 @@ export default schemaMigrations({
             { name: "created_at", type: "number" },
             { name: "updated_at", type: "number" },
           ],
+        }),
+      ],
+    },
+    {
+      toVersion: 4,
+      steps: [
+        addColumns({
+          table: "contacts",
+          columns: [{ name: "last_seen", type: "number", isOptional: true }],
         }),
       ],
     },

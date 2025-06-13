@@ -16,6 +16,12 @@ export const moveImageContact = async (image: string, folder: "contacts"): Promi
       await mkdir(`${DocumentDirectoryPath}/images/${folder}`);
     }
 
+    const imageExists = await exists(destPath);
+    if (imageExists) {
+      console.log(55555);
+      return relativePath;
+    }
+
     await moveFile(image, destPath);
 
     // ⛳️ DEVUELVE SOLO LA RUTA RELATIVA

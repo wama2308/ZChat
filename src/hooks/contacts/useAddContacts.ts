@@ -1,5 +1,5 @@
-import { MutationKey } from "@constants/queriesAndMutations";
-import { createContact, updateContact } from "@database/actions/contacts";
+import { MutationKey, QueryKey } from "@constants/queriesAndMutations";
+import { createContact, updateContact, updateContactLastSeen } from "@database/actions/contacts";
 import { type AssetImageCrop } from "@interfaces/config";
 import { EContactStatus, type IItemContact } from "@interfaces/contacts";
 import { type RawWithDetails } from "@interfaces/generic";
@@ -7,11 +7,11 @@ import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useMutation } from "@tanstack/react-query";
 import { deleteImageIfExists, getImageUri, moveImageContact } from "@utils/imageRFNS";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Toast from "react-native-toast-message";
-
+import { queryClient } from "../../../index";
 interface Props {
   data?: IItemContact;
 }
@@ -42,6 +42,18 @@ const useAddContacts = ({ data }: Props) => {
     setValue("image", value?.uri, { shouldDirty: true });
     setSelectedImage(value);
   }, []);
+
+  useEffect(() => {
+    if (data?.id) {
+      updateContactLastSeen(data.id)
+        .then(() => {
+          queryClient.invalidateQueries({ queryKey: [QueryKey.contact.contactAll] });
+        })
+        .catch((err) => {
+          console.error("Error actualizando lastSeen:", err);
+        });
+    }
+  }, [data?.id]);
 
   const {
     handleSubmit: handleSubmitForm,
@@ -94,6 +106,7 @@ const useAddContacts = ({ data }: Props) => {
     },
     onSuccess(response: RawWithDetails<IItemContact>) {
       console.info("response ", response);
+      queryClient.invalidateQueries({ queryKey: [QueryKey.contact.contactAll] });
       Toast.show({
         type: "success",
         text1: t("contacts.save-successfully"),
@@ -120,9 +133,11 @@ const useAddContacts = ({ data }: Props) => {
     },
     async onSuccess(response: RawWithDetails<IItemContact>) {
       console.info("response del edit ", response);
-      if (data?.image) {
+      queryClient.invalidateQueries({ queryKey: [QueryKey.contact.contactAll] });
+      if (data?.image && data.image !== response.image) {
         await deleteImageIfExists(data.image);
       }
+
       Toast.show({
         type: "success",
         text1: t("contacts.edit-successfully"),
