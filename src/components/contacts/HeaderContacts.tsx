@@ -10,9 +10,10 @@ import { Text, useTheme } from "react-native-paper";
 interface Props {
   searchValue?: string;
   handleSearchValue: (value: string) => void;
+  handleOpenClassify: (value: boolean) => void;
 }
 
-const HeaderContacts = ({ searchValue = "", handleSearchValue }: Props) => {
+const HeaderContacts = ({ searchValue = "", handleSearchValue, handleOpenClassify }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
@@ -24,7 +25,7 @@ const HeaderContacts = ({ searchValue = "", handleSearchValue }: Props) => {
   return (
     <HeaderSearchBar
       left={
-        <TouchableOpacity style={{}} onPress={() => {}}>
+        <TouchableOpacity style={{}} onPress={() => handleOpenClassify(true)}>
           <Text style={{ color: colors.blueBootstrap }}>{t("contacts.classify")}</Text>
         </TouchableOpacity>
       }

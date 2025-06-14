@@ -30,7 +30,7 @@ const NewContact = () => {
     resetForm,
     handleSaveContact,
   } = useAddContacts({ data: contact });
-  // console.log("selectedImage ", selectedImage);
+
   return (
     <>
       <Pressable style={styles.container} onPress={() => Keyboard.dismiss()}>

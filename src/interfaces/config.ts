@@ -33,3 +33,5 @@ export interface AssetImageCrop {
 }
 
 export type TAlert = "error" | "warning" | "info" | "success";
+
+export type TClassifyContacts = "byName" | "byLastSeen";

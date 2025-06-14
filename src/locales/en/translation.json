@@ -107,6 +107,8 @@
     "edit-error": "Error editing contact",
     "add-new": "You don't have any contacts yet. Click here to add one!",
     "error-load-list": "An error occurred while loading the contact list",
-    "edit": "Edit contact"
+    "edit": "Edit contact",
+    "order-by-name": "By name",
+    "order-last-seen": "Last seen"
   }
 }

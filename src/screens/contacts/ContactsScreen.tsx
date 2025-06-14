@@ -1,7 +1,9 @@
 // src/screens/ContactScreen.tsx
+import ClassifyContacts from "@components/contacts/ClassifyContacts";
 import HeaderContacts from "@components/contacts/HeaderContacts";
 import ListContacts from "@components/contacts/ListContacts";
 import Alert from "@components/ui/Alert";
+import ModalBottom from "@components/ui/ModalBottom";
 import useContactsScreen from "@hooks/contacts/useContactsScreen";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
@@ -11,12 +13,16 @@ const ContactScreen = () => {
   const { t } = useTranslation();
   const {
     searchValue,
-    handleSearchValue,
     isSeeker,
     dataContactsZChatAll,
     isFetchingAllContacts,
     isFetchingSeekerContacts,
     isErrorDataContactsZChatAll,
+    openClassify,
+    classify,
+    handleSearchValue,
+    handleOpenClassify,
+    handleClassify,
   } = useContactsScreen();
 
   if (isFetchingAllContacts) {
@@ -28,23 +34,36 @@ const ContactScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <HeaderContacts handleSearchValue={handleSearchValue} searchValue={searchValue} />
-      <View style={styles.listContainer}>
-        {isErrorDataContactsZChatAll ? (
-          <Alert type="error" message={t("contacts.error-load-list")} />
-        ) : (
-          dataContactsZChatAll &&
-          (isFetchingSeekerContacts ? (
-            <View style={styles.centered}>
-              <ActivityIndicator animating={true} size={80} />
-            </View>
+    <>
+      <View style={styles.container}>
+        <HeaderContacts
+          handleSearchValue={handleSearchValue}
+          searchValue={searchValue}
+          handleOpenClassify={handleOpenClassify}
+        />
+        <View style={styles.listContainer}>
+          {isErrorDataContactsZChatAll ? (
+            <Alert type="error" message={t("contacts.error-load-list")} />
           ) : (
-            <ListContacts contacts={dataContactsZChatAll} allContacts={isSeeker} />
-          ))
-        )}
+            dataContactsZChatAll &&
+            (isFetchingSeekerContacts ? (
+              <View style={styles.centered}>
+                <ActivityIndicator animating={true} size={80} />
+              </View>
+            ) : (
+              <ListContacts contacts={dataContactsZChatAll} allContacts={isSeeker} />
+            ))
+          )}
+        </View>
       </View>
-    </View>
+      <ModalBottom visible={openClassify} onDismiss={() => handleOpenClassify(false)}>
+        <ClassifyContacts
+          byClassify={classify}
+          handleClassify={handleClassify}
+          handleOpenClassify={handleOpenClassify}
+        />
+      </ModalBottom>
+    </>
   );
 };
 
