@@ -2,33 +2,46 @@
 import HeaderContacts from "@components/contacts/HeaderContacts";
 import ListContacts from "@components/contacts/ListContacts";
 import Alert from "@components/ui/Alert";
-import useListContacts from "@hooks/contacts/useListContacts";
+import useContactsScreen from "@hooks/contacts/useContactsScreen";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
   const { t } = useTranslation();
+  const {
+    searchValue,
+    handleSearchValue,
+    isSeeker,
+    dataContactsZChatAll,
+    isFetchingAllContacts,
+    isFetchingSeekerContacts,
+    isErrorDataContactsZChatAll,
+  } = useContactsScreen();
 
-  const { dataContactsZChatAll, isFetchingDataContactsZChatAll, isErrorDataContactsZChatAll } =
-    useListContacts();
-
-  if (isFetchingDataContactsZChatAll) {
+  if (isFetchingAllContacts) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator animating={true} size="large" />
+        <ActivityIndicator animating={true} size={80} />
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <HeaderContacts />
+      <HeaderContacts handleSearchValue={handleSearchValue} searchValue={searchValue} />
       <View style={styles.listContainer}>
         {isErrorDataContactsZChatAll ? (
           <Alert type="error" message={t("contacts.error-load-list")} />
         ) : (
-          dataContactsZChatAll && <ListContacts contacts={dataContactsZChatAll} />
+          dataContactsZChatAll &&
+          (isFetchingSeekerContacts ? (
+            <View style={styles.centered}>
+              <ActivityIndicator animating={true} size={80} />
+            </View>
+          ) : (
+            <ListContacts contacts={dataContactsZChatAll} allContacts={isSeeker} />
+          ))
         )}
       </View>
     </View>

@@ -13,18 +13,26 @@ interface Props {
   textCenter?: string;
   contentCenter?: ReactNode;
   right?: ReactNode;
+  valueSearchBar: string;
   actionSearchBar: (value: string) => void;
   stylesContainer?: StyleProp<ViewStyle>;
 }
 
-const HeaderSearchBar = ({ left, textCenter, contentCenter, right, actionSearchBar }: Props) => {
+const HeaderSearchBar = ({
+  left,
+  textCenter,
+  contentCenter,
+  right,
+  actionSearchBar,
+  valueSearchBar,
+}: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const insets = useSafeAreaInsets();
   const marginTop = Platform.OS === "ios" ? insets.top : insets.top + SPACES.m1;
   const searchBarRef = useRef<React.ComponentRef<typeof Searchbar>>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(valueSearchBar);
 
   const height = useSharedValue(60);
   const searchMarginTop = useSharedValue(0);

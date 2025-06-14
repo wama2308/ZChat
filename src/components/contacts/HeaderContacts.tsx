@@ -7,13 +7,18 @@ import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-const HeaderContacts = () => {
+interface Props {
+  searchValue?: string;
+  handleSearchValue: (value: string) => void;
+}
+
+const HeaderContacts = ({ searchValue = "", handleSearchValue }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
 
   const handleActionSearchBar = (value: string) => {
-    console.info("searchbaraaaqa ", value);
+    handleSearchValue(value);
   };
 
   return (
@@ -33,6 +38,7 @@ const HeaderContacts = () => {
           onPress={() => navigation.navigate("NewContact")}
         />
       }
+      valueSearchBar={searchValue}
       actionSearchBar={handleActionSearchBar}
     />
   );

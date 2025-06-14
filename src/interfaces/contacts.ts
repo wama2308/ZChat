@@ -77,7 +77,7 @@ export interface IItemContact {
   zchat: boolean;
   addFavorite: boolean;
   synchronized: boolean;
-  lastSeen: Date | null;
+  lastSeen: string | null;
 }
 
 export enum EContactStatus {

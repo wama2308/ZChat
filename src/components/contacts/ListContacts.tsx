@@ -17,6 +17,7 @@ type ListItem = { type: "header"; title: string; id: string } | { type: "item"; 
 
 interface Props {
   contacts: IItemContact[];
+  allContacts: boolean;
 }
 
 const buildDataList = (contacts: IItemContact[], t: (key: string) => string): ListItem[] => {
@@ -45,7 +46,7 @@ const buildDataList = (contacts: IItemContact[], t: (key: string) => string): Li
   return result;
 };
 
-const ListContacts = ({ contacts }: Props) => {
+const ListContacts = ({ contacts, allContacts }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
@@ -112,7 +113,11 @@ const ListContacts = ({ contacts }: Props) => {
       }}
     />
   ) : (
-    <Alert type="info" message={t("contacts.add-new")} action={() => navigation.navigate("NewContact")} />
+    <Alert
+      type={!allContacts ? "info" : "warning"}
+      message={!allContacts ? t("contacts.add-new") : t("common.label-no-results")}
+      action={!allContacts ? () => navigation.navigate("NewContact") : undefined}
+    />
   );
 };
 

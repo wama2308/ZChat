@@ -52,7 +52,7 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
       synchronized: false, // o el valor que corresponda
       phoneNumbers,
       email: input.email ?? [],
-      lastSeen: contact.lastSeen, // Aseguramos que lastSeen tenga un valor por defecto
+      lastSeen: contact.lastSeen?.toISOString() ?? null,
     };
   });
 
@@ -60,7 +60,6 @@ export const createContact = async (input: IItemContact): Promise<RawWithDetails
 };
 
 export const getAllContacts = async (): Promise<IItemContact[]> => {
-  console.log("entro en la función getAllContacts");
   const contacts = await database.get<Contact>("contacts").query(Q.sortBy("last_seen", "desc")).fetch();
 
   const contactsWithPhones = await Promise.all(
@@ -82,7 +81,7 @@ export const getAllContacts = async (): Promise<IItemContact[]> => {
         zchat: contact.zchat,
         addFavorite: contact.addFavorite,
         synchronized: contact.synchronized,
-        lastSeen: contact.lastSeen,
+        lastSeen: contact.lastSeen?.toISOString() ?? null,
       };
     })
   );
@@ -184,7 +183,7 @@ export const updateContact = async (contactData: IItemContact): Promise<RawWithD
       addFavorite: contact.addFavorite,
       synchronized: false, // o el valor que corresponda
       phoneNumbers: phoneEdit,
-      lastSeen: contact.lastSeen,
+      lastSeen: contact.lastSeen?.toISOString() ?? null,
     };
   });
   return contactEdit;
@@ -211,4 +210,47 @@ export const updateContactLastSeen = async (id: string): Promise<void> => {
       });
     }
   });
+};
+
+export const searchContacts = async (term: string): Promise<IItemContact[]> => {
+  const lowerTerm = term.toLowerCase();
+
+  const contacts = await database
+    .get<Contact>("contacts")
+    .query(
+      Q.experimentalJoinTables(["phone_numbers"]),
+      Q.or(
+        Q.where("first_name", Q.like(`${lowerTerm}%`)),
+        Q.where("last_name", Q.like(`${lowerTerm}%`)),
+        Q.on("phone_numbers", Q.where("number", Q.like(`${lowerTerm}%`)))
+      ),
+      Q.sortBy("last_seen", "desc")
+    )
+    .fetch();
+
+  const contactsWithPhones = await Promise.all(
+    contacts.map(async (contact) => {
+      const phoneNumbers = await contact.phoneNumbers;
+
+      return {
+        id: contact.id,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        phoneNumbers: phoneNumbers.map((item) => ({
+          id: item.id,
+          label: item.label,
+          number: item.number,
+        })),
+        image: contact.image,
+        email: [],
+        status: contact.status,
+        zchat: contact.zchat,
+        addFavorite: contact.addFavorite,
+        synchronized: contact.synchronized,
+        lastSeen: contact.lastSeen?.toISOString() ?? null,
+      };
+    })
+  );
+
+  return contactsWithPhones;
 };

@@ -50,7 +50,8 @@
     "label-choose": "Elegir",
     "label-number": "Número",
     "label-delete": "Borrar",
-    "label-favorites": "Favoritos"
+    "label-favorites": "Favoritos",
+    "label-no-results": "Sin resultados"
   },
   "form": {
     "label-user": "Usuario",
