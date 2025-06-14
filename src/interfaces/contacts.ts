@@ -84,3 +84,5 @@ export enum EContactStatus {
   ONLINE = "online",
   OFFLINE = "offline",
 }
+
+export type TListItem = { type: "header"; title: string; id: string } | { type: "item"; data: IItemContact };

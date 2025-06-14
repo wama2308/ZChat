@@ -9,7 +9,7 @@ export default function useContactsScreen() {
   const { value: inputValueDebounce } = useDebounce(searchValue);
   const isSeeker = inputValueDebounce.trim().length >= 3;
   const [openClassify, setOpenClassify] = useState(false);
-  const [classify, setClassify] = useState<TClassifyContacts>("byName");
+  const [classify, setClassify] = useState<TClassifyContacts>("byLastSeen");
 
   const handleOpenClassify = useCallback((value: boolean) => {
     setOpenClassify(value);

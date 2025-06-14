@@ -1,52 +1,26 @@
 // src/components/contacts/ListContacts.tsx
 import Alert from "@components/ui/Alert";
 import { SPACES, type AppTheme } from "@config/themes/themes";
-import { DATA_CONTACTS_FAVORITES } from "@constants/dataContacts";
 import { useDynamicStyles } from "@hooks/config/useDynamicStyles";
-import { type EContactStatus, type IItemContact } from "@interfaces/contacts";
+import type { TClassifyContacts } from "@interfaces/config";
+import type { IItemContact, TListItem } from "@interfaces/contacts";
 import { type RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
+import { buildDataListContacts } from "@utils/dataContacts";
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Divider, Text, useTheme } from "react-native-paper";
 import ItemContact from "./ItemContact";
 
-type ListItem = { type: "header"; title: string; id: string } | { type: "item"; data: IItemContact };
-
 interface Props {
   contacts: IItemContact[];
   allContacts: boolean;
+  byClassify: TClassifyContacts;
 }
 
-const buildDataList = (contacts: IItemContact[], t: (key: string) => string): ListItem[] => {
-  const result: ListItem[] = [];
-
-  const favorites = [
-    ...DATA_CONTACTS_FAVORITES.map((item) => ({
-      type: "item" as const,
-      data: { ...item, status: item.status as EContactStatus, lastSeen: null },
-    })),
-    ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
-  ];
-
-  const others = contacts.map((item) => ({ type: "item" as const, data: item }));
-
-  if (favorites.length > 0) {
-    result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });
-    result.push(...favorites);
-  }
-
-  if (others.length > 0) {
-    result.push({ type: "header", title: t("contacts.zchat"), id: "zchat-header" });
-    result.push(...others);
-  }
-
-  return result;
-};
-
-const ListContacts = ({ contacts, allContacts }: Props) => {
+const ListContacts = ({ contacts, allContacts, byClassify }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
@@ -63,9 +37,9 @@ const ListContacts = ({ contacts, allContacts }: Props) => {
     [colors]
   );
 
-  const data = useMemo(() => buildDataList(contacts, t), [contacts, t]);
+  const data = useMemo(() => buildDataListContacts(contacts, t, byClassify), [contacts, t, byClassify]);
 
-  const renderItem = ({ item }: { item: ListItem }) => {
+  const renderItem = ({ item }: { item: TListItem }) => {
     if (item.type === "header") {
       return (
         <Text variant="titleSmall" style={styles.header}>
@@ -76,7 +50,7 @@ const ListContacts = ({ contacts, allContacts }: Props) => {
     return <ItemContact data={item.data} />;
   };
 
-  const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: ListItem }) => {
+  const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: TListItem }) => {
     if (!leadingItem || leadingItem.type === "header") return null;
     return (
       <View style={{ backgroundColor: colors.onSecondary }}>
@@ -86,7 +60,7 @@ const ListContacts = ({ contacts, allContacts }: Props) => {
   };
 
   const getItemType = useMemo(
-    () => (item: ListItem) => {
+    () => (item: TListItem) => {
       return item.type; // Esto ayuda a FlashList a reciclar vistas correctamente
     },
     []

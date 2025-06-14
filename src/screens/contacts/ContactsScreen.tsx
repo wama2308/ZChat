@@ -51,7 +51,7 @@ const ContactScreen = () => {
                 <ActivityIndicator animating={true} size={80} />
               </View>
             ) : (
-              <ListContacts contacts={dataContactsZChatAll} allContacts={isSeeker} />
+              <ListContacts contacts={dataContactsZChatAll} allContacts={isSeeker} byClassify={classify} />
             ))
           )}
         </View>
