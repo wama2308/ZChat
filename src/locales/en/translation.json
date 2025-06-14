@@ -109,6 +109,7 @@
     "error-load-list": "An error occurred while loading the contact list",
     "edit": "Edit contact",
     "order-by-name": "By name",
-    "order-last-seen": "Last seen"
+    "order-last-seen": "Last seen",
+    "invite-from-calendar": "Invite from calendar"
   }
 }

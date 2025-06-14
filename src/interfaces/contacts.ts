@@ -1,3 +1,5 @@
+import type { TClassifyContacts } from "./config";
+
 export interface IPhoneNumberContacts {
   id?: string;
   label: string;
@@ -86,3 +88,10 @@ export enum EContactStatus {
 }
 
 export type TListItem = { type: "header"; title: string; id: string } | { type: "item"; data: IItemContact };
+
+export interface IParamsBuidlDataListContacts {
+  contacts: IItemContact[];
+  t: (key: string) => string;
+  sortBy: TClassifyContacts;
+  fromAgenda: boolean;
+}

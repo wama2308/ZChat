@@ -1,11 +1,12 @@
 // src/hooks/useContacts.ts
+import type { IItemContact } from "@interfaces/contacts";
 import { useFocusEffect } from "@react-navigation/native";
 import { useContactsStore } from "@store/contacts/useContactsStore";
 import { normalizeContacts } from "@utils/normalizeContacts";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppState, type AppStateStatus, Platform } from "react-native";
-import Contacts, { type Contact } from "react-native-contacts";
+import Contacts from "react-native-contacts";
 import {
   check,
   openSettings,
@@ -27,7 +28,7 @@ const getPermission = (): Permission => {
 
 export const useContactsRN = () => {
   const { t } = useTranslation();
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [contacts, setContacts] = useState<IItemContact[]>([]);
   const [loading, setLoading] = useState(true);
   const [permissionStatus, setPermissionStatus] = useState<PermissionStatus>("unavailable");
   const [error, setError] = useState<null | string>(null);
@@ -68,8 +69,8 @@ export const useContactsRN = () => {
         (a.displayName || a.givenName || "").localeCompare(b.displayName || b.givenName || "")
       );
 
-      setContacts(sortedContacts);
       const normalized = normalizeContacts(sortedContacts);
+      setContacts(normalized);
       setContactsPhone(normalized);
       setError(null);
     } catch (err) {

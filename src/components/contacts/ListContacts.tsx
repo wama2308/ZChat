@@ -18,9 +18,10 @@ interface Props {
   contacts: IItemContact[];
   allContacts: boolean;
   byClassify: TClassifyContacts;
+  fromAgenda: boolean;
 }
 
-const ListContacts = ({ contacts, allContacts, byClassify }: Props) => {
+const ListContacts = ({ contacts, allContacts, byClassify, fromAgenda }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
@@ -37,7 +38,10 @@ const ListContacts = ({ contacts, allContacts, byClassify }: Props) => {
     [colors]
   );
 
-  const data = useMemo(() => buildDataListContacts(contacts, t, byClassify), [contacts, t, byClassify]);
+  const data = useMemo(
+    () => buildDataListContacts({ contacts, t, sortBy: byClassify, fromAgenda }),
+    [contacts, t, byClassify]
+  );
 
   const renderItem = ({ item }: { item: TListItem }) => {
     if (item.type === "header") {
@@ -47,7 +51,7 @@ const ListContacts = ({ contacts, allContacts, byClassify }: Props) => {
         </Text>
       );
     }
-    return <ItemContact data={item.data} />;
+    return <ItemContact data={item.data} fromAgenda={fromAgenda} />;
   };
 
   const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: TListItem }) => {

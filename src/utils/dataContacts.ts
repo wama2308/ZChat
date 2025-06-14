@@ -1,11 +1,13 @@
 import { DATA_CONTACTS_FAVORITES } from "@constants/dataContacts";
-import type { EContactStatus, IItemContact, TListItem } from "@interfaces/contacts";
+import type {
+  EContactStatus,
+  IItemContact,
+  IParamsBuidlDataListContacts,
+  TListItem,
+} from "@interfaces/contacts";
 
-export const buildDataListContacts = (
-  contacts: IItemContact[],
-  t: (key: string) => string,
-  sortBy: "byName" | "byLastSeen"
-): TListItem[] => {
+export const buildDataListContacts = (params: IParamsBuidlDataListContacts): TListItem[] => {
+  const { contacts, t, sortBy, fromAgenda } = params;
   const result: TListItem[] = [];
 
   const favorites: TListItem[] = [
@@ -16,7 +18,7 @@ export const buildDataListContacts = (
     ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
   ];
 
-  if (favorites.length > 0) {
+  if (favorites.length > 0 && fromAgenda) {
     result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });
     result.push(...favorites);
   }

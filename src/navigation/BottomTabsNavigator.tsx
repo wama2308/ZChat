@@ -33,7 +33,8 @@ export default function BottomTabsNavigator() {
       routeName === "LanguageSettings" ||
       routeName === "ProfileSettings" ||
       routeName === "ChangeSizeText" ||
-      routeName === "NewContact"
+      routeName === "NewContact" ||
+      routeName === "InviteFromCalendar"
     ) {
       return false;
     }

@@ -109,6 +109,7 @@
     "error-load-list": "Ha ocurrido un error al cargar la lista de contactos",
     "edit": "Editar contacto",
     "order-by-name": "Por nombre",
-    "order-last-seen": "Visto por última vez"
+    "order-last-seen": "Visto por última vez",
+    "invite-from-calendar": "Invitar desde agenda"
   }
 }

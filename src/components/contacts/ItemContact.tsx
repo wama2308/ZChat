@@ -7,7 +7,7 @@ import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { getItemContactStyles } from "@styles/contacts/ItemContact.style";
 import { generateRandomColor } from "@utils/colors";
 import { getImageUri } from "@utils/imageRFNS";
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, View } from "react-native";
 import { Button, Text, TouchableRipple, useTheme } from "react-native-paper";
@@ -15,9 +15,10 @@ import OptionsInvitations from "./OptionsInvitations";
 
 interface Props {
   data: IItemContact;
+  fromAgenda: boolean;
 }
 
-const ItemContact = ({ data }: Props) => {
+const ItemContact = ({ data, fromAgenda }: Props) => {
   const { firstName, lastName, phoneNumbers, image, status, zchat, addFavorite, id } = data;
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
@@ -51,7 +52,7 @@ const ItemContact = ({ data }: Props) => {
           {image ? (
             <Image
               source={{
-                uri: getImageUri(image),
+                uri: fromAgenda ? image : getImageUri(image),
               }}
               style={styles.avatar}
               defaultSource={require("../../assets/images/user-select.jpg")}
@@ -92,4 +93,4 @@ const ItemContact = ({ data }: Props) => {
   );
 };
 
-export default ItemContact;
+export default memo(ItemContact);

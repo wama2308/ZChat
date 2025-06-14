@@ -3,6 +3,7 @@ import type { IItemContact } from "@interfaces/contacts";
 import { createStackNavigator } from "@react-navigation/stack";
 import ContactsScreen from "@screens/contacts/ContactsScreen";
 import FavoriteContacts from "@screens/contacts/FavoriteContacts";
+import InviteFromCalendar from "@screens/contacts/InviteFromCalendar";
 import NewContact from "@screens/contacts/NewContact";
 import { useTheme } from "react-native-paper";
 
@@ -11,6 +12,7 @@ export type RootStackParamListContacts = {
   HomeContacts: undefined;
   NewContact: { contact: IItemContact } | undefined;
   FavoriteContacts: undefined;
+  InviteFromCalendar: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamListContacts>();
@@ -23,6 +25,11 @@ export default function ContactsNavigator() {
       <Stack.Screen name="HomeContacts" component={ContactsScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NewContact" component={NewContact} options={{ headerShown: false }} />
       <Stack.Screen name="FavoriteContacts" component={FavoriteContacts} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="InviteFromCalendar"
+        component={InviteFromCalendar}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
