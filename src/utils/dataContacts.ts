@@ -8,6 +8,7 @@ import type {
 
 export const buildDataListContacts = (params: IParamsBuidlDataListContacts): TListItem[] => {
   const { contacts, t, sortBy, fromAgenda } = params;
+
   const result: TListItem[] = [];
 
   const favorites: TListItem[] = [
@@ -18,7 +19,7 @@ export const buildDataListContacts = (params: IParamsBuidlDataListContacts): TLi
     ...contacts.filter((item) => item.addFavorite).map((item) => ({ type: "item" as const, data: item })),
   ];
 
-  if (favorites.length > 0 && fromAgenda) {
+  if (favorites.length > 0 && !fromAgenda) {
     result.push({ type: "header", title: t("common.label-favorites"), id: "favorites-header" });
     result.push(...favorites);
   }

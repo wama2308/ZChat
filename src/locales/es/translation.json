@@ -51,7 +51,8 @@
     "label-number": "Número",
     "label-delete": "Borrar",
     "label-favorites": "Favoritos",
-    "label-no-results": "Sin resultados"
+    "label-no-results": "Sin resultados",
+    "label-mobile": "Móvil"
   },
   "form": {
     "label-user": "Usuario",
@@ -90,7 +91,7 @@
     "classify": "Clasificar",
     "allow-access": "Permitir acceso",
     "error-load": "Error al cargar los contactos",
-    "text-no-access": "Permitir acceso que ZChat copie los contactos de tu dispositivo aquí. Alternativamente, puedes agregar contactos internos de ZChat manualmente.",
+    "text-no-access": "Permitir acceso para que ZChat copie los contactos de tu dispositivo aquí. Alternativamente, puedes agregar contactos internos de ZChat manualmente.",
     "text-no-access-title-avise": "ZChat no tiene acceso a tus contactos",
     "text-no-access-avise": "ZChat necesita acceso a los contactos de tu teléfono para que puedas enviar invitaciones.",
     "zchat": "Contactos ZChat",

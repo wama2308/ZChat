@@ -157,6 +157,7 @@ export const updateContact = async (contactData: IItemContact): Promise<RawWithD
       record.firstName = firstName;
       record.lastName = lastName;
       record.image = image;
+      record.lastSeen = new Date();
     });
 
     // Actualizar teléfonos

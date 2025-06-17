@@ -45,7 +45,7 @@ const ItemContact = ({ data, fromAgenda }: Props) => {
         onPress={
           HEADER_FAVORITE
             ? () => navigation.navigate("FavoriteContacts")
-            : () => navigation.navigate("NewContact", { contact: data })
+            : () => navigation.navigate("NewContact", { contact: data, fromAgenda })
         }
       >
         <View style={styles.container}>

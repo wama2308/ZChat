@@ -14,6 +14,7 @@ import Toast from "react-native-toast-message";
 import { queryClient } from "../../../index";
 interface Props {
   data?: IItemContact;
+  fromAgenda: boolean;
 }
 
 export interface FormValuesAddContact {
@@ -24,13 +25,13 @@ export interface FormValuesAddContact {
   phone: string;
 }
 
-const useAddContacts = ({ data }: Props) => {
+const useAddContacts = ({ data, fromAgenda }: Props) => {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
   const PHONE_ID = data?.phoneNumbers?.[0]?.id ?? "";
 
   const [selectedImage, setSelectedImage] = useState<AssetImageCrop | null>(
-    data?.image ? { uri: getImageUri(data.image) } : null
+    data?.image ? { uri: fromAgenda ? data.image : getImageUri(data.image) } : null
   );
   const [modalShow, setModalShow] = useState<boolean>(false);
 
@@ -44,7 +45,7 @@ const useAddContacts = ({ data }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (data?.id) {
+    if (data?.id && !fromAgenda) {
       updateContactLastSeen(data.id)
         .then(() => {
           queryClient.invalidateQueries({ queryKey: [QueryKey.contact.contactAll] });
@@ -68,7 +69,7 @@ const useAddContacts = ({ data }: Props) => {
       name: data?.firstName ?? "",
       lastname: data?.lastName ?? "",
       image: data?.image ?? "",
-      phone: data?.phoneNumbers?.[0]?.number ?? "",
+      phone: !fromAgenda ? (data?.phoneNumbers?.[0]?.number ?? "") : "",
     },
     resolver: (values) => {
       const errors: Record<string, any> = {};
@@ -112,7 +113,11 @@ const useAddContacts = ({ data }: Props) => {
         text1: t("contacts.save-successfully"),
       });
       resetForm();
-      navigation.goBack();
+      if (fromAgenda) {
+        navigation.navigate("HomeContacts");
+      } else {
+        navigation.goBack();
+      }
     },
     onError: async (error: unknown, variables: IItemContact) => {
       console.error("Error guardando el contacto ", error);
@@ -179,8 +184,9 @@ const useAddContacts = ({ data }: Props) => {
       zchat: true,
       addFavorite: false,
       synchronized: false,
+      lastSeen: null,
     };
-    if (data) {
+    if (data && !fromAgenda) {
       await editContact(payload);
     } else {
       await saveContact(payload);

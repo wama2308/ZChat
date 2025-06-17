@@ -51,7 +51,8 @@
     "label-number": "Number",
     "label-delete": "Delete",
     "label-favorites": "Favorites",
-    "label-no-results": "No results"
+    "label-no-results": "No results",
+    "label-mobile": "Mobile"
   },
   "form": {
     "label-user": "User",

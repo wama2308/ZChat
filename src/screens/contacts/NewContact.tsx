@@ -1,4 +1,5 @@
 import HeaderAddContact from "@components/contacts/HeaderAddContact";
+import PhonesEmailsFromAgenda from "@components/contacts/PhonesEmailsFromAgenda";
 import EditProfile from "@components/settings/EditProfile";
 import { SPACES, type AppTheme } from "@config/themes/themes";
 import useAddContacts from "@hooks/contacts/useAddContacts";
@@ -16,7 +17,7 @@ const NewContact = () => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const route = useRoute<RouteProp<RootStackParamListContacts>>();
-  const { contact } = route.params || {};
+  const { contact, fromAgenda } = route.params || {};
 
   const {
     control,
@@ -29,13 +30,13 @@ const NewContact = () => {
     handleSelectedImage,
     resetForm,
     handleSaveContact,
-  } = useAddContacts({ data: contact });
+  } = useAddContacts({ data: contact, fromAgenda: fromAgenda || false });
 
   return (
     <>
       <Pressable style={styles.container} onPress={() => Keyboard.dismiss()}>
         <HeaderAddContact
-          title={contact ? t("contacts.edit") : t("contacts.new")}
+          title={contact && !fromAgenda ? t("contacts.edit") : t("contacts.new")}
           hasChanges={hasChanges}
           reset={resetForm}
           action={handleSaveContact}
@@ -87,6 +88,12 @@ const NewContact = () => {
               </>
             )}
           />
+          {fromAgenda && (
+            <PhonesEmailsFromAgenda
+              phoneNumbers={contact?.phoneNumbers ?? []}
+              emails={contact?.email ?? []}
+            />
+          )}
         </View>
       </Pressable>
     </>

@@ -7,21 +7,26 @@ import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "react-native-paper";
 
-const HeaderInviteContacts = () => {
+interface Props {
+  searchValue: string;
+  handleSearchValue: (value: string) => void;
+}
+
+const HeaderInviteContacts = ({ searchValue, handleSearchValue }: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme<AppTheme>();
   const navigation = useNavigation<NavigationProp<RootStackParamListContacts>>();
 
   const handleActionSearchBar = (value: string) => {
-    console.log("searchbaraaaqa ", value);
+    handleSearchValue(value);
   };
 
   return (
     <HeaderSearchBar
       left={<HeaderBackButton onPress={() => navigation.goBack()} tintColor={colors.backButtonHeader} />}
-      textCenter={t("tabs.label-contacts")}
+      textCenter={t("contacts.invite-from-calendar")}
       right={<></>}
-      valueSearchBar=""
+      valueSearchBar={searchValue}
       actionSearchBar={handleActionSearchBar}
     />
   );

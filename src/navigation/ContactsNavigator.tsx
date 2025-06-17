@@ -10,7 +10,7 @@ import { useTheme } from "react-native-paper";
 // Definir los tipos de la navegación
 export type RootStackParamListContacts = {
   HomeContacts: undefined;
-  NewContact: { contact: IItemContact } | undefined;
+  NewContact: { contact: IItemContact; fromAgenda: boolean } | undefined;
   FavoriteContacts: undefined;
   InviteFromCalendar: undefined;
 };

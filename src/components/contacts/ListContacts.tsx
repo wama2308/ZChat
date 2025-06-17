@@ -40,7 +40,7 @@ const ListContacts = ({ contacts, allContacts, byClassify, fromAgenda }: Props) 
 
   const data = useMemo(
     () => buildDataListContacts({ contacts, t, sortBy: byClassify, fromAgenda }),
-    [contacts, t, byClassify]
+    [contacts, t, byClassify, colors]
   );
 
   const renderItem = ({ item }: { item: TListItem }) => {

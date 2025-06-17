@@ -7,7 +7,16 @@ import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const InviteFromCalendar = () => {
-  const { contacts, loading, error, permissionStatus, reload, openAppSettings } = useContactsRN();
+  const {
+    loading,
+    error,
+    permissionStatus,
+    searchValue,
+    filteredContacts,
+    handleSearchValue,
+    reload,
+    openAppSettings,
+  } = useContactsRN();
 
   if (loading) {
     return (
@@ -28,9 +37,12 @@ const InviteFromCalendar = () => {
 
   return (
     <View style={styles.container}>
-      <HeaderInviteContacts />
-      {shouldShowError && <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />}
-      <ListContacts contacts={contacts} allContacts={true} byClassify="byName" fromAgenda={true} />
+      <HeaderInviteContacts handleSearchValue={handleSearchValue} searchValue={searchValue} />
+      {shouldShowError ? (
+        <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />
+      ) : (
+        <ListContacts contacts={filteredContacts} allContacts={true} byClassify="byName" fromAgenda={true} />
+      )}
     </View>
   );
 };

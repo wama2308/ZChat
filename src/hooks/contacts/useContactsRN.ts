@@ -1,9 +1,10 @@
 // src/hooks/useContacts.ts
+import useDebounce from "@hooks/config/useDebounce";
 import type { IItemContact } from "@interfaces/contacts";
 import { useFocusEffect } from "@react-navigation/native";
 import { useContactsStore } from "@store/contacts/useContactsStore";
 import { normalizeContacts } from "@utils/normalizeContacts";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppState, type AppStateStatus, Platform } from "react-native";
 import Contacts from "react-native-contacts";
@@ -34,6 +35,13 @@ export const useContactsRN = () => {
   const [error, setError] = useState<null | string>(null);
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
   const { setContactsPhone } = useContactsStore();
+  // PARA EL BUSCADOR DE CONTACTOS DESDE AGENDA
+  const [searchValue, setSearchValue] = useState<string>("");
+  const { value: inputValueDebounce } = useDebounce(searchValue);
+
+  const handleSearchValue = useCallback((value: string) => {
+    setSearchValue(value);
+  }, []);
 
   const checkPermission = useCallback(async () => {
     try {
@@ -127,12 +135,29 @@ export const useContactsRN = () => {
     }, [loadContacts])
   );
 
+  const filteredContacts = useMemo(() => {
+    const lowerSearch = inputValueDebounce.toLowerCase();
+
+    if (lowerSearch.length >= 3) {
+      return contacts.filter((contact) => {
+        const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
+        const phoneMatch = contact.phoneNumbers?.some((pn) => pn.number.toLowerCase().includes(lowerSearch));
+        return fullName.includes(lowerSearch) || phoneMatch;
+      });
+    }
+
+    return contacts; // aquí devuelves toda la data si no hay filtro
+  }, [contacts, inputValueDebounce]);
+
   return {
     contacts,
     loading,
     error,
     permissionStatus,
+    filteredContacts,
+    searchValue,
     reload: loadContacts,
     openAppSettings: openSettings,
+    handleSearchValue,
   };
 };

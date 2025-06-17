@@ -19,6 +19,7 @@ export const normalizeContacts = (contacts: Contact[]): IItemContact[] => {
     zchat: false,
     addFavorite: false,
     synchronized: false,
+    lastSeen: null,
   }));
 };
 
