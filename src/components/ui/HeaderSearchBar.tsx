@@ -3,7 +3,7 @@ import Icon from "@react-native-vector-icons/ionicons";
 import { getHeaderStyles } from "@styles/contacts/HeaderContacts.styles";
 import { memo, useMemo, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform, View, type StyleProp, type ViewStyle } from "react-native";
+import { Keyboard, Platform, View, type StyleProp, type ViewStyle } from "react-native";
 import { Button, Searchbar, Text, useTheme } from "react-native-paper";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -32,7 +32,6 @@ const HeaderSearchBar = ({
   const marginTop = Platform.OS === "ios" ? insets.top : insets.top + SPACES.m1;
   const searchBarRef = useRef<React.ComponentRef<typeof Searchbar>>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(valueSearchBar);
 
   const height = useSharedValue(60);
   const searchMarginTop = useSharedValue(0);
@@ -54,10 +53,12 @@ const HeaderSearchBar = ({
   };
 
   const handleCancelSearch = () => {
-    setSearchQuery("");
     actionSearchBar("");
-    searchBarRef.current?.blur();
     toggleHeader(false);
+    requestAnimationFrame(() => {
+      searchBarRef.current?.blur();
+      Keyboard.dismiss();
+    });
   };
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -95,20 +96,26 @@ const HeaderSearchBar = ({
         <Searchbar
           ref={searchBarRef}
           placeholder={`${t("common.label-search")}...`}
-          onChangeText={(text) => {
-            actionSearchBar(text);
-            setSearchQuery(text);
-          }}
-          value={searchQuery}
+          onChangeText={actionSearchBar}
+          value={valueSearchBar}
           onFocus={() => toggleHeader(true)}
-          onBlur={() => !searchQuery && toggleHeader(false)}
+          onBlur={() => {
+            // solo colapsar si no hay texto real
+            if (!valueSearchBar?.trim()) {
+              toggleHeader(false);
+            }
+          }}
           style={styles.searchBar}
           icon={() => <Icon name="search-outline" size={22} color={colors.onBackground} />}
           clearIcon={
-            searchQuery
+            valueSearchBar
               ? () => <Icon name="close-outline" size={22} color={colors.onBackground} />
               : undefined
           }
+          autoCorrect={false}
+          autoComplete="off"
+          importantForAutofill="no"
+          keyboardType="default"
         />
         {isSearchFocused && (
           <Button onPress={handleCancelSearch} textColor={colors.brightBlue} style={styles.cancelButton}>

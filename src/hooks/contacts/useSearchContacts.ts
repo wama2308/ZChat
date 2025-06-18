@@ -10,7 +10,7 @@ const useSearchContacts = ({ textSeeker }: Props) => {
   return useQuery({
     queryKey: [QueryKey.contact.contactAll, textSeeker],
     queryFn: () => searchContacts(textSeeker),
-    enabled: textSeeker.length >= 3,
+    enabled: textSeeker.length > 0,
     staleTime: 6000 * 5,
   });
 };

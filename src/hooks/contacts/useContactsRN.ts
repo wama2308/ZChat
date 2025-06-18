@@ -1,7 +1,6 @@
 // src/hooks/useContacts.ts
 import useDebounce from "@hooks/config/useDebounce";
 import type { IItemContact } from "@interfaces/contacts";
-import { useFocusEffect } from "@react-navigation/native";
 import { useContactsStore } from "@store/contacts/useContactsStore";
 import { normalizeContacts } from "@utils/normalizeContacts";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -129,16 +128,14 @@ export const useContactsRN = () => {
     return () => subscription.remove();
   }, [permissionStatus, checkPermission]);
 
-  useFocusEffect(
-    useCallback(() => {
-      loadContacts();
-    }, [loadContacts])
-  );
+  useEffect(() => {
+    loadContacts();
+  }, []);
 
   const filteredContacts = useMemo(() => {
     const lowerSearch = inputValueDebounce.toLowerCase();
 
-    if (lowerSearch.length >= 3) {
+    if (lowerSearch.length > 0) {
       return contacts.filter((contact) => {
         const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
         const phoneMatch = contact.phoneNumbers?.some((pn) => pn.number.toLowerCase().includes(lowerSearch));

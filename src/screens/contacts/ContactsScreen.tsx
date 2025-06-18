@@ -10,7 +10,7 @@ import useContactsScreen from "@hooks/contacts/useContactsScreen";
 import type { RootStackParamListContacts } from "@navigation/ContactsNavigator";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const ContactScreen = () => {
@@ -57,7 +57,10 @@ const ContactScreen = () => {
           />
         </ViewSettings>
 
-        <View style={styles.listContainer}>
+        <KeyboardAvoidingView
+          style={styles.listContainer}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
           {isErrorDataContactsZChatAll ? (
             <Alert type="error" message={t("contacts.error-load-list")} />
           ) : (
@@ -75,7 +78,7 @@ const ContactScreen = () => {
               />
             ))
           )}
-        </View>
+        </KeyboardAvoidingView>
       </View>
       <ModalBottom visible={openClassify} onDismiss={() => handleOpenClassify(false)}>
         <ClassifyContacts

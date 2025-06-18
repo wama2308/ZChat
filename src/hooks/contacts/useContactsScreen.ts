@@ -7,7 +7,7 @@ import { useCallback, useState } from "react";
 export default function useContactsScreen() {
   const [searchValue, setSearchValue] = useState<string>("");
   const { value: inputValueDebounce } = useDebounce(searchValue);
-  const isSeeker = inputValueDebounce.trim().length >= 3;
+  const isSeeker = inputValueDebounce.trim().length > 0;
   const [openClassify, setOpenClassify] = useState(false);
   const [classify, setClassify] = useState<TClassifyContacts>("byLastSeen");
 

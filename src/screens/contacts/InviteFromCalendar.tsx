@@ -3,7 +3,7 @@ import ListContacts from "@components/contacts/ListContacts";
 import NoAccessToContacts from "@components/contacts/NoAccessToContacts";
 import { useContactsRN } from "@hooks/contacts/useContactsRN";
 
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 const InviteFromCalendar = () => {
@@ -41,7 +41,17 @@ const InviteFromCalendar = () => {
       {shouldShowError ? (
         <NoAccessToContacts actionButton={actionButton} error={error ?? ""} />
       ) : (
-        <ListContacts contacts={filteredContacts} allContacts={true} byClassify="byName" fromAgenda={true} />
+        <KeyboardAvoidingView
+          style={styles.listContainer}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <ListContacts
+            contacts={filteredContacts}
+            allContacts={true}
+            byClassify="byName"
+            fromAgenda={true}
+          />
+        </KeyboardAvoidingView>
       )}
     </View>
   );

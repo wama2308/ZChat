@@ -43,25 +43,35 @@ const ListContacts = ({ contacts, allContacts, byClassify, fromAgenda }: Props) 
     [contacts, t, byClassify, colors]
   );
 
-  const renderItem = ({ item }: { item: TListItem }) => {
-    if (item.type === "header") {
-      return (
-        <Text variant="titleSmall" style={styles.header}>
-          {item.title}
-        </Text>
-      );
-    }
-    return <ItemContact data={item.data} fromAgenda={fromAgenda} />;
-  };
+  const renderItem = ({ item, index }: { item: TListItem; index: number }) => {
+    const showDivider = item.type === "item" && index > 0 && data[index - 1].type !== "header";
 
-  const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: TListItem }) => {
-    if (!leadingItem || leadingItem.type === "header") return null;
     return (
-      <View style={{ backgroundColor: colors.onSecondary }}>
-        <Divider bold style={{ marginLeft: 70 }} />
-      </View>
+      <>
+        {showDivider && (
+          <View style={{ backgroundColor: colors.onSecondary }}>
+            <Divider bold style={{ marginLeft: 70 }} />
+          </View>
+        )}
+        {item.type === "header" ? (
+          <Text variant="titleSmall" style={styles.header}>
+            {item.title}
+          </Text>
+        ) : (
+          <ItemContact data={item.data} fromAgenda={fromAgenda} />
+        )}
+      </>
     );
   };
+
+  // const ItemSeparatorComponent = ({ leadingItem }: { leadingItem?: TListItem }) => {
+  //   if (!leadingItem || leadingItem.type === "header") return null;
+  //   return (
+  //     <View style={{ backgroundColor: colors.onSecondary }}>
+  //       <Divider bold style={{ marginLeft: 70 }} />
+  //     </View>
+  //   );
+  // };
 
   const getItemType = useMemo(
     () => (item: TListItem) => {
@@ -75,7 +85,7 @@ const ListContacts = ({ contacts, allContacts, byClassify, fromAgenda }: Props) 
       data={data}
       keyExtractor={(item) => (item.type === "header" ? item.id : item.data.id!)}
       renderItem={renderItem}
-      ItemSeparatorComponent={ItemSeparatorComponent}
+      // ItemSeparatorComponent={ItemSeparatorComponent}
       getItemType={getItemType}
       estimatedItemSize={68} // Estimar el tamaño promedio de un ítem
       stickyHeaderIndices={data

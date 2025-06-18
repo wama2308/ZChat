@@ -214,16 +214,27 @@ export const updateContactLastSeen = async (id: string): Promise<void> => {
 };
 
 export const searchContacts = async (term: string): Promise<IItemContact[]> => {
-  const lowerTerm = term.toLowerCase();
+  const searchTerms = term
+    .toLowerCase()
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 0)
+    .map((t) => Q.sanitizeLikeString(t)); // Sanitiza cada término
+
+  if (searchTerms.length === 0) return [];
 
   const contacts = await database
     .get<Contact>("contacts")
     .query(
       Q.experimentalJoinTables(["phone_numbers"]),
-      Q.or(
-        Q.where("first_name", Q.like(`${lowerTerm}%`)),
-        Q.where("last_name", Q.like(`${lowerTerm}%`)),
-        Q.on("phone_numbers", Q.where("number", Q.like(`${lowerTerm}%`)))
+      Q.and(
+        ...searchTerms.map((term) =>
+          Q.or(
+            Q.where("first_name", Q.like(`%${term}%`)),
+            Q.where("last_name", Q.like(`%${term}%`)),
+            Q.on("phone_numbers", Q.where("number", Q.like(`${term}%`))) // comienza por término
+          )
+        )
       ),
       Q.sortBy("last_seen", "desc")
     )
